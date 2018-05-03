@@ -1,0 +1,9 @@
+/HRIS/.vs
+/HRIS/Hris.Database/obj
+/HRIS/Hris.Database/bin
+/HRIS/Hris.Profiles.Api/obj
+/HRIS/Hris.Profiles.Api/bin
+/HRIS/Hris.Profiles.Dal/obj
+/HRIS/Hris.Profiles.Dal/bin
+/HRIS/Hris.Profiles.Domain/obj
+/HRIS/Hris.Profiles.Domain/bin
