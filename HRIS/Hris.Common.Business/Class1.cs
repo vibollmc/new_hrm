@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hris.Profiles.Api
+namespace Hris.Common.Business
 {
     public class Class1
     {

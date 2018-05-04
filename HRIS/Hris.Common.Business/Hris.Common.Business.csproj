@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Hris.Profiles.Domain\Hris.Profiles.Domain.csproj" />
-  </ItemGroup>
-
 </Project>
