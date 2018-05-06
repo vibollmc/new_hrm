@@ -7,3 +7,11 @@
 /HRIS/Hris.Profiles.Dal/bin
 /HRIS/Hris.Profiles.Domain/obj
 /HRIS/Hris.Profiles.Domain/bin
+/HRIS/Hris.Common.Business/bin
+/HRIS/Hris.Common.Business/obj
+/HRIS/Hris.Common.Persistence/obj
+/HRIS/Hris.Common.Persistence/bin
+/HRIS/Hris.Profiles.Business/obj
+/HRIS/Hris.Profiles.Business/bin
+/HRIS/Hris.Profiles.Persistence/obj
+/HRIS/Hris.Profiles.Persistence/bin

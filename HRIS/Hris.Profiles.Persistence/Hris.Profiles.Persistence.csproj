@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
-    <ProjectReference Include="..\Hris.Profiles.Domain\Hris.Profiles.Business.csproj" />
+    <ProjectReference Include="..\Hris.Profiles.Business\Hris.Profiles.Business.csproj" />
   </ItemGroup>
 
 </Project>
