@@ -49,6 +49,10 @@ namespace Hris.Web.Main
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
+                //routes.MapSpaFallbackRoute(
+                //    name: "login-spa-fallback",
+                //    defaults: new { Controller = "Account", action = "Login"});
+
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });

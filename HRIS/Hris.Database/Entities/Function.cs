@@ -15,6 +15,7 @@ namespace Hris.Database.Entities
         public string Key { get; set; }
         [MaxLength(50)]
         public string Icon { get; set; }
+        public int OrderIndex { get; set; }
         public Status Status { get; set; }
     }
 }

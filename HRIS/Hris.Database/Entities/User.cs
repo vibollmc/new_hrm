@@ -27,6 +27,9 @@ namespace Hris.Database.Entities
         public string DecimalSymbol { get; set; }
         [MaxLength(1)]
         public string DigitGroupingSymbol { get; set; }
+        public DateTime? LastLogin { get; set; }
+        [MaxLength(50)]
+        public string IpAddress { get; set; }
         public Status Status { get; set; }
     }
 }

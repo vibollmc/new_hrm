@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hris.Database
+namespace Hris.Permission.Business
 {
     public class Class1
     {
