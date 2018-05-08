@@ -15,3 +15,12 @@
 /HRIS/Hris.Profiles.Business/bin
 /HRIS/Hris.Profiles.Persistence/obj
 /HRIS/Hris.Profiles.Persistence/bin
+/HRIS/Hris.Permission.Business/obj
+/HRIS/Hris.Permission.Business/bin
+/HRIS/Hris.Permission.Persistence/obj
+/HRIS/Hris.Permission.Persistence/bin
+/HRIS/Hris.Permission.Tests/obj
+/HRIS/Hris.Permission.Tests/bin
+/HRIS/Hris.Common.Tests/obj
+/HRIS/Hris.Common.Tests/bin
+/HRIS/Hris.Web.Main/wwwroot/lib

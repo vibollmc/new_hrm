@@ -19,15 +19,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Common.Persistence", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Common.Business", "Hris.Common.Business\Hris.Common.Business.csproj", "{411E872D-CBD8-40C0-BE54-79EA272759AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Common.Tests", "Hris.Common.Tests\Hris.Common.Tests.csproj", "{0CC4B734-4064-44B5-BFF5-FA30CDC62D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Common.Tests", "Hris.Common.Tests\Hris.Common.Tests.csproj", "{0CC4B734-4064-44B5-BFF5-FA30CDC62D4C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Permission", "Permission", "{13F0A66C-C8D3-485C-B828-A66CC771A1ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Permission.Business", "Hris.Permission.Business\Hris.Permission.Business.csproj", "{4E86E1C0-766C-4C5B-AE32-A92EF7FE58D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Permission.Business", "Hris.Permission.Business\Hris.Permission.Business.csproj", "{4E86E1C0-766C-4C5B-AE32-A92EF7FE58D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Permission.Persistence", "Hris.Permission.Persistence\Hris.Permission.Persistence.csproj", "{9FA2CA39-323F-4E1E-911A-5426684E254B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Permission.Persistence", "Hris.Permission.Persistence\Hris.Permission.Persistence.csproj", "{9FA2CA39-323F-4E1E-911A-5426684E254B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Permission.Tests", "Hris.Permission.Tests\Hris.Permission.Tests.csproj", "{D1F2D9DD-1031-43ED-9541-454DBC2113F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Permission.Tests", "Hris.Permission.Tests\Hris.Permission.Tests.csproj", "{D1F2D9DD-1031-43ED-9541-454DBC2113F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Utilities", "Hris.Utilities\Hris.Utilities.csproj", "{490A1E55-D406-4299-951E-5B1F14B8DD7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{D1F2D9DD-1031-43ED-9541-454DBC2113F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1F2D9DD-1031-43ED-9541-454DBC2113F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1F2D9DD-1031-43ED-9541-454DBC2113F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490A1E55-D406-4299-951E-5B1F14B8DD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490A1E55-D406-4299-951E-5B1F14B8DD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490A1E55-D406-4299-951E-5B1F14B8DD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490A1E55-D406-4299-951E-5B1F14B8DD7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
