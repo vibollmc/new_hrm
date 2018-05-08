@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+
+declare var md: any;
 
 @Component({
     selector: 'app',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+
+    ngAfterViewInit(): void {
+        md.init();
+    }
 }

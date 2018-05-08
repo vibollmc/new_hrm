@@ -29,6 +29,10 @@ export default createServerRenderer(params => {
                 setImmediate(() => {
                     resolve({
                         html: state.renderToString()
+                            .replace('<html><head><style>', '<style>')
+                            .replace('<html><head>', '')
+                            .replace('</head><body><app', '<app')
+                            .replace('</app></body></html>', '</app>')
                     });
                     moduleRef.destroy();
                 });

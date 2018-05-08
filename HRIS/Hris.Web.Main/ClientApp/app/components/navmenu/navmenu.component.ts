@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 
 @Component({
     selector: 'nav-menu',
-    templateUrl: './navmenu.component.html',
-    styleUrls: ['./navmenu.component.css']
+    templateUrl: './navmenu.component.html'
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements AfterViewInit {
+    ngAfterViewInit(): void { console.log("NavMenuComponent"); }
 }
