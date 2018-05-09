@@ -2,6 +2,7 @@
 using Hris.Database.Entities;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Hris.Database
 {
