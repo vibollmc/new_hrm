@@ -6,7 +6,7 @@ using Hris.Database.Enums;
 
 namespace Hris.Database.Entities
 {
-    public class User : Base
+    public class MDUser : Base
     {
         [MaxLength(50)]
         public string Username { get; set; }
@@ -33,7 +33,7 @@ namespace Hris.Database.Entities
         public string IpAddress { get; set; }
         public Status Status { get; set; }
 
-        public Language Language { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
+        public MDLanguage Language { get; set; }
+        public ICollection<MDUserRole> UserRoles { get; set; }
     }
 }

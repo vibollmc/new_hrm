@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hris.Database.Entities
 {
-    public class FormLanguage:Base
+    public class MDFormLanguage:Base
     {
         public int? FunctionId { get; set; }
         [MaxLength(50)]
@@ -16,7 +16,7 @@ namespace Hris.Database.Entities
         [MaxLength(500)]
         public string Value { get; set; }
 
-        public Function Function { get; set; }
-        public Language Language { get; set; }
+        public MDFunction Function { get; set; }
+        public MDLanguage Language { get; set; }
     }
 }

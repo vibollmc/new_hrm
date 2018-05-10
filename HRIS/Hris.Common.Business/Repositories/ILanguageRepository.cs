@@ -15,5 +15,26 @@ namespace Hris.Common.Business.Repositories
         /// <param name="status">language status. status = null to get all status</param>
         /// <returns>Available languagues</returns>
         Task<IEnumerable<Language>> Get(Status? status);
+
+        /// <summary>
+        /// Save language
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        Task Save(Language language);
+
+        /// <summary>
+        /// Delete language
+        /// </summary>
+        /// <param name="id">Language Id</param>
+        /// <returns></returns>
+        Task Delete(int? id);
+
+        /// <summary>
+        /// Toggle language status
+        /// </summary>
+        /// <param name="id">Language Id</param>
+        /// <returns></returns>
+        Task ChangeStatus(int? id);
     }
 }

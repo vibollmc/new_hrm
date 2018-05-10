@@ -1,26 +1,42 @@
-﻿using Hris.Database.Entities;
-using Hris.Database.Enums;
+﻿using Hris.Common.Business.Domains;
+using Hris.Database.Entities;
 
 namespace Hris.Common.Persistence.Transformations
 {
     public static class LanguageTransformations
     {
-        public static Language Transform(this Business.Domains.Language language)
+        public static MDLanguage Transform(this Language language)
         {
-            return new Language
-            {
-                Id = language.Id,
-                Code = language.Code,
-                Name = language.Name,
-                IsDefault = language.IsDefault,
-                Status = language.Status.Parse<Status, Business.Enums.Status>()
-            };
+            return language == null
+                ? null
+                : new MDLanguage
+                {
+                    Id = language.Id,
+                    Code = language.Code,
+                    Name = language.Name,
+                    IsDefault = language.IsDefault,
+                    Status = language.Status.Transform()
+                };
         }
 
-        public static Business.Domains.Language Transform(this Language language)
+        public static Language Transform(this MDLanguage language)
         {
-            return new Business.Domains.Language(language.Id, language.Code, language.Name, language.IsDefault,
-                language.Status.Parse<Business.Enums.Status, Status>());
+            return language == null
+                ? null
+                : new Language(language.Id, language.Code, language.Name, language.IsDefault,
+                    language.Status.Transform());
+        }
+
+        public static void UpdateValue(this MDLanguage language, Language value)
+        {
+            if (value == null) return;
+            if (language == null)
+                language = new MDLanguage {Id = value.Id};
+            
+            language.Code = value.Code;
+            language.Name = value.Name;
+            language.IsDefault = value.IsDefault;
+            language.Status = value.Status.Transform();
         }
     }
 }

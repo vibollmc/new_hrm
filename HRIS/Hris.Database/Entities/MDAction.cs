@@ -6,7 +6,7 @@ using Hris.Database.Enums;
 
 namespace Hris.Database.Entities
 {
-    public class Action: Base
+    public class MDAction: Base
     {
         [MaxLength(50)]
         public string Key { get; set; }
@@ -17,8 +17,8 @@ namespace Hris.Database.Entities
         public int Order { get; set; }
         public Status Status { get; set; }
 
-        public ICollection<ActionLanguage> ActionLanguages { get; set; }
-        public ICollection<FunctionAction> FunctionActions { get; set; }
-        public ICollection<RoleFunctionAction> RoleFunctionActions { get; set; }
+        public ICollection<MDActionLanguage> ActionLanguages { get; set; }
+        public ICollection<MDFunctionAction> FunctionActions { get; set; }
+        public ICollection<MDRoleFunctionAction> RoleFunctionActions { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Hris.Database.Enums;
 
 namespace Hris.Database.Entities
 {
-    public class Language : Base
+    public class MDLanguage : Base
     {
         [MaxLength(10)]
         public string Code { get; set; }
@@ -15,8 +15,8 @@ namespace Hris.Database.Entities
         public bool IsDefault { get; set; }
         public Status Status { get; set; }
 
-        public ICollection<Action> Actions { get; set; }
-        public ICollection<FormLanguage> FormLanguages { get; set; }
-        public ICollection<FunctionLanguage> FunctionLanguages { get; set; }
+        public ICollection<MDAction> Actions { get; set; }
+        public ICollection<MDFormLanguage> FormLanguages { get; set; }
+        public ICollection<MDFunctionLanguage> FunctionLanguages { get; set; }
     }
 }

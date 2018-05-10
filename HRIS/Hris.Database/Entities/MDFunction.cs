@@ -6,7 +6,7 @@ using Hris.Database.Enums;
 
 namespace Hris.Database.Entities
 {
-    public class Function : Base
+    public class MDFunction : Base
     {
         [MaxLength(50)]
         public string Name { get; set; }
@@ -18,10 +18,10 @@ namespace Hris.Database.Entities
         public int OrderIndex { get; set; }
         public Status Status { get; set; }
 
-        public ICollection<FormLanguage> FormLanguages { get; set; }
-        public ICollection<FunctionAction> FunctionActions { get; set; }
-        public ICollection<FunctionLanguage> FunctionLanguages { get; set; }
-        public ICollection<RoleFunction> RoleFunctions { get; set; }
-        public ICollection<RoleFunctionAction> RoleFunctionActions { get; set; }
+        public ICollection<MDFormLanguage> FormLanguages { get; set; }
+        public ICollection<MDFunctionAction> FunctionActions { get; set; }
+        public ICollection<MDFunctionLanguage> FunctionLanguages { get; set; }
+        public ICollection<MDRoleFunction> RoleFunctions { get; set; }
+        public ICollection<MDRoleFunctionAction> RoleFunctionActions { get; set; }
     }
 }
