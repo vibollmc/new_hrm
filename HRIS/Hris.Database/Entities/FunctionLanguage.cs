@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Hris.Database.Entities
 {
-    public class RoleFunction
+    public class FunctionLanguage
     {
-        public int? RoleId { get; set; }
         public int? FunctionId { get; set; }
-        
-        public Role Role { get; set; }
+        public int? LanguageId { get; set; }
+        public string Name { get; set; }
+
         public Function Function { get; set; }
+        public Language Language { get; set; }
     }
 }

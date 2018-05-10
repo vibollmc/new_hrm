@@ -17,7 +17,8 @@ namespace Hris.Database.Entities
         [MaxLength(50)]
         public string Email { get; set; }
         [MaxLength(10)]
-        public string Language { get; set; }
+        public string LanguageCode { get; set; }
+        public int? LanguageId { get; set; }
         public int? TimeZone { get; set; }
         [MaxLength(20)]
         public string DateFormat { get; set; }
@@ -31,5 +32,8 @@ namespace Hris.Database.Entities
         [MaxLength(50)]
         public string IpAddress { get; set; }
         public Status Status { get; set; }
+
+        public Language Language { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

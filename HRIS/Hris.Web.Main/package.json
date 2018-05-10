@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "postinstall": "webpack --config webpack.config.vendor.js",
     "test": "karma start ClientApp/test/karma.conf.js"
   },
   "devDependencies": {

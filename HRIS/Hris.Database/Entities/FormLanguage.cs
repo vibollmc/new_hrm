@@ -9,11 +9,14 @@ namespace Hris.Database.Entities
     {
         public int? FunctionId { get; set; }
         [MaxLength(50)]
-        public string KeyFunction { get; set; }
+        public string FunctionKey { get; set; }
         public int? LanguageId { get; set; }
         [MaxLength(50)]
         public string Key { get; set; }
         [MaxLength(500)]
         public string Value { get; set; }
+
+        public Function Function { get; set; }
+        public Language Language { get; set; }
     }
 }

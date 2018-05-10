@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hris.Common.Business\Hris.Common.Business.csproj" />
+    <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
+  </ItemGroup>
+
 </Project>

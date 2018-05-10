@@ -65,7 +65,7 @@ function initInterface() {
         $('html').addClass('perfect-scrollbar-off');
     }
 
-    $('body').bootstrapMaterialDesign();
+    //$('body').bootstrapMaterialDesign();
 
     $sidebar = $('.sidebar');
 
@@ -94,17 +94,17 @@ function initInterface() {
     // we style the badges with our colors
     var tagClass = $('.tagsinput').data('color');
 
-   if($(".tagsinput").length != 0){
-     $('.tagsinput').tagsinput();
-   }
+    if($(".tagsinput").length != 0){
+        $('.tagsinput').tagsinput();
+    }
 
-   $('.bootstrap-tagsinput').addClass(''+ tagClass +'-badge');
+    $('.bootstrap-tagsinput').addClass(''+ tagClass +'-badge');
 
     //    Activate bootstrap-select
-    $(".select").dropdown({
-        "dropdownClass": "dropdown-menu",
-        "optionClass": ""
-    });
+    //$(".select").dropdown({
+    //    "dropdownClass": "dropdown-menu",
+    //    "optionClass": ""
+    //});
 
     $('.form-control').on("focus", function() {
         $(this).parent('.input-group').addClass("input-group-focus");
@@ -113,43 +113,43 @@ function initInterface() {
     });
 
 
-    if (breakCards == true) {
-        // We break the cards headers if there is too much stress on them :-)
-        $('[data-header-animation="true"]').each(function() {
-            var $fix_button = $(this)
-            var $card = $(this).parent('.card');
+    //if (breakCards == true) {
+    //    // We break the cards headers if there is too much stress on them :-)
+    //    $('[data-header-animation="true"]').each(function() {
+    //        var $fix_button = $(this);
+    //        var $card = $(this).parent('.card');
 
-            $card.find('.fix-broken-card').click(function() {
-                console.log(this);
-                var $header = $(this).parent().parent().siblings('.card-header, .card-header-image');
+    //        $card.find('.fix-broken-card').click(function() {
+    //            console.log(this);
+    //            var $header = $(this).parent().parent().siblings('.card-header, .card-header-image');
 
-                $header.removeClass('hinge').addClass('fadeInDown');
+    //            $header.removeClass('hinge').addClass('fadeInDown');
 
-                $card.attr('data-count', 0);
+    //            $card.attr('data-count', 0);
 
-                setTimeout(function() {
-                    $header.removeClass('fadeInDown animate');
-                }, 480);
-            });
+    //            setTimeout(function() {
+    //                $header.removeClass('fadeInDown animate');
+    //            }, 480);
+    //        });
 
-            $card.mouseenter(function() {
-                var $this = $(this);
-                hover_count = parseInt($this.attr('data-count'), 10) + 1 || 0;
-                $this.attr("data-count", hover_count);
+    //        $card.mouseenter(function() {
+    //            var $this = $(this);
+    //            hover_count = parseInt($this.attr('data-count'), 10) + 1 || 0;
+    //            $this.attr("data-count", hover_count);
 
-                if (hover_count >= 20) {
-                    $(this).children('.card-header, .card-header-image').addClass('hinge animated');
-                }
-            });
-        });
-    }
+    //            if (hover_count >= 20) {
+    //                $(this).children('.card-header, .card-header-image').addClass('hinge animated');
+    //            }
+    //        });
+    //    });
+    //}
 
     // remove class has-error for checkbox validation
-    $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on('click', function() {
-        if ($(this).hasClass('error')) {
-            $(this).closest('div').removeClass('has-error');
-        }
-    });
+    //$('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on('click', function() {
+    //    if ($(this).hasClass('error')) {
+    //        $(this).closest('div').removeClass('has-error');
+    //    }
+    //});
 
     $(document).on('click', '.navbar-toggler', function () {
         $toggle = $(this);
@@ -200,19 +200,19 @@ function initInterface() {
         }
 
     });
+
+    // activate collapse right menu when the windows is resized
+    $(window).resize(function () {
+        md.initSidebarsCheck();
+
+        // reset the seq for charts drawing animations
+        seq = seq2 = 0;
+
+        //setTimeout(function() {
+        //    demo.initDashboardPageCharts();
+        //}, 500);
+    });
 }
-
-// activate collapse right menu when the windows is resized
-$(window).resize(function() {
-    md.initSidebarsCheck();
-
-    // reset the seq for charts drawing animations
-    seq = seq2 = 0;
-
-    setTimeout(function() {
-        demo.initDashboardPageCharts();
-    }, 500);
-});
 
 md = {
     misc: {
@@ -250,7 +250,7 @@ md = {
             }
          });
 
-         $('.datepicker').datetimepicker({
+        $('.datepicker').datetimepicker({
             format: 'MM/DD/YYYY',
             icons: {
                 time: "fa fa-clock-o",
@@ -265,7 +265,7 @@ md = {
             }
          });
 
-         $('.timepicker').datetimepicker({
+        $('.timepicker').datetimepicker({
 //          format: 'H:mm',    // use this format if you want the 24hours timepicker
             format: 'h:mm A',    //use this format if you want the 12hours timpiecker with AM/PM toggle
             icons: {
@@ -310,11 +310,11 @@ md = {
     },
 
     initSidebarsCheck: function() {
-        if ($(window).width() <= 991) {
+        //if ($(window).width() <= 991) {
             if ($sidebar.length != 0) {
                 md.initRightMenu();
             }
-        }
+        //}
     },
 
     initMinimizeSidebar: function() {
@@ -398,7 +398,6 @@ md = {
             }
         }
     }, 200),
-
 
     // initBootstrapNavbarMenu: debounce(function(){
     //

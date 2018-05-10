@@ -7,8 +7,8 @@ declare var md: any;
     templateUrl: './app.component.html'
 })
 export class AppComponent implements AfterViewInit {
-
     ngAfterViewInit(): void {
         md.init();
+        console.log("AppComponent.ngAfterViewInit was called");
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using Hris.Database.Entities;
-using JetBrains.Annotations;
+﻿using Hris.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Hris.Database
 {
@@ -12,41 +9,62 @@ namespace Hris.Database
     public class HrisContext : DbContext
     {
         /// <summary>
-        /// Store users login
+        /// All action of functions in systems
         /// </summary>
-        public DbSet<User> Users { get; set; }
+        public DbSet<Action> Actions { get; set; }
 
         /// <summary>
-        /// Store Audit logs
+        /// Language of Actions
         /// </summary>
-        public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<ActionLanguage> ActionLanguages { get; set; }
 
         /// <summary>
-        /// Store setting form's languages
+        /// Setting form's languages
         /// </summary>
         public DbSet<FormLanguage> FormLanguages { get; set; }
 
         /// <summary>
-        /// Store all functions of system, to be build menu
+        /// All functions of system, to be build menu
         /// </summary>
         public DbSet<Function> Functions { get; set; }
 
         /// <summary>
-        /// Store availiable languages on system
+        /// Setting Function's Actions
+        /// </summary>
+        public DbSet<FunctionAction> FunctionActions { get; set; }
+
+        /// <summary>
+        /// Setting Function's Languages
+        /// </summary>
+        public DbSet<FunctionLanguage> FunctionLanguages { get; set; }
+
+        /// <summary>
+        /// Availiable Languages on system
         /// </summary>
         public DbSet<Language> Languages { get; set; }
 
         /// <summary>
-        /// Store all Role permission on system
+        /// All Role permission on system
         /// </summary>
         public DbSet<Role> Roles { get; set; }
+
         /// <summary>
-        /// Store setting Role on functuions
+        /// Setting Role on functions
         /// </summary>
         public DbSet<RoleFunction> RoleFunctions { get; set; }
 
         /// <summary>
-        /// Store user's roles
+        /// Setting Role on function's Actions
+        /// </summary>
+        public DbSet<RoleFunctionAction> RoleFunctionActions { get; set; }
+
+        /// <summary>
+        /// Users login
+        /// </summary>
+        public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// User's roles
         /// </summary>
         public DbSet<UserRole> UserRoles { get; set; }
 
@@ -56,10 +74,27 @@ namespace Hris.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ActionLanguage>()
+                .HasKey(x => new { x.ActionId, x.LanguageId });
+
+            modelBuilder.Entity<FunctionAction>()
+                .HasKey(x => new { x.ActionId, x.FunctionId });
+
+            modelBuilder.Entity<FunctionLanguage>()
+                .HasKey(x => new { x.FunctionId, x.LanguageId});
+
+            modelBuilder.Entity<RoleFunction>()
+                .HasKey(x => new {x.FunctionId, x.RoleId});
+
+            modelBuilder.Entity<RoleFunctionAction>()
+                .HasKey(x => new {x.RoleId, x.ActionId, x.FunctionId});
+
             modelBuilder.Entity<User>()
                 .HasIndex(c => c.Username)
                 .IsUnique();
 
+            modelBuilder.Entity<UserRole>()
+                .HasKey(x => new {x.RoleId, x.UserId});
         }
     }
 }

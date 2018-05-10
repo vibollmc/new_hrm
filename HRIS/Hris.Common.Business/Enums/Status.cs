@@ -1,4 +1,4 @@
-﻿namespace Hris.Database.Enums
+﻿namespace Hris.Common.Business.Enums
 {
     public enum Status
     {

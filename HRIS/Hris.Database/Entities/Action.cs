@@ -6,22 +6,19 @@ using Hris.Database.Enums;
 
 namespace Hris.Database.Entities
 {
-    public class Function : Base
+    public class Action: Base
     {
-        [MaxLength(50)]
-        public string Name { get; set; }
-        public Module Module { get; set; }
         [MaxLength(50)]
         public string Key { get; set; }
         [MaxLength(50)]
-        public string Icon { get; set; }
-        public int OrderIndex { get; set; }
+        public string Name { get; set; }
+        [MaxLength(50)]
+        public string Event { get; set; }
+        public int Order { get; set; }
         public Status Status { get; set; }
 
-        public ICollection<FormLanguage> FormLanguages { get; set; }
+        public ICollection<ActionLanguage> ActionLanguages { get; set; }
         public ICollection<FunctionAction> FunctionActions { get; set; }
-        public ICollection<FunctionLanguage> FunctionLanguages { get; set; }
-        public ICollection<RoleFunction> RoleFunctions { get; set; }
         public ICollection<RoleFunctionAction> RoleFunctionActions { get; set; }
     }
 }

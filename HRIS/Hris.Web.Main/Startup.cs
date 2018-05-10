@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hris.Database;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -26,6 +27,20 @@ namespace Hris.Web.Main
         {
             services.AddDbContext<HrisContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MySqlConnection")));
             services.AddMvc();
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Acount/Logout";
+                    options.AccessDeniedPath = options.LoginPath;
+                    options.ReturnUrlParameter = "url";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,15 +61,13 @@ namespace Hris.Web.Main
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                //routes.MapSpaFallbackRoute(
-                //    name: "login-spa-fallback",
-                //    defaults: new { Controller = "Account", action = "Login"});
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

@@ -14,5 +14,9 @@ namespace Hris.Database.Entities
         public string Name { get; set; }
         public bool IsDefault { get; set; }
         public Status Status { get; set; }
+
+        public ICollection<Action> Actions { get; set; }
+        public ICollection<FormLanguage> FormLanguages { get; set; }
+        public ICollection<FunctionLanguage> FunctionLanguages { get; set; }
     }
 }
