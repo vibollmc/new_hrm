@@ -21,7 +21,7 @@ namespace Hris.Common.Business.Repositories
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        Task Save(Language language);
+        Task<int?> Save(Language language);
 
         /// <summary>
         /// Delete language

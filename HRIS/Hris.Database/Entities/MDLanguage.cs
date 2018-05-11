@@ -13,7 +13,7 @@ namespace Hris.Database.Entities
         [MaxLength(50)]
         public string Name { get; set; }
         public bool IsDefault { get; set; }
-        public Status Status { get; set; }
+        public MDStatus Status { get; set; }
 
         public ICollection<MDAction> Actions { get; set; }
         public ICollection<MDFormLanguage> FormLanguages { get; set; }

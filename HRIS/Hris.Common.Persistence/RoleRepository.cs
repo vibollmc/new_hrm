@@ -7,6 +7,7 @@ using Hris.Common.Business.Enums;
 using Hris.Common.Business.Repositories;
 using Hris.Common.Persistence.Transformations;
 using Hris.Database;
+using Hris.Database.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hris.Common.Persistence
@@ -39,7 +40,7 @@ namespace Hris.Common.Persistence
             return await roles.ToListAsync();
         }
 
-        public async Task Save(Role role)
+        public async Task<int?> Save(Role role)
         {
             var item = await _dbContext.Roles.FirstOrDefaultAsync(x => x.Id == role.Id);
 
@@ -50,10 +51,13 @@ namespace Hris.Common.Persistence
             }
             else
             {
-                await _dbContext.AddAsync(role.Transform());
+                item = role.Transform();
+                await _dbContext.Roles.AddAsync(item);
             }
 
             await _dbContext.SaveChangesAsync();
+
+            return item.Id;
         }
 
         public async Task Delete(int? id)
@@ -70,9 +74,9 @@ namespace Hris.Common.Persistence
             var role = await _dbContext.Roles.FirstOrDefaultAsync(x => x.Id == id);
             if (role == null) return;
 
-            role.Status = role.Status == Database.Enums.Status.Active
-                ? Database.Enums.Status.Inactive
-                : Database.Enums.Status.Active;
+            role.Status = role.Status == MDStatus.Active
+                ? MDStatus.Inactive
+                : MDStatus.Active;
             await _dbContext.SaveChangesAsync();
         }
     }

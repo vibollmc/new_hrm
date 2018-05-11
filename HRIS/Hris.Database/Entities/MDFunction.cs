@@ -10,13 +10,13 @@ namespace Hris.Database.Entities
     {
         [MaxLength(50)]
         public string Name { get; set; }
-        public Module Module { get; set; }
+        public MDModule Module { get; set; }
         [MaxLength(50)]
         public string Key { get; set; }
         [MaxLength(50)]
         public string Icon { get; set; }
         public int OrderIndex { get; set; }
-        public Status Status { get; set; }
+        public MDStatus Status { get; set; }
 
         public ICollection<MDFormLanguage> FormLanguages { get; set; }
         public ICollection<MDFunctionAction> FunctionActions { get; set; }

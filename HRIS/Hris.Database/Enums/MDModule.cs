@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hris.Database.Enums
 {
-    public enum Module
+    public enum MDModule
     {
         Common = 1,
         Profile = 2

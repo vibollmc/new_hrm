@@ -8,6 +8,7 @@ using Hris.Common.Business.Enums;
 using Hris.Common.Business.Repositories;
 using Hris.Common.Persistence.Transformations;
 using Hris.Database;
+using Hris.Database.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hris.Common.Persistence
@@ -32,7 +33,7 @@ namespace Hris.Common.Persistence
             return await languages.ToListAsync();
         }
 
-        public async Task Save(Language language)
+        public async Task<int?> Save(Language language)
         {
             var item = await _dbContext.Languages.FirstOrDefaultAsync(x => x.Id == language.Id);
 
@@ -43,10 +44,13 @@ namespace Hris.Common.Persistence
             }
             else
             {
-                await _dbContext.AddAsync(language.Transform());
+                item = language.Transform();
+                await _dbContext.AddAsync(item);
             }
 
             await _dbContext.SaveChangesAsync();
+
+            return item.Id;
         }
 
         public async Task Delete(int? id)
@@ -63,9 +67,9 @@ namespace Hris.Common.Persistence
             var language = await _dbContext.Languages.FirstOrDefaultAsync(x => x.Id == id);
             if (language == null) return;
 
-            language.Status = language.Status == Database.Enums.Status.Active
-                ? Database.Enums.Status.Inactive
-                : Database.Enums.Status.Active;
+            language.Status = language.Status == MDStatus.Active
+                ? MDStatus.Inactive
+                : MDStatus.Active;
             language.UpdatedAt = DateTime.UtcNow;
 
             await _dbContext.SaveChangesAsync();

@@ -34,7 +34,7 @@ namespace Hris.Common.Business.Repositories
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        Task Save(User user);
+        Task<int?> Save(User user);
         /// <summary>
         /// Delete user
         /// </summary>

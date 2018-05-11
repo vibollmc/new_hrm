@@ -31,7 +31,7 @@ namespace Hris.Database.Entities
         public DateTime? LastLogin { get; set; }
         [MaxLength(50)]
         public string IpAddress { get; set; }
-        public Status Status { get; set; }
+        public MDStatus Status { get; set; }
 
         public MDLanguage Language { get; set; }
         public ICollection<MDUserRole> UserRoles { get; set; }

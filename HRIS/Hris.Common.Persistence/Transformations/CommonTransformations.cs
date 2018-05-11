@@ -1,22 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
+using Hris.Common.Business.Enums;
 using Hris.Database.Enums;
 
 namespace Hris.Common.Persistence.Transformations
 {
     public static class CommonTransformations
     {
-        public static Status Transform(this Business.Enums.Status status)
+        public static MDStatus Transform(this Status status)
         {
-            return status.Parse<Status, Business.Enums.Status>();
+            return status.Parse<MDStatus, Status>();
         }
 
-        public static Business.Enums.Status Transform(this Status status)
+        public static Status Transform(this MDStatus status)
         {
-            return status.Parse<Business.Enums.Status, Status>();
+            return status.Parse<Status, MDStatus>();
+        }
+
+        public static MDModule Transform(this Module module)
+        {
+            return module.Parse<MDModule, Module>();
+        }
+
+        public static Module Transform(this MDModule module)
+        {
+            return module.Parse<Module, MDModule>();
         }
 
         public static T Parse<T, TK>(this TK k) where T: struct, IConvertible where TK:struct, IConvertible

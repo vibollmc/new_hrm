@@ -8,6 +8,7 @@ using Hris.Common.Business.Enums;
 using Hris.Common.Business.Repositories;
 using Hris.Common.Persistence.Transformations;
 using Hris.Database;
+using Hris.Database.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hris.Common.Persistence
@@ -47,17 +48,23 @@ namespace Hris.Common.Persistence
             return await users.ToListAsync();
         }
 
-        public async Task Save(User user)
+        public async Task<int?> Save(User user)
         {
-            var userDb = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
-            if (userDb != null)
+            var mdUser = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
+            if (mdUser != null)
             {
-                userDb.UpdateValue(user);
-                userDb.UpdatedAt = DateTime.UtcNow;
+                mdUser.UpdateValue(user);
+                mdUser.UpdatedAt = DateTime.UtcNow;
             }
-            else await _dbContext.Users.AddAsync(user.Transform());
+            else
+            {
+                mdUser = user.Transform();
+                await _dbContext.Users.AddAsync(mdUser);
+            }
 
             await _dbContext.SaveChangesAsync();
+
+            return mdUser.Id;
         }
 
         public async Task Delete(int? id)
@@ -75,9 +82,9 @@ namespace Hris.Common.Persistence
             if (user == null) return;
 
             user.UpdatedAt = DateTime.UtcNow;
-            user.Status = user.Status == Database.Enums.Status.Active
-                ? Database.Enums.Status.Inactive
-                : Database.Enums.Status.Active;
+            user.Status = user.Status == MDStatus.Active
+                ? MDStatus.Inactive
+                : MDStatus.Active;
             await _dbContext.SaveChangesAsync();
         }
     }

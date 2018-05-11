@@ -1,6 +1,6 @@
 ﻿namespace Hris.Database.Enums
 {
-    public enum Status
+    public enum MDStatus
     {
         Undefined = 0,
         Active = 1,
