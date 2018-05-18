@@ -25,3 +25,7 @@
 /HRIS/Hris.Common.Tests/bin
 /HRIS/Hris.Web.Main/wwwroot/lib
 /material-dashboard-angular-v2.1.0/node_modules
+/HRIS/Hris.List.Business/obj
+/HRIS/Hris.List.Business/bin
+/HRIS/Hris.List.Persistence/obj
+/HRIS/Hris.List.Persistence/bin

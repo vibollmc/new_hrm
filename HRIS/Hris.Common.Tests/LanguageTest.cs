@@ -3,8 +3,6 @@ using Hris.Common.Business.Domains;
 using Hris.Common.Business.Enums;
 using Hris.Common.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hris.Database;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hris.Common.Tests
 {
@@ -21,5 +19,11 @@ namespace Hris.Common.Tests
 
             Assert.IsTrue(id1 != null && id2 != null);
         }
+
+        //[TestMethod]
+        //public async Task AddLanguageGender()
+        //{
+            
+        //}
     }
 }

@@ -28,7 +28,7 @@ namespace Hris.Common.Business.Repositories
         /// </summary>
         /// <param name="role">role</param>
         /// <returns></returns>
-        Task Save(Role role);
+        Task<int?> Save(Role role);
 
         /// <summary>
         /// Delete role by Id

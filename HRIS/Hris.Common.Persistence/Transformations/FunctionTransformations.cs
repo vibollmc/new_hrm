@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
 using Hris.Common.Business.Domains;
 using Hris.Database.Entities;
+using Hris.Database.Entities.Common;
 
 namespace Hris.Common.Persistence.Transformations
 {

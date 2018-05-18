@@ -5,7 +5,6 @@ using Hris.Common.Business.Repositories;
 using Hris.Common.Persistence.Transformations;
 using Hris.Database;
 using Microsoft.EntityFrameworkCore;
-using Action = Hris.Common.Business.Domains.Action;
 
 namespace Hris.Common.Persistence
 {
@@ -37,7 +36,7 @@ namespace Hris.Common.Persistence
             return func.Id;
         }
 
-        public async Task<int?> SaveAction(Action action)
+        public async Task<int?> SaveAction(Business.Domains.Action action)
         {
             var act = await _dbContext.Actions.FirstOrDefaultAsync(x => x.Id == action.Id);
             if (act == null)
