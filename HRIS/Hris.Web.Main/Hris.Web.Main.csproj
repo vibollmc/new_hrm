@@ -258,7 +258,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hris.Common.Business\Hris.Common.Business.csproj" />
+    <ProjectReference Include="..\Hris.Common.Persistence\Hris.Common.Persistence.csproj" />
     <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
+    <ProjectReference Include="..\Hris.Profiles.Business\Hris.Profiles.Business.csproj" />
+    <ProjectReference Include="..\Hris.Profiles.Persistence\Hris.Profiles.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

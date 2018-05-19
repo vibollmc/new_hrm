@@ -12,7 +12,7 @@ using System;
 namespace Hris.Database.Migrations
 {
     [DbContext(typeof(HrisContext))]
-    [Migration("20180510035115_DbInitial")]
+    [Migration("20180511180916_DbInitial")]
     partial class DbInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace Hris.Database.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Hris.Database.Entities.Action", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDAction", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
@@ -34,10 +34,11 @@ namespace Hris.Database.Migrations
                     b.Property<string>("Event")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Key")
+                    b.Property<string>("Icon")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("LanguageId");
+                    b.Property<string>("Key")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);
@@ -50,12 +51,10 @@ namespace Hris.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LanguageId");
-
                     b.ToTable("Actions");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.ActionLanguage", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDActionLanguage", b =>
                 {
                     b.Property<int?>("ActionId");
 
@@ -70,7 +69,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("ActionLanguages");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.FormLanguage", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFormLanguage", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
@@ -103,7 +102,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("FormLanguages");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.Function", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFunction", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
@@ -134,7 +133,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("Functions");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.FunctionAction", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFunctionAction", b =>
                 {
                     b.Property<int?>("ActionId");
 
@@ -147,7 +146,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("FunctionActions");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.FunctionLanguage", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFunctionLanguage", b =>
                 {
                     b.Property<int?>("FunctionId");
 
@@ -162,7 +161,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("FunctionLanguages");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.Language", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDLanguage", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
@@ -188,7 +187,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("Languages");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.Role", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDRole", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
@@ -209,7 +208,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.RoleFunction", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDRoleFunction", b =>
                 {
                     b.Property<int?>("FunctionId");
 
@@ -222,7 +221,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("RoleFunctions");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.RoleFunctionAction", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDRoleFunctionAction", b =>
                 {
                     b.Property<int?>("RoleId");
 
@@ -239,7 +238,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("RoleFunctionActions");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.User", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDUser", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd();
@@ -299,7 +298,7 @@ namespace Hris.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.UserRole", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDUserRole", b =>
                 {
                     b.Property<int?>("RoleId");
 
@@ -312,109 +311,102 @@ namespace Hris.Database.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.Action", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDActionLanguage", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Language")
-                        .WithMany("Actions")
-                        .HasForeignKey("LanguageId");
-                });
-
-            modelBuilder.Entity("Hris.Database.Entities.ActionLanguage", b =>
-                {
-                    b.HasOne("Hris.Database.Entities.Action", "Action")
+                    b.HasOne("Hris.Database.Entities.MDAction", "Action")
                         .WithMany("ActionLanguages")
                         .HasForeignKey("ActionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.Language", "Language")
-                        .WithMany()
+                    b.HasOne("Hris.Database.Entities.MDLanguage", "Language")
+                        .WithMany("ActionLanguages")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.FormLanguage", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFormLanguage", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Function", "Function")
+                    b.HasOne("Hris.Database.Entities.MDFunction", "Function")
                         .WithMany("FormLanguages")
                         .HasForeignKey("FunctionId");
 
-                    b.HasOne("Hris.Database.Entities.Language", "Language")
+                    b.HasOne("Hris.Database.Entities.MDLanguage", "Language")
                         .WithMany("FormLanguages")
                         .HasForeignKey("LanguageId");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.FunctionAction", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFunctionAction", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Action", "Action")
+                    b.HasOne("Hris.Database.Entities.MDAction", "Action")
                         .WithMany("FunctionActions")
                         .HasForeignKey("ActionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.Function", "Function")
+                    b.HasOne("Hris.Database.Entities.MDFunction", "Function")
                         .WithMany("FunctionActions")
                         .HasForeignKey("FunctionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.FunctionLanguage", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDFunctionLanguage", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Function", "Function")
+                    b.HasOne("Hris.Database.Entities.MDFunction", "Function")
                         .WithMany("FunctionLanguages")
                         .HasForeignKey("FunctionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.Language", "Language")
+                    b.HasOne("Hris.Database.Entities.MDLanguage", "Language")
                         .WithMany("FunctionLanguages")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.RoleFunction", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDRoleFunction", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Function", "Function")
+                    b.HasOne("Hris.Database.Entities.MDFunction", "Function")
                         .WithMany("RoleFunctions")
                         .HasForeignKey("FunctionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.Role", "Role")
+                    b.HasOne("Hris.Database.Entities.MDRole", "Role")
                         .WithMany("RoleFunctions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.RoleFunctionAction", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDRoleFunctionAction", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Action", "Action")
+                    b.HasOne("Hris.Database.Entities.MDAction", "Action")
                         .WithMany("RoleFunctionActions")
                         .HasForeignKey("ActionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.Function", "Function")
+                    b.HasOne("Hris.Database.Entities.MDFunction", "Function")
                         .WithMany("RoleFunctionActions")
                         .HasForeignKey("FunctionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.Role", "Role")
+                    b.HasOne("Hris.Database.Entities.MDRole", "Role")
                         .WithMany("RoleFunctionActions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.User", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDUser", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Language", "Language")
+                    b.HasOne("Hris.Database.Entities.MDLanguage", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId");
                 });
 
-            modelBuilder.Entity("Hris.Database.Entities.UserRole", b =>
+            modelBuilder.Entity("Hris.Database.Entities.MDUserRole", b =>
                 {
-                    b.HasOne("Hris.Database.Entities.Role", "Role")
+                    b.HasOne("Hris.Database.Entities.MDRole", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Hris.Database.Entities.User", "User")
+                    b.HasOne("Hris.Database.Entities.MDUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

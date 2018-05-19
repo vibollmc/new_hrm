@@ -10,6 +10,27 @@ namespace Hris.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Actions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    Event = table.Column<string>(maxLength: 50, nullable: true),
+                    Icon = table.Column<string>(maxLength: 50, nullable: true),
+                    Key = table.Column<string>(maxLength: 50, nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Order = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Functions",
                 columns: table => new
                 {
@@ -67,30 +88,52 @@ namespace Hris.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Actions",
+                name: "FunctionActions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    DeletedAt = table.Column<DateTime>(nullable: true),
-                    Event = table.Column<string>(maxLength: 50, nullable: true),
-                    Key = table.Column<string>(maxLength: 50, nullable: true),
-                    LanguageId = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Order = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                    ActionId = table.Column<int>(nullable: false),
+                    FunctionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Actions", x => x.Id);
+                    table.PrimaryKey("PK_FunctionActions", x => new { x.ActionId, x.FunctionId });
                     table.ForeignKey(
-                        name: "FK_Actions_Languages_LanguageId",
+                        name: "FK_FunctionActions_Actions_ActionId",
+                        column: x => x.ActionId,
+                        principalTable: "Actions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FunctionActions_Functions_FunctionId",
+                        column: x => x.FunctionId,
+                        principalTable: "Functions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActionLanguages",
+                columns: table => new
+                {
+                    ActionId = table.Column<int>(nullable: false),
+                    LanguageId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActionLanguages", x => new { x.ActionId, x.LanguageId });
+                    table.ForeignKey(
+                        name: "FK_ActionLanguages_Actions_ActionId",
+                        column: x => x.ActionId,
+                        principalTable: "Actions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ActionLanguages_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,79 +229,6 @@ namespace Hris.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleFunctions",
-                columns: table => new
-                {
-                    FunctionId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoleFunctions", x => new { x.FunctionId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_RoleFunctions_Functions_FunctionId",
-                        column: x => x.FunctionId,
-                        principalTable: "Functions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleFunctions_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ActionLanguages",
-                columns: table => new
-                {
-                    ActionId = table.Column<int>(nullable: false),
-                    LanguageId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActionLanguages", x => new { x.ActionId, x.LanguageId });
-                    table.ForeignKey(
-                        name: "FK_ActionLanguages_Actions_ActionId",
-                        column: x => x.ActionId,
-                        principalTable: "Actions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ActionLanguages_Languages_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FunctionActions",
-                columns: table => new
-                {
-                    ActionId = table.Column<int>(nullable: false),
-                    FunctionId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FunctionActions", x => new { x.ActionId, x.FunctionId });
-                    table.ForeignKey(
-                        name: "FK_FunctionActions_Actions_ActionId",
-                        column: x => x.ActionId,
-                        principalTable: "Actions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FunctionActions_Functions_FunctionId",
-                        column: x => x.FunctionId,
-                        principalTable: "Functions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RoleFunctionActions",
                 columns: table => new
                 {
@@ -283,6 +253,30 @@ namespace Hris.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RoleFunctionActions_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleFunctions",
+                columns: table => new
+                {
+                    FunctionId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleFunctions", x => new { x.FunctionId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_RoleFunctions_Functions_FunctionId",
+                        column: x => x.FunctionId,
+                        principalTable: "Functions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoleFunctions_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
@@ -316,11 +310,6 @@ namespace Hris.Database.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ActionLanguages_LanguageId",
                 table: "ActionLanguages",
-                column: "LanguageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Actions_LanguageId",
-                table: "Actions",
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(

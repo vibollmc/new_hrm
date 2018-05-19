@@ -15,7 +15,7 @@ namespace Hris.Database.Entities
         public bool IsDefault { get; set; }
         public MDStatus Status { get; set; }
 
-        public ICollection<MDAction> Actions { get; set; }
+        public ICollection<MDActionLanguage> ActionLanguages { get; set; }
         public ICollection<MDFormLanguage> FormLanguages { get; set; }
         public ICollection<MDFunctionLanguage> FunctionLanguages { get; set; }
     }
