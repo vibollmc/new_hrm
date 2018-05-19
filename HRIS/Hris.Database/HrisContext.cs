@@ -1,4 +1,6 @@
 ﻿using Hris.Database.Entities;
+using Hris.Database.Entities.Common;
+using Hris.Database.Entities.List;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hris.Database
@@ -8,6 +10,8 @@ namespace Hris.Database
     /// </summary>
     public class HrisContext : DbContext
     {
+
+        #region common
         /// <summary>
         /// All action of functions in systems
         /// </summary>
@@ -68,6 +72,15 @@ namespace Hris.Database
         /// </summary>
         public DbSet<MDUserRole> UserRoles { get; set; }
 
+        #endregion common
+
+        #region List
+
+        public DbSet<MDGender> Genders { get; set; }
+        public DbSet<MDGenderLanguage> GenderLanguages { get; set; }
+
+
+        #endregion List
         public HrisContext(DbContextOptions<HrisContext> options) : base(options)
         {
         }
@@ -95,6 +108,10 @@ namespace Hris.Database
 
             modelBuilder.Entity<MDUserRole>()
                 .HasKey(x => new {x.RoleId, x.UserId});
+
+            modelBuilder.Entity<MDFormLanguage>()
+                .HasIndex(x => new {x.FunctionId, x.FunctionKey, x.Key, x.LanguageId})
+                .IsUnique();
         }
     }
 }

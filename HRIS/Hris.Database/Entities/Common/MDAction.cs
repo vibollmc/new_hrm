@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Hris.Database.Enums;
 
-namespace Hris.Database.Entities
+namespace Hris.Database.Entities.Common
 {
     public class MDAction: Base
     {
