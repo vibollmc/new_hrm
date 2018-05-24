@@ -23,6 +23,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\list\gender\gender.component.ts" />
+    <None Remove="ClientApp\app\components\shared\base.component.ts" />
+    <None Remove="ClientApp\app\components\shared\base.model.ts" />
+    <None Remove="ClientApp\app\components\shared\base.service.ts" />
+    <None Remove="ClientApp\app\components\shared\datamodel\list\gender.ts" />
+    <None Remove="ClientApp\app\components\shared\http.client.ts" />
+    <None Remove="ClientApp\app\components\shared\list.model.ts" />
+    <None Remove="ClientApp\app\components\shared\list.service.ts" />
+    <None Remove="ClientApp\app\components\shared\response.result.ts" />
+    <None Remove="ClientApp\app\components\shared\share.service.ts" />
+    <None Remove="ClientApp\app\components\shared\system.config.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
@@ -263,6 +277,22 @@
     <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
     <ProjectReference Include="..\Hris.Profiles.Business\Hris.Profiles.Business.csproj" />
     <ProjectReference Include="..\Hris.Profiles.Persistence\Hris.Profiles.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\list\gender\gender.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\base.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\datamodel\base.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\base.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\datamodel\list\gender.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\enum.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\http.client.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\list.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\list.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\datamodel\response.result.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\share.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\share.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\system.config.ts" />
   </ItemGroup>
 
   <ItemGroup>
