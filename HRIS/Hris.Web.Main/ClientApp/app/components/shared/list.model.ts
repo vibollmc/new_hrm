@@ -6,12 +6,12 @@ import { ResultCode } from "./enum";
 
 @Injectable()
 export class ListModel<T extends BaseModel> {
-    obj: T;
-    lstObj: T[] | null;
-
     constructor(
-        private readonly service: ListService<T>
-    ) { }
+        private readonly service: ListService<T>,
+        public obj: T,
+        public lstObj: T[] | null
+    ) {
+    }
 
     setCollection(collectionName: string) {
         this.service.setUrlApi(collectionName);

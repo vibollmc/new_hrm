@@ -10,15 +10,13 @@ import { Status } from "./enum";
 
 @Injectable()
 export class ListService<T extends BaseModel> extends BaseService {
-    private urlGet: string;
-    private urlAddNew: string;
-    private urlUpdate: string;
-    private urlDelete: string;
-    private urlUpdateStatus: string;
-
     constructor(
         private readonly http: HttpClient,
-        
+        private urlGet: string,
+        private urlAddNew: string,
+        private urlUpdate: string,
+        private urlDelete: string,
+        private urlUpdateStatus: string
     ) {
         super();
     }
@@ -35,19 +33,19 @@ export class ListService<T extends BaseModel> extends BaseService {
         return this.http.get(this.urlGet)
             .toPromise()
             .then(response => response.json() as ResponseResult)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
     addNew(obj: T): Promise<ResponseResult> {
         return this.http.post(this.urlAddNew, obj)
             .toPromise()
             .then(response => response.json() as ResponseResult)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
     update(obj: T): Promise<ResponseResult> {
         return this.http.post(this.urlUpdate, obj)
             .toPromise()
             .then(response => response.json() as ResponseResult)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
     delete(id: number): Promise<ResponseResult> {
         return this.http.get(this.urlDelete + "/" + id)
@@ -55,10 +53,10 @@ export class ListService<T extends BaseModel> extends BaseService {
             .then(response => response.json() as ResponseResult)
             .catch(this.handleError);
     }
-    updateStatus(id: number) {
+    updateStatus(id: number): Promise<ResponseResult> {
         return this.http.post(this.urlUpdateStatus, { id: id})
             .toPromise()
             .then(response => response.json() as ResponseResult)
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 }

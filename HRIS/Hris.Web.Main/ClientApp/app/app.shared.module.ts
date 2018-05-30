@@ -4,6 +4,10 @@ import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
 
+import { GridModule } from "@progress/kendo-angular-grid";
+
+import { HttpClient } from "./components/shared/http.client";
+
 import { AppComponent } from "./components/app/app.component";
 import { NavMenuComponent } from "./components/navmenu/navmenu.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -22,6 +26,7 @@ import { CounterComponent } from "./components/counter/counter.component";
         CommonModule,
         HttpModule,
         FormsModule,
+        GridModule,
         RouterModule.forRoot([
             { path: "", redirectTo: "home", pathMatch: "full" },
             { path: "home", component: HomeComponent },

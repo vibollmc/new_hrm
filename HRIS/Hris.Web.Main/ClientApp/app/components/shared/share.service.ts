@@ -12,7 +12,7 @@ export class ShareService extends BaseService {
     }
 
     set token(value: string | null) {
-        if (value) sessionStorage.setItem(SystemConfig.keyToken, value);
+        if (value) sessionStorage.setItem(SystemConfig.keyToken, value.toString());
         else sessionStorage.removeItem(SystemConfig.keyToken);
     }
 
