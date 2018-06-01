@@ -22,5 +22,19 @@ namespace Hris.List.Business.Repositories
         /// <param name="status"></param>
         /// <returns></returns>
         Task<IEnumerable<Gender>> Select(Status? status);
+
+        /// <summary>
+        /// Toggle gender status
+        /// </summary>
+        /// <param name="genderId"></param>
+        /// <returns></returns>
+        Task<int?> ToggleStatus(int? genderId);
+
+        /// <summary>
+        /// Delete gender
+        /// </summary>
+        /// <param name="genderId"></param>
+        /// <returns></returns>
+        Task<int?> Delete(int? genderId);
     }
 }

@@ -433,30 +433,31 @@
 }
 
 
-.main-panel{
+.main-panel {
     position: relative;
     float: right;
     width: $sidebar-width;
     @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-    > .content{
+    > .content {
         margin-top: 70px;
-        padding: 30px 15px;
-        min-height: calc(100vh - 123px);
+        padding: 0px 0px 0px 15px;
+        min-height: calc(108vh - 123px);
+        background-color: #fff;
     }
 
-    > .footer{
+    > .footer {
         border-top: 1px solid #e7e7e7;
     }
 
-    > .navbar{
+    > .navbar {
         margin-bottom: 0;
     }
 
-    .header{
+    .header {
         margin-bottom: 30px;
 
-        .title{
+        .title {
             margin-top: 10px;
             margin-bottom: 10px;
         }

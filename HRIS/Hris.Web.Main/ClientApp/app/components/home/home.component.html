@@ -1,5 +1,12 @@
-<h1>Hello!</h1>
-
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-lg-12">
+        <div class="k-block">
+            <button kendoButton (click)="onButtonClick()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
+            <button kendoButton (click)="onButtonClick()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-edit'">Sửa</button>
+            <button kendoButton (click)="onButtonClick()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-delete'">Xóa</button>
+        </div>
+    </div>
+</div>
 <kendo-grid [data]="gridData" [height]="410">
     <kendo-grid-column field="ProductID" title="ID" width="40">
     </kendo-grid-column>

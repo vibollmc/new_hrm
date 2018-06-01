@@ -24,6 +24,10 @@ export class GenderComponent extends BaseComponent {
         this.vm.loadData();
     }
 
+    onButtonClick() {
+        
+    }
+
     select(obj: Gender | null) {
         if (obj !== null) {
             Object.assign(this.vm.obj, obj);

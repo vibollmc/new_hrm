@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hris.Database;
+using Hris.Database.Enums;
 using Hris.List.Business.Domains;
 using Hris.List.Business.Enums;
 using Hris.List.Business.Repositories;
@@ -48,6 +49,31 @@ namespace Hris.List.Persistence
                 .Select(x => x.Transform());
 
             return await genders.ToListAsync();
+        }
+
+        public async Task<int?> ToggleStatus(int? genderId)
+        {
+            var gender = await _dbContext.Genders.FirstOrDefaultAsync(x=> x.Id == genderId);
+            if (gender == null) return 0;
+
+            gender.Status = gender.Status == MDStatus.Active ? MDStatus.Inactive : MDStatus.Active;
+            gender.UpdatedAt = DateTime.UtcNow;
+
+            await _dbContext.SaveChangesAsync();
+
+            return genderId;
+        }
+
+        public async Task<int?> Delete(int? genderId)
+        {
+            var gender = await _dbContext.Genders.FirstOrDefaultAsync(x => x.Id == genderId);
+            if (gender == null) return 0;
+
+            gender.DeletedAt = DateTime.UtcNow;
+
+            await _dbContext.SaveChangesAsync();
+
+            return genderId;
         }
     }
 }
