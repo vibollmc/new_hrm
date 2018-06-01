@@ -6,6 +6,15 @@ import { Component } from "@angular/core";
 })
 export class HomeComponent {
     gridData: any[] = products;
+    isAddOrEdit = false;
+
+    closeAddOrEdit() {
+        this.isAddOrEdit = false;
+    }
+
+    openAddOrEdit() {
+        this.isAddOrEdit = true;
+    }
 }
 
 export const sampleProducts = [

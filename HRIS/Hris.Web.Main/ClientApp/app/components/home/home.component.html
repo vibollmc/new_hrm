@@ -1,8 +1,8 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-12 col-lg-12">
         <div class="k-block">
-            <button kendoButton (click)="onButtonClick()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
-            <button kendoButton (click)="onButtonClick()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-edit'">Sửa</button>
+            <button kendoButton (click)="openAddOrEdit()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
+            <button kendoButton (click)="openAddOrEdit()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-edit'">Sửa</button>
             <button kendoButton (click)="onButtonClick()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-delete'">Xóa</button>
         </div>
     </div>
@@ -24,3 +24,24 @@
         </ng-template>
     </kendo-grid-column>
 </kendo-grid>
+
+<kendo-window title="Please provide additional data" *ngIf="isAddOrEdit" (close)="closeAddOrEdit()" [top]="80" [minWidth]="500" [width]="700">
+    <form class="k-form">
+        <fieldset>
+            <legend>User Details</legend>
+
+            <label class="k-form-field">
+                <span>First Name</span>
+                <input class="k-textbox" placeholder="Your Name" />
+            </label>
+            <label class="k-form-field">
+                <span>Last Name</span>
+                <input class="k-textbox" placeholder="Your Last Name" />
+            </label>
+        </fieldset>
+        <div class="text-right">
+            <button type="button" class="k-button" (click)="closeAddOrEdit()">Cancel</button>
+            <button type="button" class="k-button k-primary" (click)="submit()">Submit</button>
+        </div>
+    </form>
+</kendo-window>

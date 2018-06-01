@@ -1,15 +1,20 @@
+//Angular module
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
+//End Angular module
 
 //KendoUI Component
 import { GridModule } from "@progress/kendo-angular-grid";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { DialogsModule } from "@progress/kendo-angular-dialog";
 //End KendoUI
 
+//Common services
 import { HttpClient } from "./components/shared/http.client";
+//End common services
 
 //Components
 import { AppComponent } from "./components/app/app.component";
@@ -18,7 +23,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { FetchDataComponent } from "./components/fetchdata/fetchdata.component";
 import { CounterComponent } from "./components/counter/counter.component";
 import { GenderComponent } from "./components/list/gender/gender.component";
-//Components
+//End Components
 
 @NgModule({
     declarations: [
@@ -35,6 +40,7 @@ import { GenderComponent } from "./components/list/gender/gender.component";
         FormsModule,
         GridModule,
         ButtonsModule,
+        DialogsModule,
         RouterModule.forRoot([
             { path: "", redirectTo: "home", pathMatch: "full" },
             { path: "home", component: HomeComponent },

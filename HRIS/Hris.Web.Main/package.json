@@ -63,6 +63,7 @@
   "dependencies": {
     "@progress/kendo-angular-buttons": "^4.1.1",
     "@progress/kendo-angular-dateinputs": "^3.4.0",
+    "@progress/kendo-angular-dialog": "^3.6.1",
     "@progress/kendo-angular-dropdowns": "^3.0.1",
     "@progress/kendo-angular-excel-export": "^2.1.0",
     "@progress/kendo-angular-grid": "^3.4.0",
