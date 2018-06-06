@@ -275,8 +275,12 @@
     <ProjectReference Include="..\Hris.Common.Business\Hris.Common.Business.csproj" />
     <ProjectReference Include="..\Hris.Common.Persistence\Hris.Common.Persistence.csproj" />
     <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
+    <ProjectReference Include="..\Hris.List.Api\Hris.List.Api.csproj" />
+    <ProjectReference Include="..\Hris.List.Business\Hris.List.Business.csproj" />
+    <ProjectReference Include="..\Hris.List.Persistence\Hris.List.Persistence.csproj" />
     <ProjectReference Include="..\Hris.Profiles.Business\Hris.Profiles.Business.csproj" />
     <ProjectReference Include="..\Hris.Profiles.Persistence\Hris.Profiles.Persistence.csproj" />
+    <ProjectReference Include="..\Hris.Shared\Hris.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

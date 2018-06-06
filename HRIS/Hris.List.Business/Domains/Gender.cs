@@ -7,8 +7,8 @@ namespace Hris.List.Business.Domains
 {
     public class Gender : Base
     {
-        public Gender(int? id, string name, string nameEn, Status status, DateTime? createdAt,
-            DateTime? updateAt) : base(id, createdAt, updateAt, status)
+        public Gender(int? id, string name, string nameEn, Status status, DateTime? createdAt, string createdBy,
+            DateTime? updateAt, string updateBy, DateTime? deletedAt, string deletedBy) : base(id, status, createdAt, createdBy, updateAt, updateBy, deletedAt, deletedBy)
         {
             Name = name;
             NameEn = nameEn;

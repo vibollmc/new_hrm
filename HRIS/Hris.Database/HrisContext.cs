@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hris.Database
 {
+    /// <inheritdoc />
     /// <summary>
     /// Main Db context
     /// </summary>
@@ -77,8 +78,6 @@ namespace Hris.Database
         #region List
 
         public DbSet<MDGender> Genders { get; set; }
-        public DbSet<MDGenderLanguage> GenderLanguages { get; set; }
-
 
         #endregion List
         public HrisContext(DbContextOptions<HrisContext> options) : base(options)

@@ -11,6 +11,8 @@ import { BaseComponent } from "../../shared/base.component";
 })
 
 export class GenderComponent extends BaseComponent {
+    gridData: any;
+    isAddOrEdit = false;
 
     constructor(public vm: ListModel<Gender>,
         protected router: Router) {
@@ -24,8 +26,12 @@ export class GenderComponent extends BaseComponent {
         this.vm.loadData();
     }
 
-    onButtonClick() {
-        
+    closeAddOrEdit() {
+        this.isAddOrEdit = false;
+    }
+
+    openAddOrEdit() {
+        this.isAddOrEdit = true;
     }
 
     select(obj: Gender | null) {
@@ -38,6 +44,7 @@ export class GenderComponent extends BaseComponent {
 
     save() {
         this.vm.save();
+        this.isAddOrEdit = false;
     }
 
     delete(obj: Gender) {

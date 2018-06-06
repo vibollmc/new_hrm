@@ -16,14 +16,17 @@ namespace Hris.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
                     Event = table.Column<string>(maxLength: 50, nullable: true),
                     Icon = table.Column<string>(maxLength: 50, nullable: true),
                     Key = table.Column<string>(maxLength: 50, nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Order = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,18 +40,42 @@ namespace Hris.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
                     Icon = table.Column<string>(maxLength: 50, nullable: true),
                     Key = table.Column<string>(maxLength: 50, nullable: true),
                     Module = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     OrderIndex = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Functions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Genders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    NameEn = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,11 +86,14 @@ namespace Hris.Database.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Code = table.Column<string>(maxLength: 10, nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
                     IsDefault = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,10 +107,13 @@ namespace Hris.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,12 +176,15 @@ namespace Hris.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
                     FunctionId = table.Column<int>(nullable: true),
                     FunctionKey = table.Column<string>(maxLength: 50, nullable: true),
                     Key = table.Column<string>(maxLength: 50, nullable: true),
                     LanguageId = table.Column<int>(nullable: true),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     Value = table.Column<string>(maxLength: 500, nullable: true)
                 },
                 constraints: table =>
@@ -200,9 +236,11 @@ namespace Hris.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CreatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DateFormat = table.Column<string>(maxLength: 20, nullable: true),
                     DecimalSymbol = table.Column<string>(maxLength: 1, nullable: true),
                     DeletedAt = table.Column<DateTime>(nullable: true),
+                    DeletedBy = table.Column<string>(maxLength: 20, nullable: true),
                     DigitGroupingSymbol = table.Column<string>(maxLength: 1, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: true),
                     Fullname = table.Column<string>(maxLength: 50, nullable: true),
@@ -215,6 +253,7 @@ namespace Hris.Database.Migrations
                     TimeFormat = table.Column<string>(maxLength: 10, nullable: true),
                     TimeZone = table.Column<int>(nullable: true),
                     UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedBy = table.Column<string>(maxLength: 20, nullable: true),
                     Username = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
@@ -313,14 +352,16 @@ namespace Hris.Database.Migrations
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FormLanguages_FunctionId",
-                table: "FormLanguages",
-                column: "FunctionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_FormLanguages_LanguageId",
                 table: "FormLanguages",
                 column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FormLanguages_FunctionId_FunctionKey_Key_LanguageId",
+                table: "FormLanguages",
+                columns: new[] { "FunctionId", "FunctionKey", "Key", "LanguageId" },
+                unique: true,
+                filter: "[FunctionId] IS NOT NULL AND [FunctionKey] IS NOT NULL AND [Key] IS NOT NULL AND [LanguageId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FunctionActions_FunctionId",
@@ -378,6 +419,9 @@ namespace Hris.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "FunctionLanguages");
+
+            migrationBuilder.DropTable(
+                name: "Genders");
 
             migrationBuilder.DropTable(
                 name: "RoleFunctionActions");

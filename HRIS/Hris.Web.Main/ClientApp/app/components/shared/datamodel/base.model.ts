@@ -1,15 +1,15 @@
 ﻿import {Status} from "../enum";
 
 export class BaseModel {
-    Id: number | null;
-    Status: Status | null;
+    id: number | null | undefined;
+    status: Status | null;
 
-    CreatedAt: Date | null;
-    CreatedBy: string | null;
-    UpdatedAt: Date | null;
-    UpdatedBy: string | null;
+    createdAt: Date | null | undefined;
+    createdBy: string | null | undefined;
+    updatedAt: Date | null | undefined;
+    updatedBy: string | null | undefined;
 
     constructor() {
-        this.Status = Status.Active;
+        this.status = Status.Active;
     }
 }

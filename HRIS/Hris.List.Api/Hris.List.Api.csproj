@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <ProjectReference Include="..\Hris.List.Business\Hris.List.Business.csproj" />
+    <ProjectReference Include="..\Hris.Shared\Hris.Shared.csproj" />
   </ItemGroup>
 
 </Project>

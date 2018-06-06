@@ -10,23 +10,23 @@ import { Status } from "./enum";
 
 @Injectable()
 export class ListService<T extends BaseModel> extends BaseService {
+    private urlGet: string | undefined;
+    private urlAddNew: string | undefined;
+    private urlUpdate: string | undefined;
+    private urlDelete: string | undefined;
+    private urlUpdateStatus: string | undefined;
     constructor(
-        private readonly http: HttpClient,
-        private urlGet: string,
-        private urlAddNew: string,
-        private urlUpdate: string,
-        private urlDelete: string,
-        private urlUpdateStatus: string
+        private readonly http: HttpClient
     ) {
         super();
     }
 
     setUrlApi(collectionName: string) {
-        this.urlGet = `${this.baseUrl}/${collectionName}`;
-        this.urlAddNew = `${this.baseUrl}/${collectionName}/add`;
-        this.urlUpdate = `${this.baseUrl}/${collectionName}/update`;
-        this.urlDelete = `${this.baseUrl}/${collectionName}/delete`;
-        this.urlUpdateStatus = `${this.baseUrl}/${collectionName}/status`;
+        this.urlGet = `${this.baseUrl}/${collectionName}/List`;
+        this.urlAddNew = `${this.baseUrl}/${collectionName}/Add`;
+        this.urlUpdate = `${this.baseUrl}/${collectionName}/Update`;
+        this.urlDelete = `${this.baseUrl}/${collectionName}/Delete`;
+        this.urlUpdateStatus = `${this.baseUrl}/${collectionName}/Status`;
     }
 
     get(): Promise<ResponseResult> {

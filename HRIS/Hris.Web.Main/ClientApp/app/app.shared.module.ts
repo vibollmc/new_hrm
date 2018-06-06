@@ -14,6 +14,10 @@ import { DialogsModule } from "@progress/kendo-angular-dialog";
 
 //Common services
 import { HttpClient } from "./components/shared/http.client";
+import { ListModel } from "./components/shared/list.model";
+import { ListService } from "./components/shared/list.service";
+import { ShareModel } from "./components/shared/share.model";
+import { ShareService } from "./components/shared/share.service";
 //End common services
 
 //Components
@@ -33,6 +37,13 @@ import { GenderComponent } from "./components/list/gender/gender.component";
         FetchDataComponent,
         HomeComponent,
         GenderComponent
+    ],
+    providers: [
+        ListModel,
+        ListService,
+        HttpClient,
+        ShareModel,
+        ShareService
     ],
     imports: [
         CommonModule,

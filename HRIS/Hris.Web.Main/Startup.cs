@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hris.Database;
+using Hris.List.Api;
+using Hris.List.Business.Repositories;
+using Hris.List.Business.Services.Implementations;
+using Hris.List.Business.Services.Interfaces;
+using Hris.List.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +46,23 @@ namespace Hris.Web.Main
                     options.AccessDeniedPath = options.LoginPath;
                     options.ReturnUrlParameter = "url";
                 });
+
+            #region List
+
+            #region repositories
+            services.AddTransient<IGenderRepository, GenderRepository>();
+            #endregion
+
+            #region services
+            services.AddTransient<IGenderService, GenderService>();
+            #endregion
+
+            #region api
+            services.AddTransient<IHrisListApi, HrisListApi>();
+            #endregion
+
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

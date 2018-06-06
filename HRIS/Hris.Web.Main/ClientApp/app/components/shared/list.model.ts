@@ -6,10 +6,10 @@ import { ResultCode } from "./enum";
 
 @Injectable()
 export class ListModel<T extends BaseModel> {
+    obj: T | undefined;
+    lstObj: T[] | null | undefined;
     constructor(
-        private readonly service: ListService<T>,
-        public obj: T,
-        public lstObj: T[] | null
+        private readonly service: ListService<T>
     ) {
     }
 
@@ -30,10 +30,10 @@ export class ListModel<T extends BaseModel> {
     }
 
     save() {
-        if (this.obj === undefined || this.obj === null) return;
+        if (!this.obj) return;
 
-        if (this.obj.Id === undefined
-            || this.obj.Id === null || this.obj.Id === 0) {
+        if (!this.obj.id) {
+
             this.service.addNew(this.obj).then(
                 response => {
                     if (response.data === true) {
@@ -59,14 +59,14 @@ export class ListModel<T extends BaseModel> {
     }
 
     updateStatus(id: number | null) {
-        if (id === undefined || id === null || id === 0) return;
+        if (!id) return;
 
         this.service.updateStatus(id);
     }
 
     delete() {
-        if (this.obj.Id === undefined
-            || this.obj.Id === null || this.obj.Id === 0) return;
+        if (!this.obj) return;
+        if (!this.obj.id) return;
 
         //TODO: Confirm to deleted
         //MessageProvider.confirmDelete(null,
