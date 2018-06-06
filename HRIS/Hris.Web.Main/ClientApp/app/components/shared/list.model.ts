@@ -20,7 +20,7 @@ export class ListModel<T extends BaseModel> {
     loadData() {
         this.service.get().then(
             response => {
-                if (response.code === ResultCode.Success) {
+                if (response.code == ResultCode.Success) {
                     this.lstObj = response.data as T[];
                 }
                 else {

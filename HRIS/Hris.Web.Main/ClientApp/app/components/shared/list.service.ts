@@ -48,7 +48,7 @@ export class ListService<T extends BaseModel> extends BaseService {
             .catch(err => this.handleError(err));
     }
     delete(id: number): Promise<ResponseResult> {
-        return this.http.get(this.urlDelete + "/" + id)
+        return this.http.post(this.urlDelete, { id: id })
             .toPromise()
             .then(response => response.json() as ResponseResult)
             .catch(this.handleError);
