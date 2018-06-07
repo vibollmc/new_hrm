@@ -19,7 +19,11 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Compile Remove="typings\**" />
     <Content Remove="ClientApp\**" />
+    <Content Remove="typings\**" />
+    <EmbeddedResource Remove="typings\**" />
+    <None Remove="typings\**" />
   </ItemGroup>
 
   <ItemGroup>

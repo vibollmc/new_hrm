@@ -25,7 +25,7 @@ namespace Hris.Web.Main.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] GenderViewModel gender)
+        public async Task<IActionResult> Save([FromBody] GenderViewModel gender)
         {
             var genderId = await _hrisListApi.SaveGender(gender);
 
@@ -33,25 +33,17 @@ namespace Hris.Web.Main.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] GenderViewModel gender)
+        public async Task<IActionResult> Delete([FromBody] GenderViewModel gender)
         {
-            var genderId = await _hrisListApi.SaveGender(gender);
+            var genderId = await _hrisListApi.DeleteGender(gender.Id);
 
             return Json(new ResponseResult<bool>(genderId > 0));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete([FromBody] int? id)
+        public async Task<IActionResult> Status([FromBody] GenderViewModel gender)
         {
-            var genderId = await _hrisListApi.DeleteGender(id);
-
-            return Json(new ResponseResult<bool>(genderId > 0));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Status([FromBody] int? id)
-        {
-            var genderId = await _hrisListApi.ToggleGenderStatus(id);
+            var genderId = await _hrisListApi.ToggleGenderStatus(gender.Id);
 
             return Json(new ResponseResult<bool>(genderId > 0));
         }

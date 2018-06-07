@@ -1,7 +1,6 @@
 ﻿export enum Status {
-    Undefined = 0,
-    Active = 1,
-    Inactive = 2
+    Inactive = 0,
+    Active = 1
 }
 
 export enum ResultCode {

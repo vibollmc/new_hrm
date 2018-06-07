@@ -10,6 +10,7 @@ import { RouterModule } from "@angular/router";
 import { GridModule } from "@progress/kendo-angular-grid";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DialogsModule } from "@progress/kendo-angular-dialog";
+import { SwitchModule, NumericTextBoxModule } from "@progress/kendo-angular-inputs";
 //End KendoUI
 
 //Common services
@@ -52,6 +53,8 @@ import { GenderComponent } from "./components/list/gender/gender.component";
         GridModule,
         ButtonsModule,
         DialogsModule,
+        SwitchModule,
+        NumericTextBoxModule,
         RouterModule.forRoot([
             { path: "", redirectTo: "home", pathMatch: "full" },
             { path: "home", component: HomeComponent },
