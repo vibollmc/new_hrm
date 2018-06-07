@@ -85,13 +85,8 @@ export class ListModel<T extends BaseModel> {
         });
 
         dialog.result.subscribe((result) => {
-            console.log(result);
-            if (result instanceof DialogCloseResult) {
-                
-            } else if (result instanceof DialogAction) {
-                console.log(result);
-                if (result.text === "Yes") {
-
+            if ((<DialogAction>result).text) {
+                if ((<DialogAction>result).text === "Yes") {
                     if (this.obj)
                         this.service.delete(this.obj).then(
                             response => {
@@ -103,8 +98,11 @@ export class ListModel<T extends BaseModel> {
                                 }
                             }
                         );
+
+                    console.log(result);
                 }
             }
+
         });
 
         //TODO: Confirm to deleted

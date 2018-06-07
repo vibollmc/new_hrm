@@ -45,7 +45,7 @@ namespace Hris.List.Persistence
         public async Task<IEnumerable<Gender>> Select(Status? status)
         {
             var genders = _dbContext.Genders
-                .Where(x => status == null || x.Status == status.Value.Transform())
+                .Where(x => (status == null || x.Status == status.Value.Transform()) && !x.DeletedAt.HasValue)
                 .Select(x => x.Transform());
 
             return await genders.ToListAsync();
