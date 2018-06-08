@@ -1,15 +1,12 @@
 ﻿import { Injectable } from "@angular/core";
 
 import { SelectableSettings } from "@progress/kendo-angular-grid";
-import {
-    DialogService,
-    DialogAction,
-    DialogCloseResult
-    } from "@progress/kendo-angular-dialog";
 
 import { ListService } from "./list.service";
+import { ShareService } from "./share.service";
 import { BaseModel } from "./datamodel/base.model";
 import { ResultCode } from "./enum";
+import { NotificationProvider } from "./notification.provider"
 
 @Injectable()
 export class ListModel<T extends BaseModel> {
@@ -22,7 +19,7 @@ export class ListModel<T extends BaseModel> {
 
     constructor(
         private readonly service: ListService<T>,
-        private readonly dialogService: DialogService
+        private readonly notificationProvider: NotificationProvider
     ) {
         this.isAddingOrEditing = false;
         this.gridSelectableSettings = {
@@ -52,12 +49,12 @@ export class ListModel<T extends BaseModel> {
 
         this.service.save(this.obj).then(
             response => {
-                if (response.data === true) {
-                    //TODO: MESSAGE NOTIFY SAVE SUCCESSFUL
-                    this.loadData();
+                if (response.code === ResultCode.Success) {
+                    this.notificationProvider.deleteSuccess();
+                    this.lstObj = response.data as T[];
                     this.isAddingOrEditing = false;
                 } else {
-                    //TODO: MESSAGE NOTIFY SAVE FAIL
+                    this.notificationProvider.saveError(response.message);
                 }
             });
 
@@ -72,53 +69,20 @@ export class ListModel<T extends BaseModel> {
     delete() {
         if (!this.obj) return;
 
-        const dialog = this.dialogService.open({
-            title: "Please confirm",
-            content: "Are you sure?",
-            actions: [
-                { text: "No" },
-                { text: "Yes", primary: true }
-            ],
-            width: 450,
-            height: 200,
-            minWidth: 250
-        });
-
-        dialog.result.subscribe((result) => {
-            if ((<DialogAction>result).text) {
-                if ((<DialogAction>result).text === "Yes") {
-                    if (this.obj)
-                        this.service.delete(this.obj).then(
-                            response => {
-                                if (response.data === true) {
-                                    //TODO: MESSAGE NOTIFY DELETE SUCCESSFUL
-                                    this.loadData();
-                                } else {
-                                    //TODO: MESSAGE NOTIFY DELETE FAIL
-                                }
+        this.notificationProvider.confirmDelete((result) => {
+            if (result) {
+                if (this.obj)
+                    this.service.delete(this.obj).then(
+                        response => {
+                            if (response.code === ResultCode.Success) {
+                                this.notificationProvider.deleteSuccess();
+                                this.lstObj = response.data as T[];
+                            } else {
+                                this.notificationProvider.deleteError(response.message);
                             }
-                        );
-
-                    console.log(result);
-                }
+                        }
+                    );
             }
-
         });
-
-        //TODO: Confirm to deleted
-        //MessageProvider.confirmDelete(null,
-        //    (result) => {
-        //        if (result === false) return;
-
-        //        this._service.delete(this.obj._id).then(
-        //            response => {
-        //                if (response.data === true) {
-        //                    MessageProvider.deleteSuccess();
-        //                    this.loadData();
-        //                }
-        //                else MessageProvider.deleteError(response.message);
-        //            }
-        //        );
-        //    });
     }
 }

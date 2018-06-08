@@ -35,6 +35,7 @@
     <None Remove="ClientApp\app\components\shared\http.client.ts" />
     <None Remove="ClientApp\app\components\shared\list.model.ts" />
     <None Remove="ClientApp\app\components\shared\list.service.ts" />
+    <None Remove="ClientApp\app\components\shared\notification.provider.ts" />
     <None Remove="ClientApp\app\components\shared\response.result.ts" />
     <None Remove="ClientApp\app\components\shared\share.service.ts" />
     <None Remove="ClientApp\app\components\shared\system.config.ts" />
@@ -298,6 +299,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\shared\list.model.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\list.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\datamodel\response.result.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\shared\notification.provider.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\share.model.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\share.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\shared\system.config.ts" />

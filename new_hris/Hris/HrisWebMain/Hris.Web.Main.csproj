@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked> 
+	<PostBuildEvent>ng build --aot</PostBuildEvent> 
+	<TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
+    <ProjectReference Include="..\Hris.Shared\Hris.Shared.csproj" />
+    <ProjectReference Include="..\List\Hris.List.Api\Hris.List.Api.csproj" />
+    <ProjectReference Include="..\List\Hris.List.Business\Hris.List.Business.csproj" />
+    <ProjectReference Include="..\List\Hris.List.Persistence\Hris.List.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

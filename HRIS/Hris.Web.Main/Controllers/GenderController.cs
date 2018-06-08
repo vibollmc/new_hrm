@@ -19,6 +19,11 @@ namespace Hris.Web.Main.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
+            return await GetListGender();
+        }
+
+        private async Task<JsonResult> GetListGender()
+        {
             var genders = await _hrisListApi.SelectGender(null);
 
             return Json(new ResponseResult<IEnumerable<GenderViewModel>>(genders));
@@ -29,7 +34,9 @@ namespace Hris.Web.Main.Controllers
         {
             var genderId = await _hrisListApi.SaveGender(gender);
 
-            return Json(new ResponseResult<bool>(genderId > 0));
+            if (genderId > 0) return await GetListGender();
+
+            return Json(new ResponseResult<bool>(false, ResultCode.Error, null));
         }
 
         [HttpPost]
@@ -37,7 +44,9 @@ namespace Hris.Web.Main.Controllers
         {
             var genderId = await _hrisListApi.DeleteGender(gender.Id);
 
-            return Json(new ResponseResult<bool>(genderId > 0));
+            if (genderId > 0) return await GetListGender();
+
+            return Json(new ResponseResult<bool>(false, ResultCode.Error, null));
         }
 
         [HttpPost]
@@ -45,7 +54,9 @@ namespace Hris.Web.Main.Controllers
         {
             var genderId = await _hrisListApi.ToggleGenderStatus(gender.Id);
 
-            return Json(new ResponseResult<bool>(genderId > 0));
+            if (genderId > 0) return await GetListGender();
+
+            return Json(new ResponseResult<bool>(false, ResultCode.Error, null));
         }
     }
 }

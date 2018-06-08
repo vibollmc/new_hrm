@@ -1,10 +1,15 @@
 ﻿import { Injectable, AfterContentChecked, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-
+import SystemConfig from "./system.config";
 @Injectable()
 export class BaseComponent implements AfterContentChecked, OnInit {
-    constructor(protected router: Router)
-    { }
+    constructor(protected router: Router, pageTitle: string) {
+        this.setPageTitle(pageTitle);
+    }
+
+    get pageTitle(): string | null {
+        return sessionStorage.getItem(SystemConfig.pageTitle);
+    }
 
     ngAfterContentChecked(): void {
         this.checkLoginStatus();
@@ -16,5 +21,10 @@ export class BaseComponent implements AfterContentChecked, OnInit {
 
     private checkLoginStatus() {
         
+    }
+    
+    private setPageTitle(value: string | null) {
+        if (value) sessionStorage.setItem(SystemConfig.pageTitle, value);
+        else sessionStorage.removeItem(SystemConfig.pageTitle);
     }
 }

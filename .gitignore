@@ -33,3 +33,7 @@
 /HRIS/Hris.List.Api/bin
 /HRIS/Hris.Shared/obj
 /HRIS/Hris.Shared/bin
+/new_hris/Hris/.vs
+/new_hris/Hris/HrisWebMain/bin
+/new_hris/Hris/HrisWebMain/obj
+/new_hris/Hris/HrisWebMain/wwwroot
