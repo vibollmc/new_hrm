@@ -4,51 +4,53 @@ import {
     DialogAction
 } from "@progress/kendo-angular-dialog";
 
-declare var toastr: any;
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class NotificationProvider {
 
-    constructor(private readonly dialogService: DialogService) {
-        
-    }
+  constructor(private readonly dialogService: DialogService,
+    private readonly toastr: ToastrService) {
+  }
 
-    saveSuccess() {
-        toastr.success("Lưu dữ liệu thành công", "Lưu dữ liệu");
-    }
-    saveError(message?: string) {
-        toastr.error(`Lữu dữ liệu không thành công:<br>${message}`, "Lưu dữ liệu");
-    }
+  saveSuccess() {
+    this.toastr.success("Lưu dữ liệu thành công", "Lưu dữ liệu");
+  }
 
-    deleteSuccess() {
-        toastr.success("Xóa dữ liệu thành công", "Xóa dữ liệu");
-    }
-    deleteError(message?: string) {
-        toastr.error(`Xóa dữ liệu không thành công:<br>${message}`, "Xóa dữ liệu");
-    }
+  saveError(message?: string) {
+    this.toastr.error(`Lữu dữ liệu không thành công:<br>${message}`, "Lưu dữ liệu");
+  }
 
-    confirmDelete(callBack: (result: boolean) => void, message?: string) {
+  deleteSuccess() {
+    this.toastr.success("Xóa dữ liệu thành công", "Xóa dữ liệu");
+  }
 
-        const dialog = this.dialogService.open({
-            title: "Xác nhận",
-            content: message ? message : "Bạn muốn xóa dữ liệu này?",
-            actions: [
-                { text: "No" },
-                { text: "Yes", primary: true }
-            ],
-            width: 400,
-            height: 150,
-            minWidth: 200
-        });
+  deleteError(message?: string) {
+    this.toastr.error(`Xóa dữ liệu không thành công:<br>${message}`, "Xóa dữ liệu");
+  }
 
-        dialog.result.subscribe((result) => {
-            let resultCallback = false;
-            if ((result as DialogAction).text)
-                if ((result as DialogAction).text === "Yes")
-                    resultCallback = true;
+  confirmDelete(callBack: (result: boolean) => void, message?: string) {
 
-            callBack(resultCallback);
-        });
-    }
+    const dialog = this.dialogService.open({
+      title: "Xác nhận",
+      content: message ? message : "Bạn muốn xóa dữ liệu này?",
+      actions: [
+        { text: "No" },
+        { text: "Yes", primary: true }
+      ],
+      width: 400,
+      height: 150,
+      minWidth: 200
+    });
+
+    dialog.result.subscribe((result) => {
+      let resultCallback = false;
+      if ((result as DialogAction).text)
+        if ((result as DialogAction).text === "Yes")
+          resultCallback = true;
+
+      callBack(resultCallback);
+    });
+  }
 
 }

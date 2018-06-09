@@ -4,8 +4,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
+import { BrowserXhr, HttpModule } from "@angular/http";
 import { RouterModule } from "@angular/router";
+
+import { ToastrModule } from "ngx-toastr";
+import { NgProgressModule, NgProgressBrowserXhr } from "ngx-progressbar";
 
 //KendoUI Component
 import { GridModule } from "@progress/kendo-angular-grid";
@@ -45,19 +48,22 @@ import { GenderComponent } from "./list/gender/gender.component";
     ShareModel,
     ShareService,
     NotificationProvider,
-    { provide: "BASE_URL", useFactory: getBaseUrl }
+    { provide: "BASE_URL", useFactory: getBaseUrl },
+    { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
     HttpModule,
+    NgProgressModule,
     FormsModule,
     GridModule,
     ButtonsModule,
     DialogsModule,
     SwitchModule,
     NumericTextBoxModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomeComponent },

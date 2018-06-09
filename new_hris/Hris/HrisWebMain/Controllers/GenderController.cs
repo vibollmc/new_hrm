@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
 using Hris.Shared.Gender;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hris.Web.Main.Controllers
@@ -57,9 +54,9 @@ namespace Hris.Web.Main.Controllers
     {
       var genderId = await _hrisListApi.ToggleGenderStatus(gender.Id);
 
-      if (genderId > 0) return await GetListGender();
-
-      return Json(new ResponseResult<bool>(false, ResultCode.Error, null));
+      return Json(genderId > 0
+        ? new ResponseResult<bool>(true, ResultCode.Success, null)
+        : new ResponseResult<bool>(false, ResultCode.Error, null));
     }
   }
 }

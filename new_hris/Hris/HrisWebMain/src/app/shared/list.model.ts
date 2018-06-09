@@ -49,7 +49,7 @@ export class ListModel<T extends BaseModel> {
         this.service.save(this.obj).then(
             response => {
                 if (response.code === ResultCode.Success) {
-                    this.notificationProvider.deleteSuccess();
+                    this.notificationProvider.saveSuccess();
                     this.lstObj = response.data as T[];
                     this.isAddingOrEditing = false;
                 } else {
@@ -62,7 +62,15 @@ export class ListModel<T extends BaseModel> {
     updateStatus(obj: T | undefined) {
         if (!obj) return;
 
-        this.service.updateStatus(obj);
+        this.service.updateStatus(obj).then(
+          response => {
+            if (response.code === ResultCode.Success) {
+              this.notificationProvider.saveSuccess();
+            } else {
+              this.notificationProvider.saveError(response.message);
+            }
+          }
+        );
     }
 
     delete() {
