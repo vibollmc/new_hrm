@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Hris.Database;
 using Hris.List.Api;
@@ -8,6 +9,7 @@ using Hris.List.Business.Repositories;
 using Hris.List.Business.Services.Implementations;
 using Hris.List.Business.Services.Interfaces;
 using Hris.List.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Hris.Web.Main
 {
@@ -32,10 +35,7 @@ namespace Hris.Web.Main
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-      services.AddDbContext<HrisContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MySqlConnection")));
-
-      #region List
+      #region List DI
 
       #region repositories
       services.AddTransient<IGenderRepository, GenderRepository>();
@@ -50,6 +50,25 @@ namespace Hris.Web.Main
       #endregion
 
       #endregion
+
+
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+          options.TokenValidationParameters = new TokenValidationParameters
+          {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = Configuration["Jwt:Issuer"],
+            ValidAudience = Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+          };
+        });
+
+      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+      services.AddDbContext<HrisContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MySqlConnection")));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +82,8 @@ namespace Hris.Web.Main
       {
         app.UseHsts();
       }
+
+      app.UseAuthentication();
 
       app.UseHttpsRedirection();
       app.UseMvc(routes =>
