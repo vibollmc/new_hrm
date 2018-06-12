@@ -67,7 +67,8 @@ import { GenderComponent } from "./list/gender/gender.component";
     NumericTextBoxModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
-      { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "", redirectTo: "login", pathMatch: "full" },
+      { path: "login", component: LoginComponent },
       { path: "home", component: HomeComponent },
       { path: "counter", component: CounterComponent },
       { path: "fetch-data", component: FetchDataComponent },

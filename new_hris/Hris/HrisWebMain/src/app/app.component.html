@@ -1,5 +1,6 @@
 <ng-progress></ng-progress>
-<div class="wrapper">
+<login *ngIf="sm.currentPage === 'login'"></login>
+<div *ngIf="sm.currentPage !== 'login'" class="wrapper">
   <nav-menu></nav-menu>
   <div class="main-panel">
     <!-- Navbar -->
