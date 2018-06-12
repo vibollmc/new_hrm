@@ -26,6 +26,7 @@ import { NotificationProvider } from "./shared/notification.provider";
 
 //Components
 import { AppComponent } from "./app.component";
+import { LoginComponent } from "./login/login.component";
 import { NavMenuComponent } from "./navmenu/navmenu.component";
 import { HomeComponent } from "./home/home.component";
 import { FetchDataComponent } from "./fetchdata/fetchdata.component";
@@ -35,6 +36,7 @@ import { GenderComponent } from "./list/gender/gender.component";
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     NavMenuComponent,
     CounterComponent,
     FetchDataComponent,
