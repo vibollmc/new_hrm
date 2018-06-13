@@ -1,7 +1,6 @@
 import { Component, AfterViewInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ShareModel } from "./shared/share.model";
-
-declare var md: any;
 
 @Component({
   selector: "app-root",
@@ -9,11 +8,15 @@ declare var md: any;
 })
 export class AppComponent implements AfterViewInit {
 
-  constructor(public readonly sm: ShareModel) {
+  constructor(public readonly sm: ShareModel,
+    private readonly router: Router) {
   }
 
   ngAfterViewInit(): void {
-    md.init();
-    console.log("AppComponent.ngAfterViewInit was called");
+  }
+
+  logout() {
+    this.sm.token = null;
+    this.router.navigate(["login"]);
   }
 }

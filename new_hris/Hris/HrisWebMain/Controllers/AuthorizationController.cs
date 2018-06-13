@@ -33,7 +33,7 @@ namespace Hris.Web.Main.Controllers
 
       var token = BuildToken(user);
 
-      response = Ok(new ResponseResult<string>(token));
+      response = Ok(new ResponseResult<string>(data: token));
 
       return response;
     }

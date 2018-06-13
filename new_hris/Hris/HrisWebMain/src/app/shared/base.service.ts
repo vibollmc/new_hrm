@@ -1,24 +1,25 @@
 import { Injectable } from "@angular/core";
-import SystemConfig from "./system.config";
+import systemConfig from "./system.config";
 import { ResponseResult } from "./datamodel/response.result";
 import { ResultCode } from "./enum";
 
 @Injectable()
 export class BaseService {
-    protected readonly baseUrl: string;
-    constructor() {
-        this.baseUrl = this.getBaseUrl();
-    }
+  protected readonly baseUrl: string;
 
-    private getBaseUrl(): string {
-        return document.getElementsByTagName("base")[0].href;
-    }
+  constructor() {
+    this.baseUrl = this.getBaseUrl();
+  }
 
-    handleError(error: any): ResponseResult {
-        sessionStorage.setItem(SystemConfig.isAjaxProcessing, "false");
+  private getBaseUrl(): string {
+    return document.getElementsByTagName("base")[0].href;
+  }
 
-        //TODO: SHOW ERROR OR SOMETHING
+  handleError(error: any): ResponseResult {
+    sessionStorage.setItem(systemConfig.isAjaxProcessing, "false");
 
-        return new ResponseResult(ResultCode.Error, error, error.toString());
-    }
+    //TODO: SHOW ERROR OR SOMETHING
+
+    return new ResponseResult(ResultCode.Error, error, error.toString());
+  }
 }

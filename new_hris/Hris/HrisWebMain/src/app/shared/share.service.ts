@@ -1,45 +1,47 @@
-﻿import { Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Headers } from "@angular/http";
 
-import SystemConfig from "./system.config";
+import systemConfig from "./system.config";
 import { BaseService } from "./base.service";
 
 @Injectable()
 export class ShareService extends BaseService {
 
-    get token(): string | null {
-        return sessionStorage.getItem(SystemConfig.keyToken);
+  get token(): string | null {
+    return sessionStorage.getItem(systemConfig.keyToken);
+  }
+
+  set token(value: string | null) {
+    if (value) sessionStorage.setItem(systemConfig.keyToken, value.toString());
+    else sessionStorage.removeItem(systemConfig.keyToken);
+  }
+
+  get isAjaxProcessing(): boolean {
+    if (sessionStorage.getItem(systemConfig.isAjaxProcessing)) {
+      return sessionStorage.getItem(systemConfig.isAjaxProcessing) === "true";
     }
 
-    set token(value: string | null) {
-        if (value) sessionStorage.setItem(SystemConfig.keyToken, value.toString());
-        else sessionStorage.removeItem(SystemConfig.keyToken);
-    }
+    return false;
+  }
 
-    get isAjaxProcessing(): boolean {
-        if (sessionStorage.getItem(SystemConfig.isAjaxProcessing)) {
-            return sessionStorage.getItem(SystemConfig.isAjaxProcessing) === "true";
-        }
+  set isAjaxProcessing(value: boolean) {
+    if (value) sessionStorage.setItem(systemConfig.isAjaxProcessing, value.toString());
+    else sessionStorage.removeItem(systemConfig.isAjaxProcessing);
+  }
 
-        return false;
-    }
-    set isAjaxProcessing(value: boolean) {
-        if (value) sessionStorage.setItem(SystemConfig.isAjaxProcessing, value.toString());
-        else sessionStorage.removeItem(SystemConfig.isAjaxProcessing);
-    }
+  get functionName(): string | null {
+    return sessionStorage.getItem(systemConfig.pageTitle);
+  }
 
-    get functionName(): string | null {
-        return sessionStorage.getItem(SystemConfig.pageTitle);
-    }
-    set functionName(value: string | null) {
-        if (value) sessionStorage.setItem(SystemConfig.pageTitle, value);
-        else sessionStorage.removeItem(SystemConfig.pageTitle);
-    }
+  set functionName(value: string | null) {
+    if (value) sessionStorage.setItem(systemConfig.pageTitle, value);
+    else sessionStorage.removeItem(systemConfig.pageTitle);
+  }
 
-    createAuthorizationHeader(): Headers {
-        this.isAjaxProcessing = true;
-        let header = new Headers();
-        header.append("x-access-token", this.token === null ? "" : this.token);
-        return header;
-    }
+  createAuthorizationHeader(): Headers {
+    this.isAjaxProcessing = true;
+    let header = new Headers();
+    header.append("Authorization", `Bearer ${this.token === null ? "" : this.token}`);
+    return header;
+  }
 }

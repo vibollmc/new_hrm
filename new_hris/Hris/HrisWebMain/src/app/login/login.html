@@ -3,36 +3,36 @@
     <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
     <div class="container" style="padding-bottom:23vh">
       <div class="col-md-4 col-sm-6 ml-auto mr-auto">
-        <form class="form" method="" action="">
+        <form class="form" name="formLogin" #loginForm="ngForm" (ngSubmit)="login()">
           <div class="card card-login card-hidden">
             <div class="card-header card-header-rose text-center">
               <h4 class="card-title">Log in</h4>
             </div>
             <div class="card-body ">
               <p class="card-description text-center">HRIS</p>
-              <span class="bmd-form-group">
+              <div class="bmd-form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username...">
+                  <input type="text" class="form-control" placeholder="Username..." [(ngModel)]="vm.objLogin.username" required name="username" autocomplete="off">
                 </div>
-              </span>
-              <span class="bmd-form-group">
+              </div>
+              <div class="bmd-form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">lock_outline</i>
+                      <i class="material-icons">vpn_key</i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password...">
+                  <input type="password" class="form-control" placeholder="Password..." [(ngModel)]="vm.objLogin.password" required name="password">
                 </div>
-              </span>
+              </div>
             </div>
             <div class="card-footer justify-content-center">
-              <a href="javascript:void(0);" class="btn btn-rose btn-link btn-lg">SIGN IN</a>
+              <button type="submit" [disabled]="!loginForm.form.valid" class="btn btn-rose"><i class="material-icons">lock</i> SIGN IN</button>
             </div>
           </div>
         </form>

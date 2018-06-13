@@ -13,20 +13,36 @@ export class NotificationProvider {
     private readonly toastr: ToastrService) {
   }
 
+  error(message: string, title?: string) {
+    this.toastr.error(message, title ? title : "Error");
+  }
+
+  success(message: string, title?: string) {
+    this.toastr.success(message, title ? title : "Success");
+  }
+
+  warning(message: string, title?: string) {
+    this.toastr.warning(message, title ? title : "Warning");
+  }
+
+  info(message: string, title?: string) {
+    this.toastr.info(message, title ? title : "Info");
+  }
+
   saveSuccess() {
-    this.toastr.success("Lưu dữ liệu thành công", "Lưu dữ liệu");
+    this.success("Lưu dữ liệu thành công", "Lưu dữ liệu");
   }
 
   saveError(message?: string) {
-    this.toastr.error(`Lữu dữ liệu không thành công:<br>${message}`, "Lưu dữ liệu");
+    this.error(`Lữu dữ liệu không thành công:<br>${message}`, "Lưu dữ liệu");
   }
 
   deleteSuccess() {
-    this.toastr.success("Xóa dữ liệu thành công", "Xóa dữ liệu");
+    this.success("Xóa dữ liệu thành công", "Xóa dữ liệu");
   }
 
   deleteError(message?: string) {
-    this.toastr.error(`Xóa dữ liệu không thành công:<br>${message}`, "Xóa dữ liệu");
+    this.error(`Xóa dữ liệu không thành công:<br>${message}`, "Xóa dữ liệu");
   }
 
   confirmDelete(callBack: (result: boolean) => void, message?: string) {
