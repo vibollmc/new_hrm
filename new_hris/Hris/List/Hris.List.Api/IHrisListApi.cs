@@ -13,14 +13,14 @@ namespace Hris.List.Api
         /// </summary>
         /// <param name="gender"></param>
         /// <returns></returns>
-        Task<int?> SaveGender(GenderViewModel gender);
+        Task<int?> SaveGender(GenderModel gender);
 
         /// <summary>
         /// Select Gender
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        Task<IEnumerable<GenderViewModel>> SelectGender(Status? status);
+        Task<IEnumerable<GenderModel>> SelectGender(Status? status);
 
         /// <summary>
         /// Toggle gender status

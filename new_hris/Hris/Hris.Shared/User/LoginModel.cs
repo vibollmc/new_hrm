@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hris.Shared
+namespace Hris.Shared.User
 {
     public class LoginModel
     {

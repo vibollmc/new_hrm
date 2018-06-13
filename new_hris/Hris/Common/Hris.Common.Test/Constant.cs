@@ -6,6 +6,6 @@ namespace Hris.Common.Tests
 {
     public static class Constant
     {
-        public const string ConnectionString = "Server=.\\SQLEXPRESS;User Id=sa;Password=123456;Database=HRIS_NEW";
+        public const string ConnectionString = "Server=125.212.254.17,49172;Database=New_Hris;user id=sa;password=Besuungheo04101409@#SA";
     }
 }

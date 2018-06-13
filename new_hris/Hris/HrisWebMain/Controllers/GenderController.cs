@@ -26,11 +26,11 @@ namespace Hris.Web.Main.Controllers
     {
       var genders = await _hrisListApi.SelectGender(null);
 
-      return Json(new ResponseResult<IEnumerable<GenderViewModel>>(genders));
+      return Json(new ResponseResult<IEnumerable<GenderModel>>(genders));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Save([FromBody] GenderViewModel gender)
+    public async Task<IActionResult> Save([FromBody] GenderModel gender)
     {
       var genderId = await _hrisListApi.SaveGender(gender);
 
@@ -40,7 +40,7 @@ namespace Hris.Web.Main.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Delete([FromBody] GenderViewModel gender)
+    public async Task<IActionResult> Delete([FromBody] GenderModel gender)
     {
       var genderId = await _hrisListApi.DeleteGender(gender.Id);
 
@@ -50,7 +50,7 @@ namespace Hris.Web.Main.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> Status([FromBody] GenderViewModel gender)
+    public async Task<IActionResult> Status([FromBody] GenderModel gender)
     {
       var genderId = await _hrisListApi.ToggleGenderStatus(gender.Id);
 

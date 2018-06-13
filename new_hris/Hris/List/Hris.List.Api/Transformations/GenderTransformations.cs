@@ -8,11 +8,11 @@ namespace Hris.List.Api.Transformations
 {
     public static class GenderTransformations
     {
-        public static GenderViewModel Transform(this Gender gender)
+        public static GenderModel Transform(this Gender gender)
         {
             return gender == null
                 ? null
-                : new GenderViewModel
+                : new GenderModel
                 {
                     Id = gender.Id,
                     Status = gender.Status.Transform(),
@@ -27,7 +27,7 @@ namespace Hris.List.Api.Transformations
                 };
         }
 
-        public static Gender Transform(this GenderViewModel gender)
+        public static Gender Transform(this GenderModel gender)
         {
             return gender == null
                 ? null

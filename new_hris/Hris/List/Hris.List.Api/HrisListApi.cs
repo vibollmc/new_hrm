@@ -19,12 +19,12 @@ namespace Hris.List.Api
         }
 
         #region gender
-        public async Task<int?> SaveGender(GenderViewModel gender)
+        public async Task<int?> SaveGender(GenderModel gender)
         {
             return await _genderService.Save(gender.Transform());
         }
 
-        public async Task<IEnumerable<GenderViewModel>> SelectGender(Status? status)
+        public async Task<IEnumerable<GenderModel>> SelectGender(Status? status)
         {
             var genders = await _genderService.Select(status?.Transform());
 

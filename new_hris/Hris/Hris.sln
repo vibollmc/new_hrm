@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Web.Main", "HrisWebMain\Hris.Web.Main.csproj", "{993742EB-E8B7-4222-899A-EABEA95733EC}"
 EndProject
@@ -36,6 +36,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Profiles.Business", "Profiles\Hris.Profiles.Business\Hris.Profiles.Business.csproj", "{6AFF1035-DBCF-43BD-87E8-CEF3D6AC7965}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hris.Profiles.Persistence", "Profiles\Hris.Profiles.Persistence\Hris.Profiles.Persistence.csproj", "{D0F9A072-9680-472B-933E-C21FB8B3B590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Common.Test", "Common\Hris.Common.Test\Hris.Common.Test.csproj", "{356C8805-A746-43FB-A411-36AD32EA124E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hris.Common.Api", "Common\Hris.Common.Api\Hris.Common.Api.csproj", "{D39FE50F-86E4-4AC8-AADD-E9361C5B4CDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +99,14 @@ Global
 		{D0F9A072-9680-472B-933E-C21FB8B3B590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0F9A072-9680-472B-933E-C21FB8B3B590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0F9A072-9680-472B-933E-C21FB8B3B590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356C8805-A746-43FB-A411-36AD32EA124E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356C8805-A746-43FB-A411-36AD32EA124E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356C8805-A746-43FB-A411-36AD32EA124E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356C8805-A746-43FB-A411-36AD32EA124E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D39FE50F-86E4-4AC8-AADD-E9361C5B4CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D39FE50F-86E4-4AC8-AADD-E9361C5B4CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D39FE50F-86E4-4AC8-AADD-E9361C5B4CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D39FE50F-86E4-4AC8-AADD-E9361C5B4CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +122,8 @@ Global
 		{9E22B02F-1BC2-4D3F-B334-89B0BA8D7066} = {D3B3FD4D-9BF6-48A8-93CC-6BDD0722B205}
 		{6AFF1035-DBCF-43BD-87E8-CEF3D6AC7965} = {5247CF76-EFE8-4E08-88D1-945146B318F2}
 		{D0F9A072-9680-472B-933E-C21FB8B3B590} = {5247CF76-EFE8-4E08-88D1-945146B318F2}
+		{356C8805-A746-43FB-A411-36AD32EA124E} = {11251293-B1B7-4CC1-B0C9-0005971B1E27}
+		{D39FE50F-86E4-4AC8-AADD-E9361C5B4CDA} = {11251293-B1B7-4CC1-B0C9-0005971B1E27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7BC0C3D-128D-4545-B1BD-F117D0D06123}

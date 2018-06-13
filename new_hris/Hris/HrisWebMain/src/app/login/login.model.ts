@@ -6,7 +6,7 @@ import { LoginService } from "./login.service";
 import { Login } from "../shared/datamodel/login";
 import { ResponseResult } from "../shared/datamodel/response.result";
 import { NotificationProvider } from "../shared/notification.provider";
-
+import { Md5 } from "../shared/md5";
 
 @Injectable()
 export class LoginModel {
@@ -25,6 +25,8 @@ export class LoginModel {
   }
 
   login() {
+    this.objLogin.password = Md5(this.objLogin.password);
+
     this.loginService.login(this.objLogin)
       .subscribe(
         response => {
