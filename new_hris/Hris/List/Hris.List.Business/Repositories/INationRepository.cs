@@ -5,42 +5,42 @@ using System.Threading.Tasks;
 using Hris.List.Business.Domains;
 using Hris.List.Business.Enums;
 
-namespace Hris.List.Business.Services.Interfaces
+namespace Hris.List.Business.Repositories
 {
-    public interface IGenderService
+    public interface INationRepository
     {
         /// <summary>
-        /// Save Gender
+        /// Save Nation
         /// </summary>
-        /// <param name="gender"></param>
+        /// <param name="nation"></param>
         /// <returns></returns>
-        Task<int?> Save(Gender gender);
+        Task<int?> Save(Nation nation);
 
         /// <summary>
-        /// Select Gender
+        /// Select Nation
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<Gender>> Select();
+        Task<IEnumerable<Nation>> Select();
 
         /// <summary>
-        /// Select gender
+        /// Select Nation
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
-        Task<IEnumerable<Gender>> Select(Status status);
+        Task<IEnumerable<Nation>> Select(Status status);
 
         /// <summary>
-        /// Toggle gender status
+        /// Toggle Nation status
         /// </summary>
-        /// <param name="gender"></param>
+        /// <param name="nation"></param>
         /// <returns></returns>
-        Task<int?> ToggleStatus(Gender gender);
+        Task<int?> ToggleStatus(Nation nation);
 
         /// <summary>
-        /// Delete gender
+        /// Delete Nation
         /// </summary>
-        /// <param name="gender"></param>
+        /// <param name="nation"></param>
         /// <returns></returns>
-        Task<int?> Delete(Gender gender);
+        Task<int?> Delete(Nation nation);
     }
 }

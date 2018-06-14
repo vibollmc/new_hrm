@@ -23,6 +23,13 @@ namespace Hris.List.Business.Repositories
         Task<IEnumerable<Gender>> Select();
 
         /// <summary>
+        /// Select gender
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        Task<IEnumerable<Gender>> Select(Status status);
+
+        /// <summary>
         /// Toggle gender status
         /// </summary>
         /// <param name="gender"></param>

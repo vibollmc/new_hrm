@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hris.List.Business.Domains
 {
-    public class MDWard : Base
+    public class Ward : Base
     {
         public string Name { get; set; }
         public string NameEn { get; set; }

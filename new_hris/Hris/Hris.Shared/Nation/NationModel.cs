@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-
-namespace Hris.List.Business.Domains
+namespace Hris.Shared.Nation
 {
-    public class Education : Base
+    public class NationModel: BaseModel
     {
         public string Name { get; set; }
         public string NameEn { get; set; }

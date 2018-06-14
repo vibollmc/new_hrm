@@ -28,6 +28,11 @@ namespace Hris.List.Business.Services.Implementations
             return await _genderRepository.Select();
         }
 
+        public async Task<IEnumerable<Gender>> Select(Status status)
+        {
+            return await _genderRepository.Select(status);
+        }
+
         public async Task<int?> ToggleStatus(Gender gender)
         {
             return await _genderRepository.ToggleStatus(gender);

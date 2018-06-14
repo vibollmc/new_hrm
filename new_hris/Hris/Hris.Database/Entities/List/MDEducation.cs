@@ -5,7 +5,7 @@ using Hris.Database.Enums;
 
 namespace Hris.Database.Entities.List
 {
-    public class MDEducation
+    public class MDEducation : Base
     {
         public string Name { get; set; }
         public string NameEn { get; set; }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Hris.Database;
 using Hris.Database.Entities.List;
 using Hris.Database.Enums;
 using Hris.List.Business.Domains;
+using Hris.List.Business.Enums;
 using Hris.List.Business.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,9 +38,9 @@ namespace Hris.List.Persistence
             else
             {
                 genderDb.Name = gender.Name;
-                genderDb.NameEn = genderDb.NameEn;
-                genderDb.Status = genderDb.Status;
-                genderDb.UpdatedBy = genderDb.UpdatedBy;
+                genderDb.NameEn = gender.NameEn;
+                genderDb.Status = _mapper.Map<MDStatus>(gender.Status);
+                genderDb.UpdatedBy = gender.UpdatedBy;
                 genderDb.UpdatedAt = DateTime.UtcNow;
             }
             await _dbContext.SaveChangesAsync();
@@ -57,10 +57,20 @@ namespace Hris.List.Persistence
             return await genders.ToListAsync();
         }
 
+        public async Task<IEnumerable<Gender>> Select(Status status)
+        {
+
+            var genders = _dbContext.Genders
+                .Where(x => x.Status == _mapper.Map<Status, MDStatus>(status) && !x.DeletedAt.HasValue)
+                .Select(x => _mapper.Map<Gender>(x));
+
+            return await genders.ToListAsync();
+        }
+
         public async Task<int?> ToggleStatus(Gender gender)
         {
             var genderdb = await _dbContext.Genders.FirstOrDefaultAsync(x=> x.Id == gender.Id);
-            if (gender == null) return 0;
+            if (genderdb == null) return 0;
 
             genderdb.Status = genderdb.Status == MDStatus.Active ? MDStatus.Inactive : MDStatus.Active;
             genderdb.UpdatedAt = DateTime.UtcNow;
@@ -81,7 +91,7 @@ namespace Hris.List.Persistence
 
             await _dbContext.SaveChangesAsync();
 
-            return gender.Id;
+            return genderdb.Id;
         }
     }
 }

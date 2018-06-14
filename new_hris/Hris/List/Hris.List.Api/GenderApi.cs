@@ -17,16 +17,16 @@ namespace Hris.List.Api
 
         public async Task<IEnumerable<GenderModel>> SelectGender()
         {
-            try
-            {
-                var genders = await _genderService.Select();
+            var genders = await _genderService.Select();
 
-                return _mapper.Map<IEnumerable<GenderModel>>(genders);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return _mapper.Map<IEnumerable<GenderModel>>(genders);
+        }
+
+        public async Task<IEnumerable<GenderModel>> SelectGender(Status status)
+        {
+            var genders = await _genderService.Select(_mapper.Map<Business.Enums.Status>(status));
+
+            return _mapper.Map<IEnumerable<GenderModel>>(genders);
         }
 
         public async Task<int?> ToggleGenderStatus(GenderModel gender)
