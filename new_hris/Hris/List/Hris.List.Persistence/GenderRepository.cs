@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Hris.Database;
+using Hris.Database.Entities.List;
 using Hris.Database.Enums;
 using Hris.List.Business.Domains;
-using Hris.List.Business.Enums;
 using Hris.List.Business.Repositories;
-using Hris.List.Persistence.Transformations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hris.List.Persistence
@@ -15,10 +16,12 @@ namespace Hris.List.Persistence
     public class GenderRepository: IGenderRepository
     {
         private readonly HrisContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public GenderRepository(HrisContext dbContext)
+        public GenderRepository(HrisContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<int?> Save(Gender gender)
@@ -29,12 +32,15 @@ namespace Hris.List.Persistence
 
             if (genderDb == null)
             {
-                genderDb = gender.Transform();
+                genderDb = _mapper.Map<MDGender>(gender);
                 await _dbContext.Genders.AddAsync(genderDb);
             }
             else
             {
-                genderDb.UpdateValue(gender);
+                genderDb.Name = gender.Name;
+                genderDb.NameEn = genderDb.NameEn;
+                genderDb.Status = genderDb.Status;
+                genderDb.UpdatedBy = genderDb.UpdatedBy;
                 genderDb.UpdatedAt = DateTime.UtcNow;
             }
             await _dbContext.SaveChangesAsync();
@@ -42,38 +48,40 @@ namespace Hris.List.Persistence
             return genderDb.Id;
         }
 
-        public async Task<IEnumerable<Gender>> Select(Status? status)
+        public async Task<IEnumerable<Gender>> Select()
         {
+
             var genders = _dbContext.Genders
-                .Where(x => (status == null || x.Status == status.Value.Transform()) && !x.DeletedAt.HasValue)
-                .Select(x => x.Transform());
+                .Where(x => !x.DeletedAt.HasValue).Select(x => _mapper.Map<Gender>(x));
 
             return await genders.ToListAsync();
         }
 
-        public async Task<int?> ToggleStatus(int? genderId)
+        public async Task<int?> ToggleStatus(Gender gender)
         {
-            var gender = await _dbContext.Genders.FirstOrDefaultAsync(x=> x.Id == genderId);
+            var genderdb = await _dbContext.Genders.FirstOrDefaultAsync(x=> x.Id == gender.Id);
             if (gender == null) return 0;
 
-            gender.Status = gender.Status == MDStatus.Active ? MDStatus.Inactive : MDStatus.Active;
-            gender.UpdatedAt = DateTime.UtcNow;
+            genderdb.Status = genderdb.Status == MDStatus.Active ? MDStatus.Inactive : MDStatus.Active;
+            genderdb.UpdatedAt = DateTime.UtcNow;
+            genderdb.UpdatedBy = gender.UpdatedBy;
 
             await _dbContext.SaveChangesAsync();
 
-            return genderId;
+            return genderdb.Id;
         }
 
-        public async Task<int?> Delete(int? genderId)
+        public async Task<int?> Delete(Gender gender)
         {
-            var gender = await _dbContext.Genders.FirstOrDefaultAsync(x => x.Id == genderId);
-            if (gender == null) return 0;
+            var genderdb = await _dbContext.Genders.FirstOrDefaultAsync(x => x.Id == gender.Id);
+            if (genderdb == null) return 0;
 
-            gender.DeletedAt = DateTime.UtcNow;
+            genderdb.DeletedAt = DateTime.UtcNow;
+            genderdb.DeletedBy = gender.DeletedBy;
 
             await _dbContext.SaveChangesAsync();
 
-            return genderId;
+            return gender.Id;
         }
     }
 }

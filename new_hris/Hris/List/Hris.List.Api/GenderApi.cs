@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hris.List.Api.Transformations;
+using Hris.List.Business.Domains;
 using Hris.Shared.Enum;
 using Hris.Shared.Gender;
 
@@ -11,24 +12,31 @@ namespace Hris.List.Api
     {
         public async Task<int?> SaveGender(GenderModel gender)
         {
-            return await _genderService.Save(gender.Transform());
+            return await _genderService.Save(_mapper.Map<Gender>(gender));
         }
 
-        public async Task<IEnumerable<GenderModel>> SelectGender(Status? status)
+        public async Task<IEnumerable<GenderModel>> SelectGender()
         {
-            var genders = await _genderService.Select(status?.Transform());
+            try
+            {
+                var genders = await _genderService.Select();
 
-            return genders.Select(x => x.Transform());
+                return _mapper.Map<IEnumerable<GenderModel>>(genders);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
-        public async Task<int?> ToggleGenderStatus(int? genderId)
+        public async Task<int?> ToggleGenderStatus(GenderModel gender)
         {
-            return await _genderService.ToggleStatus(genderId);
+            return await _genderService.ToggleStatus(_mapper.Map<Gender>(gender));
         }
 
-        public async Task<int?> DeleteGender(int? genderId)
+        public async Task<int?> DeleteGender(GenderModel gender)
         {
-            return await _genderService.Delete(genderId);
+            return await _genderService.Delete(_mapper.Map<Gender>(gender));
         }
     }
 }

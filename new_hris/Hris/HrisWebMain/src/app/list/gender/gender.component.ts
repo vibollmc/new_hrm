@@ -48,14 +48,17 @@ export class GenderComponent extends BaseComponent {
 
   save() {
     this.vm.save();
+    this.vm.objSelected = new Gender();
   }
 
   delete() {
     Object.assign(this.vm.obj, this.vm.objSelected);
     this.vm.delete();
+    this.vm.objSelected = new Gender();
   }
 
   updateStatus(gender: Gender) {
     this.vm.updateStatus(gender);
+    this.vm.objSelected = new Gender();
   }
 }

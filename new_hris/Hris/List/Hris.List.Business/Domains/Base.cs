@@ -7,25 +7,13 @@ namespace Hris.List.Business.Domains
 {
     public class Base
     {
-        public Base(int? id, Status status, DateTime? createdAt, string createdBy, DateTime? updatedAt, string updatedBy, DateTime? deletedAt, string deletedBy)
-        {
-            Id = id;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            Status = status;
-            DeletedAt = deletedAt;
-            CreatedBy = createdBy;
-            UpdatedBy = updatedBy;
-            DeletedBy = deletedBy;
-        }
-
-        public int? Id { get; }
-        public DateTime? CreatedAt { get; }
-        public DateTime? UpdatedAt { get; }
-        public DateTime? DeletedAt { get; }
-        public string CreatedBy { get; }
-        public string UpdatedBy { get; }
-        public string DeletedBy { get; }
-        public Status Status { get; }
+        public int? Id { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public string DeletedBy { get; set; }
+        public Status Status { get; set; }
     }
 }

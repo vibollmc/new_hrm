@@ -14,9 +14,7 @@ namespace Hris.Common.Api
         {
             var user = await _userService.Get(username, password);
 
-            var userModel = _mapper.Map<User, UserModel>(user);
-
-            return userModel;
+            return _mapper.Map<UserModel>(user);
         }
 
         public async Task<UserModel> GetUser(int? id)

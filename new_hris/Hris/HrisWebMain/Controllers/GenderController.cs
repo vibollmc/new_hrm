@@ -27,7 +27,7 @@ namespace Hris.Web.Main.Controllers
 
     private async Task<ResponseResult<IEnumerable<GenderModel>>> GetListGender()
     {
-      var genders = await _hrisListApi.SelectGender(null);
+      var genders = await _hrisListApi.SelectGender();
 
       return new ResponseResult<IEnumerable<GenderModel>>(genders);
     }
@@ -48,7 +48,8 @@ namespace Hris.Web.Main.Controllers
     [HttpPost("[action]")]
     public async Task<ResponseResult<IEnumerable<GenderModel>>> Delete([FromBody] GenderModel gender)
     {
-      var genderId = await _hrisListApi.DeleteGender(gender.Id);
+      gender.DeletedBy = CurrentUser;
+      var genderId = await _hrisListApi.DeleteGender(gender);
 
       if (genderId > 0) return await GetListGender();
 
@@ -58,7 +59,8 @@ namespace Hris.Web.Main.Controllers
     [HttpPost("[action]")]
     public async Task<ResponseResult<bool>> Status([FromBody] GenderModel gender)
     {
-      var genderId = await _hrisListApi.ToggleGenderStatus(gender.Id);
+      gender.UpdatedBy = CurrentUser;
+      var genderId = await _hrisListApi.ToggleGenderStatus(gender);
 
       return genderId > 0
         ? new ResponseResult<bool>(true, ResultCode.Success, null)

@@ -79,6 +79,16 @@ namespace Hris.Database
 
         public DbSet<MDGender> Genders { get; set; }
 
+        public DbSet<MDCountry> Countries { get; set; }
+
+        public DbSet<MDProvince> Provinces { get; set; }
+
+        public DbSet<MDDistrict> Districts { get; set; }
+
+        public DbSet<MDWard> Wards { get; set; }
+
+        public DbSet<MDNation> Nations { get; set; }
+
         #endregion List
         public HrisContext(DbContextOptions<HrisContext> options) : base(options)
         {

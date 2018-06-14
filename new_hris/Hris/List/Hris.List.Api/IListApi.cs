@@ -18,23 +18,21 @@ namespace Hris.List.Api
         /// <summary>
         /// Select Gender
         /// </summary>
-        /// <param name="status"></param>
         /// <returns></returns>
-        Task<IEnumerable<GenderModel>> SelectGender(Status? status);
+        Task<IEnumerable<GenderModel>> SelectGender();
 
         /// <summary>
         /// Toggle gender status
         /// </summary>
-        /// <param name="genderId"></param>
+        /// <param name="gender"></param>
         /// <returns></returns>
-        Task<int?> ToggleGenderStatus(int? genderId);
+        Task<int?> ToggleGenderStatus(GenderModel gender);
 
         /// <summary>
         /// Delete gender
         /// </summary>
-        /// <param name="genderId"></param>
         /// <returns></returns>
-        Task<int?> DeleteGender(int? genderId);
+        Task<int?> DeleteGender(GenderModel gender);
         #endregion gender
     }
 }

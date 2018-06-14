@@ -23,19 +23,19 @@ namespace Hris.List.Business.Services.Implementations
             return await _genderRepository.Save(gender);
         }
 
-        public async Task<IEnumerable<Gender>> Select(Status? status)
+        public async Task<IEnumerable<Gender>> Select()
         {
-            return await _genderRepository.Select(status);
+            return await _genderRepository.Select();
         }
 
-        public async Task<int?> ToggleStatus(int? genderId)
+        public async Task<int?> ToggleStatus(Gender gender)
         {
-            return await _genderRepository.ToggleStatus(genderId);
+            return await _genderRepository.ToggleStatus(gender);
         }
 
-        public async Task<int?> Delete(int? genderId)
+        public async Task<int?> Delete(Gender gender)
         {
-            return await _genderRepository.Delete(genderId);
+            return await _genderRepository.Delete(gender);
         }
     }
 }
