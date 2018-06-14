@@ -25,7 +25,7 @@ namespace Hris.Common.Persistence
         public async Task<User> Get(string username, string password)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(x =>
-                x.Username.Equals(username, StringComparison.OrdinalIgnoreCase) && x.Password == password.ToMd5Hash());
+                x.Username.Equals(username, StringComparison.OrdinalIgnoreCase) && x.Password == password);
 
             return user.Transform();
         }

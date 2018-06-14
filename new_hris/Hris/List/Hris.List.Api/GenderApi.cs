@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hris.List.Api.Transformations;
-using Hris.List.Business.Services.Interfaces;
 using Hris.Shared.Enum;
 using Hris.Shared.Gender;
 
 namespace Hris.List.Api
 {
-    public class HrisListApi : IHrisListApi
+    public partial class ListApi
     {
-        private readonly IGenderService _genderService;
-
-        public HrisListApi(IGenderService genderService)
-        {
-            _genderService = genderService;
-        }
-
-        #region gender
         public async Task<int?> SaveGender(GenderModel gender)
         {
             return await _genderService.Save(gender.Transform());
@@ -40,6 +30,5 @@ namespace Hris.List.Api
         {
             return await _genderService.Delete(genderId);
         }
-        #endregion gender
     }
 }

@@ -2,6 +2,8 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using Hris.Common.Api;
 using Hris.Shared;
 using Hris.Shared.User;
 using Microsoft.AspNetCore.Authorization;
@@ -14,18 +16,21 @@ namespace Hris.Web.Main.Controllers
   public class AuthorizationController : Controller
   {
     private readonly IConfiguration _configuration;
+    private readonly ICommonApi _commonApi;
 
-    public AuthorizationController(IConfiguration configuration)
+    public AuthorizationController(IConfiguration configuration, ICommonApi commonApi)
     {
       _configuration = configuration;
+      _commonApi = commonApi;
     }
 
     [AllowAnonymous]
     [HttpPost]
-    public IActionResult Index([FromBody] LoginModel login)
+    public async Task<IActionResult> Index([FromBody] LoginModel login)
     {
       IActionResult response = Unauthorized();
-      var user = Authenticate(login);
+
+      var user = await Authenticate(login);
 
       if (user == null) return response;
 
@@ -42,10 +47,10 @@ namespace Hris.Web.Main.Controllers
       var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
       var claims = new[] {
-        new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
-        new Claim(JwtRegisteredClaimNames.GivenName, user.Name),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        new Claim(JwtRegisteredClaimNames.UniqueName, user.Username)
+        new Claim(ClaimTypes.Sid, user.Id.ToString()),
+        new Claim(ClaimTypes.NameIdentifier, user.Username),
+        new Claim(ClaimTypes.Email, user.Email),
+        new Claim(ClaimTypes.Name, user.Fullname)
       };
 
       var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
@@ -57,17 +62,9 @@ namespace Hris.Web.Main.Controllers
       return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    private UserModel Authenticate(LoginModel login)
+    private async Task<UserModel> Authenticate(LoginModel login)
     {
-      UserModel user = null;
-
-      //TO DO: Verify account login
-      if (login.Username == "mario" && login.Password == "secret")
-      {
-        user = new UserModel {Id = 1, Username = "mario", Name = "Mario Rossi", Email = "mario.rossi@domain.com"};
-      }
-
-      return user;
+      return await _commonApi.GetUser(login.Username, login.Password);
     }
   }
 }

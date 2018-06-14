@@ -21,6 +21,10 @@ export class LoginModel {
   ) {
     if (this.shareService.token) this.router.navigate(["home"]);
     this.objLogin = new Login();
+    //For test
+    this.objLogin.username = "admin";
+    this.objLogin.password = "admin";
+    
     this.message = null;
   }
 
@@ -31,18 +35,20 @@ export class LoginModel {
       .subscribe(
         response => {
           var result = response.json() as ResponseResult;
+          this.objLogin.password = null;
           if (result.data) {
             this.objLogin.username = null;
-            this.objLogin.password = null;
 
             this.shareService.token = result.data;
             this.router.navigate(["home"]);
           } else {
             this.notification.error("Đăng nhập không thành công. sai tên đăng nhập hoặc mật khẩu.");
+
           }
         },
         err => {
-          this.notification.error(`Đăng nhập không thành công. Có lỗi xảy ra: ${err}`);
+          this.objLogin.password = null;
+          this.notification.error("Đăng nhập không thành công. sai tên đăng nhập hoặc mật khẩu.");
         });
   }
 }

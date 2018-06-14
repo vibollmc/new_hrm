@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Hris.Shared.Enum;
 
 namespace Hris.Shared.User
 {
-    public class UserModel : BaseModel
+    public class UserModel
     {
+        public int? Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Fullname { get; set; }
@@ -19,5 +19,6 @@ namespace Hris.Shared.User
         public string DigitGroupingSymbol { get; set; }
         public DateTime? LastLogin { get; set; }
         public string IpAddress { get; set; }
+        public Status Status { get; set; }
     }
 }

@@ -1,5 +1,10 @@
 using System.Text;
 using AutoMapper;
+using Hris.Common.Api;
+using Hris.Common.Business.Repositories;
+using Hris.Common.Business.Services.Implementations;
+using Hris.Common.Business.Services.Interfaces;
+using Hris.Common.Persistence;
 using Hris.Database;
 using Hris.List.Api;
 using Hris.List.Business.Repositories;
@@ -29,6 +34,18 @@ namespace Hris.Web.Main
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      #region Common DI
+
+      #region repositories
+      services.AddTransient<IUserRepository, UserRepository>();
+      #endregion
+
+      #region services
+      services.AddTransient<IUserService, UserService>();
+      #endregion
+
+      #endregion
+
       #region List DI
 
       #region repositories
@@ -39,10 +56,11 @@ namespace Hris.Web.Main
       services.AddTransient<IGenderService, GenderService>();
       #endregion
 
-      #region api
-      services.AddTransient<IHrisListApi, HrisListApi>();
       #endregion
 
+      #region API DI
+      services.AddTransient<ICommonApi, CommonApi>();
+      services.AddTransient<IListApi, ListApi>();
       #endregion
 
 

@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Hris.Common.Api\Hris.Common.Api.csproj" />
+    <ProjectReference Include="..\Common\Hris.Common.Business\Hris.Common.Business.csproj" />
+    <ProjectReference Include="..\Common\Hris.Common.Persistence\Hris.Common.Persistence.csproj" />
     <ProjectReference Include="..\Hris.Database\Hris.Database.csproj" />
     <ProjectReference Include="..\Hris.Shared\Hris.Shared.csproj" />
     <ProjectReference Include="..\List\Hris.List.Api\Hris.List.Api.csproj" />

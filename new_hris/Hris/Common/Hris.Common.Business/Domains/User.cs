@@ -28,20 +28,20 @@ namespace Hris.Common.Business.Domains
             Status = status;
         }
 
-        public int? Id { get; }
-        public string Username { get; }
-        public string Password { get; }
-        public string Fullname { get;}
-        public string Email { get;}
-        public string LanguageCode { get;}
-        public int? LanguageId { get;}
-        public int? TimeZone { get;}
-        public string DateFormat { get;}
-        public string TimeFormat { get;}
-        public string DecimalSymbol { get;}
-        public string DigitGroupingSymbol { get;}
-        public DateTime? LastLogin { get;}
-        public string IpAddress { get;}
-        public Status Status { get;}
+        public int? Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Fullname { get; set; }
+        public string Email { get; set; }
+        public string LanguageCode { get; set; }
+        public int? LanguageId { get; set; }
+        public int? TimeZone { get; set; }
+        public string DateFormat { get; set; }
+        public string TimeFormat { get; set; }
+        public string DecimalSymbol { get; set; }
+        public string DigitGroupingSymbol { get; set; }
+        public DateTime? LastLogin { get; set; }
+        public string IpAddress { get; set; }
+        public Status Status { get; set; }
     }
 }

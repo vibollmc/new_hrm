@@ -5,7 +5,7 @@ using Hris.Shared.Gender;
 
 namespace Hris.List.Api
 {
-    public interface IHrisListApi
+    public interface IListApi
     {
         #region gender
         /// <summary>

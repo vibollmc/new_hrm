@@ -46,10 +46,14 @@ export class NotificationProvider {
   }
 
   confirmDelete(callBack: (result: boolean) => void, message?: string) {
+    this.confirm(message ? message : "Bạn muốn xóa dữ liệu này?", "Xác nhận", callBack);
+  }
+
+  confirm(message: string, title: string, callBack: (result: boolean) => void) {
 
     const dialog = this.dialogService.open({
-      title: "Xác nhận",
-      content: message ? message : "Bạn muốn xóa dữ liệu này?",
+      title: title,
+      content: message,
       actions: [
         { text: "No" },
         { text: "Yes", primary: true }

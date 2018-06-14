@@ -6,33 +6,35 @@ import { BaseModel } from "./datamodel/base.model";
 
 @Injectable()
 export class ListService<T extends BaseModel> extends BaseService {
-    private urlGet: string | undefined;
-    private urlSave: string | undefined;
-    private urlDelete: string | undefined;
-    private urlUpdateStatus: string | undefined;
-    constructor(
-        private readonly http: HttpClient
-    ) {
-        super();
-    }
+  private urlApi: string | undefined;
+  private urlApiDelete: string | undefined;
+  private urlApiUpdateStatus: string | undefined;
 
-    setUrlApi(collectionName: string) {
-        this.urlGet = `${this.baseUrl}/${collectionName}/List`;
-        this.urlSave = `${this.baseUrl}/${collectionName}/Save`;
-        this.urlDelete = `${this.baseUrl}/${collectionName}/Delete`;
-        this.urlUpdateStatus = `${this.baseUrl}/${collectionName}/Status`;
-    }
+  constructor(
+    private readonly http: HttpClient
+  ) {
+    super();
+  }
 
-    get() {
-        return this.http.get(this.urlGet);
-    }
-    save(obj: T) {
-        return this.http.post(this.urlSave, obj);
-    }
-    delete(obj: T) {
-        return this.http.post(this.urlDelete, obj);
-    }
-    updateStatus(obj: T) {
-        return this.http.post(this.urlUpdateStatus, obj);
-    }
+  setUrlApi(collectionName: string) {
+    this.urlApi = `${this.baseUrl}/api/${collectionName}`;
+    this.urlApiDelete = `${this.baseUrl}/api/${collectionName}/Delete`;
+    this.urlApiUpdateStatus = `${this.baseUrl}/api/${collectionName}/Status`;
+  }
+
+  get() {
+    return this.http.get(this.urlApi);
+  }
+
+  save(obj: T) {
+    return this.http.post(this.urlApi, obj);
+  }
+
+  delete(obj: T) {
+    return this.http.post(this.urlApiDelete, obj);
+  }
+
+  updateStatus(obj: T) {
+    return this.http.post(this.urlApiUpdateStatus, obj);
+  }
 }

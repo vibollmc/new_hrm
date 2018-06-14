@@ -3,60 +3,66 @@ using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
 using Hris.Shared.Gender;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hris.Web.Main.Controllers
 {
-  public class GenderController : Controller
+  [Authorize]
+  [Route("api/[controller]")]
+  public class GenderController : BaseController
   {
-    private readonly IHrisListApi _hrisListApi;
+    private readonly IListApi _hrisListApi;
 
-    public GenderController(IHrisListApi hrisListApi)
+    public GenderController(IListApi hrisListApi)
     {
       _hrisListApi = hrisListApi;
     }
 
     [HttpGet]
-    public async Task<IActionResult> List()
+    public async Task<ResponseResult<IEnumerable<GenderModel>>> Get()
     {
       return await GetListGender();
     }
 
-    private async Task<JsonResult> GetListGender()
+    private async Task<ResponseResult<IEnumerable<GenderModel>>> GetListGender()
     {
       var genders = await _hrisListApi.SelectGender(null);
 
-      return Json(new ResponseResult<IEnumerable<GenderModel>>(genders));
+      return new ResponseResult<IEnumerable<GenderModel>>(genders);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Save([FromBody] GenderModel gender)
+    public async Task<ResponseResult<IEnumerable<GenderModel>>> Post([FromBody] GenderModel gender)
     {
+      if (gender.Id.HasValue && gender.Id.Value > 0) gender.UpdatedBy = CurrentUser;
+      else gender.CreatedBy = CurrentUser;
+
       var genderId = await _hrisListApi.SaveGender(gender);
 
       if (genderId > 0) return await GetListGender();
 
-      return Json(new ResponseResult<bool>(false, ResultCode.Error, null));
+      return new ResponseResult<IEnumerable<GenderModel>>(null, ResultCode.Error, null);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Delete([FromBody] GenderModel gender)
+    [HttpPost("[action]")]
+    public async Task<ResponseResult<IEnumerable<GenderModel>>> Delete([FromBody] GenderModel gender)
     {
       var genderId = await _hrisListApi.DeleteGender(gender.Id);
 
       if (genderId > 0) return await GetListGender();
 
-      return Json(new ResponseResult<bool>(false, ResultCode.Error, null));
+      return new ResponseResult<IEnumerable<GenderModel>>(null, ResultCode.Error, null);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Status([FromBody] GenderModel gender)
+    [HttpPost("[action]")]
+    public async Task<ResponseResult<bool>> Status([FromBody] GenderModel gender)
     {
       var genderId = await _hrisListApi.ToggleGenderStatus(gender.Id);
 
-      return Json(genderId > 0
+      return genderId > 0
         ? new ResponseResult<bool>(true, ResultCode.Success, null)
-        : new ResponseResult<bool>(false, ResultCode.Error, null));
+        : new ResponseResult<bool>(false, ResultCode.Error, null);
     }
   }
 }
