@@ -89,6 +89,8 @@ namespace Hris.Database
 
         public DbSet<MDNation> Nations { get; set; }
 
+        public DbSet<MDEducation> Educations { get; set; }
+
         #endregion List
         public HrisContext(DbContextOptions<HrisContext> options) : base(options)
         {

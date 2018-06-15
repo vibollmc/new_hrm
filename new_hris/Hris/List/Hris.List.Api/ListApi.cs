@@ -1,17 +1,17 @@
-﻿using AutoMapper;
-using Hris.List.Business.Services.Interfaces;
+﻿using System;
+using AutoMapper;
 
 namespace Hris.List.Api
 {
     public partial class ListApi : IListApi
     {
-        private readonly IGenderService _genderService;
         private readonly IMapper _mapper;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ListApi(IGenderService genderService, IMapper mapper)
+        public ListApi(IMapper mapper, IServiceProvider serviceProvider)
         {
-            _genderService = genderService;
             _mapper = mapper;
+            _serviceProvider = serviceProvider;
         }
     }
 }

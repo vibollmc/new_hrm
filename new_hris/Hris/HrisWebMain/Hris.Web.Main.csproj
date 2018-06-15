@@ -27,4 +27,8 @@
     <ProjectReference Include="..\List\Hris.List.Persistence\Hris.List.Persistence.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="ng build --aot" />
+  </Target>
+
 </Project>

@@ -12,11 +12,11 @@ namespace Hris.Web.Main.Controllers
   [Route("api/[controller]")]
   public class GenderController : BaseController
   {
-    private readonly IListApi _hrisListApi;
+    private readonly IListApi _listApi;
 
-    public GenderController(IListApi hrisListApi)
+    public GenderController(IListApi listApi)
     {
-      _hrisListApi = hrisListApi;
+      _listApi = listApi;
     }
 
     [HttpGet]
@@ -27,7 +27,7 @@ namespace Hris.Web.Main.Controllers
 
     private async Task<ResponseResult<IEnumerable<GenderModel>>> GetListGender()
     {
-      var genders = await _hrisListApi.SelectGender();
+      var genders = await _listApi.SelectGender();
 
       return new ResponseResult<IEnumerable<GenderModel>>(genders);
     }
@@ -38,7 +38,7 @@ namespace Hris.Web.Main.Controllers
       if (gender.Id.HasValue && gender.Id.Value > 0) gender.UpdatedBy = CurrentUser;
       else gender.CreatedBy = CurrentUser;
 
-      var genderId = await _hrisListApi.SaveGender(gender);
+      var genderId = await _listApi.SaveGender(gender);
 
       if (genderId > 0) return await GetListGender();
 
@@ -49,7 +49,7 @@ namespace Hris.Web.Main.Controllers
     public async Task<ResponseResult<IEnumerable<GenderModel>>> Delete([FromBody] GenderModel gender)
     {
       gender.DeletedBy = CurrentUser;
-      var genderId = await _hrisListApi.DeleteGender(gender);
+      var genderId = await _listApi.DeleteGender(gender);
 
       if (genderId > 0) return await GetListGender();
 
@@ -60,7 +60,7 @@ namespace Hris.Web.Main.Controllers
     public async Task<ResponseResult<bool>> Status([FromBody] GenderModel gender)
     {
       gender.UpdatedBy = CurrentUser;
-      var genderId = await _hrisListApi.ToggleGenderStatus(gender);
+      var genderId = await _listApi.ToggleGenderStatus(gender);
 
       return genderId > 0
         ? new ResponseResult<bool>(true, ResultCode.Success, null)

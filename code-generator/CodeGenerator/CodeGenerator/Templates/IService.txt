@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Hris.List.Business.Domains;
+using Hris.List.Business.Enums;
+
+namespace Hris.List.Business.Services.Interfaces
+{
+    public interface I{0}Service
+    {
+        Task<int?> Save({0} {1});
+
+        Task<IEnumerable<{0}>> Select();
+
+        Task<IEnumerable<{0}>> Select(Status status);
+
+        Task<int?> ToggleStatus({0} {1});
+
+        Task<int?> Delete({0} {1});
+    }
+}

@@ -1,0 +1,46 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Hris.Shared.Enum;
+using Hris.Shared.{0};
+
+namespace Hris.List.Api
+{
+    public partial interface IListApi
+    {
+
+        /// <summary>
+        /// Save {0}
+        /// </summary>
+        /// <param name="{1}"></param>
+        /// <returns></returns>
+        Task<int?> Save{0}({0}Model {1});
+
+        /// <summary>
+        /// Select {0}
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<{0}Model>> Select{0}();
+
+        /// <summary>
+        /// Select {0}
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        Task<IEnumerable<{0}Model>> Select{0}(Status status);
+
+        /// <summary>
+        /// Toggle {0} status
+        /// </summary>
+        /// <param name="{1}"></param>
+        /// <returns></returns>
+        Task<int?> Toggle{0}Status({0}Model {1});
+
+        /// <summary>
+        /// Delete {0}
+        /// </summary>
+        /// <param name="{1}"></param>
+        /// <returns></returns>
+        Task<int?> Delete{0}({0}Model {1});
+
+    }
+}

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Hris.Shared.Enum;
+﻿using Hris.Shared.Enum;
 
 namespace Hris.Shared.Gender
 {

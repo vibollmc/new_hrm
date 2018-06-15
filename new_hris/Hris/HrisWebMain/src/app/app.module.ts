@@ -32,6 +32,11 @@ import { HomeComponent } from "./home/home.component";
 import { FetchDataComponent } from "./fetchdata/fetchdata.component";
 import { CounterComponent } from "./counter/counter.component";
 import { GenderComponent } from "./list/gender/gender.component";
+import { CountryComponent } from "./list/country/country.component";
+import { DistrictComponent } from "./list/district/district.component";
+import { EducationComponent } from "./list/education/education.component";
+import { ProvinceComponent } from "./list/province/province.component";
+import { WardComponent } from "./list/ward/ward.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +46,12 @@ import { GenderComponent } from "./list/gender/gender.component";
     CounterComponent,
     FetchDataComponent,
     HomeComponent,
-    GenderComponent
+    GenderComponent,
+    CountryComponent,
+    DistrictComponent,
+    EducationComponent,
+    ProvinceComponent,
+    WardComponent
   ],
   providers: [
     ListModel,
@@ -73,6 +83,11 @@ import { GenderComponent } from "./list/gender/gender.component";
       { path: "counter", component: CounterComponent },
       { path: "fetch-data", component: FetchDataComponent },
       { path: "gender", component: GenderComponent },
+      { path: "country", component: CountryComponent },
+      { path: "district", component: DistrictComponent },
+      { path: "education", component: EducationComponent },
+      { path: "province", component: ProvinceComponent },
+      { path: "ward", component: WardComponent },
       { path: "**", redirectTo: "home" }
     ])
   ],

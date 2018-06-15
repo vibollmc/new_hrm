@@ -50,10 +50,22 @@ namespace Hris.Web.Main
 
       #region repositories
       services.AddTransient<IGenderRepository, GenderRepository>();
+      services.AddTransient<ICountryRepository, CountryRepository>();
+      services.AddTransient<IDistrictRepository, DistrictRepository>();
+      services.AddTransient<IEducationRepository, EducationRepository>();
+      services.AddTransient<INationRepository, NationRepository>();
+      services.AddTransient<IProvinceRepository, ProvinceRepository>();
+      services.AddTransient<IWardRepository, WardRepository>();
       #endregion
 
       #region services
       services.AddTransient<IGenderService, GenderService>();
+      services.AddTransient<ICountryService, CountryService>();
+      services.AddTransient<IDistrictService, DistrictService>();
+      services.AddTransient<IEducationService, EducationService>();
+      services.AddTransient<INationService, NationService>();
+      services.AddTransient<IProvinceService, ProvinceService>();
+      services.AddTransient<IWardService, WardService>();
       #endregion
 
       #endregion

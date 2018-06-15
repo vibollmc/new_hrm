@@ -1,38 +1,43 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-lg-12">
-        <div class="k-block">
-            <button kendoButton (click)="openAddOrEdit('add')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
-            <button kendoButton (click)="openAddOrEdit('edit')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-edit'" [disabled]="!vm.objSelected.id">Sửa</button>
-            <button kendoButton (click)="delete()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-delete'" [disabled]="!vm.objSelected.id">Xóa</button>
-        </div>
+  <div class="col-xs-12 col-sm-12 col-lg-12">
+    <div class="k-block">
+      <button kendoButton (click)="openAddOrEdit('add')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
+      <button kendoButton (click)="openAddOrEdit('edit')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-edit'" [disabled]="!vm.objSelected.id">Sửa</button>
+      <button kendoButton (click)="delete()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-delete'" [disabled]="!vm.objSelected.id">Xóa</button>
     </div>
+  </div>
 </div>
-<kendo-dialog title="Thêm danh mục" *ngIf="vm.isAddingOrEditing" (close)="closeAddOrEdit()" [minWidth]="500" [width]="600">
-    <form class="k-form" #editForm="ngForm" (ngSubmit)="save()">
-        <label class="k-form-field">
-            <span>Tên tiếng Việt <span class="k-required">*</span></span>
-            <input class="k-textbox" [(ngModel)]="vm.obj.name" required name="name" />
-        </label>
-        <label class="k-form-field">
-            <span>Tên tiếng Anh </span>
-            <input class="k-textbox" [(ngModel)]="vm.obj.nameEn" name="nameEn" />
-        </label>
-        <div class="text-right">
-            <button type="button" class="k-button" (click)="closeAddOrEdit()">Cancel</button>
-            <button type="button" class="k-button k-primary" (click)="save()" [disabled]="!editForm.form.valid">Save</button>
-        </div>
-    </form>
+<kendo-dialog *ngIf="vm.isAddingOrEditing" (close)="closeAddOrEdit()" [minWidth]="500" [width]="600">
+  <kendo-dialog-titlebar>
+    <div style="font-size: 18px; line-height: 1.3em;">
+      <span [ngClass]="classAddOrEdit"></span> {{titleAddOrEdit}}
+    </div>
+  </kendo-dialog-titlebar>
+  <form class="k-form" #editForm="ngForm" (ngSubmit)="save()">
+    <label class="k-form-field">
+      <span>Tên tiếng Việt <span class="k-required">*</span></span>
+      <input class="k-textbox" [(ngModel)]="vm.obj.name" required name="name"/>
+    </label>
+    <label class="k-form-field">
+      <span>Tên tiếng Anh </span>
+      <input class="k-textbox" [(ngModel)]="vm.obj.nameEn" name="nameEn"/>
+    </label>
+    <div class="text-right">
+      <button type="button" class="k-button" (click)="closeAddOrEdit()">Cancel</button>
+      <button type="button" class="k-button k-primary" (click)="save()" [disabled]="!editForm.form.valid">Save</button>
+    </div>
+  </form>
 </kendo-dialog>
-<kendo-grid [data]="vm.lstObj" [selectable]="vm.gridSelectableSettings" (selectionChange)="gridSelectionChange($event)" [height]="410">
-    <kendo-grid-column field="id" title="ID" width="40">
-    </kendo-grid-column>
-    <kendo-grid-column field="name" title="Name">
-    </kendo-grid-column>
-    <kendo-grid-column field="nameEn" title="English">
-    </kendo-grid-column>
-    <kendo-grid-column field="status" title="Trạng thái" width="80">
-        <ng-template kendoGridCellTemplate let-dataItem>
-            <kendo-switch [(ngModel)]="dataItem.status" (valueChange)="updateStatus(dataItem)"></kendo-switch>
-        </ng-template>
-    </kendo-grid-column>
+<kendo-grid [data]="vm.lstObj" [selectable]="vm.gridSelectableSettings" (selectionChange)="gridSelectionChange($event)" [height]="heightBrowser - 70">
+  <kendo-grid-column field="id" title="ID" width="40">
+  </kendo-grid-column>
+  <kendo-grid-column field="name" title="Name">
+  </kendo-grid-column>
+  <kendo-grid-column field="nameEn" title="English">
+  </kendo-grid-column>
+  <kendo-grid-column field="status" title="Trạng thái" width="80">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <kendo-switch [(ngModel)]="dataItem.status" (valueChange)="updateStatus(dataItem)"></kendo-switch>
+    </ng-template>
+  </kendo-grid-column>
 </kendo-grid>

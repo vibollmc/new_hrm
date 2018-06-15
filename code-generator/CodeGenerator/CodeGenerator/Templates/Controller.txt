@@ -1,0 +1,70 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Hris.List.Api;
+using Hris.Shared;
+using Hris.Shared.{0};
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Hris.Web.Main.Controllers
+{
+  [Authorize]
+  [Route("api/[controller]")]
+  public class {0}Controller : BaseController
+  {
+    private readonly IListApi _listApi;
+
+    public {0}Controller(IListApi listApi)
+    {
+      _listApi = listApi;
+    }
+
+    [HttpGet]
+    public async Task<ResponseResult<IEnumerable<{0}Model>>> Get()
+    {
+      return await GetList{0}();
+    }
+
+    private async Task<ResponseResult<IEnumerable<{0}Model>>> GetList{0}()
+    {
+      var {1}s = await _listApi.Select{0}();
+
+      return new ResponseResult<IEnumerable<{0}Model>>({1}s);
+    }
+
+    [HttpPost]
+    public async Task<ResponseResult<IEnumerable<{0}Model>>> Post([FromBody] {0}Model {1})
+    {
+      if ({1}.Id.HasValue && {1}.Id.Value > 0) {1}.UpdatedBy = CurrentUser;
+      else {1}.CreatedBy = CurrentUser;
+
+      var {1}Id = await _listApi.Save{0}({1});
+
+      if ({1}Id > 0) return await GetList{0}();
+
+      return new ResponseResult<IEnumerable<{0}Model>>(null, ResultCode.Error, null);
+    }
+
+    [HttpPost("[action]")]
+    public async Task<ResponseResult<IEnumerable<{0}Model>>> Delete([FromBody] {0}Model {1})
+    {
+      {1}.DeletedBy = CurrentUser;
+      var {1}Id = await _listApi.Delete{0}({1});
+
+      if ({1}Id > 0) return await GetList{0}();
+
+      return new ResponseResult<IEnumerable<{0}Model>>(null, ResultCode.Error, null);
+    }
+
+    [HttpPost("[action]")]
+    public async Task<ResponseResult<bool>> Status([FromBody] {0}Model {1})
+    {
+      {1}.UpdatedBy = CurrentUser;
+      var {1}Id = await _listApi.Toggle{0}Status({1});
+
+      return {1}Id > 0
+        ? new ResponseResult<bool>(true, ResultCode.Success, null)
+        : new ResponseResult<bool>(false, ResultCode.Error, null);
+    }
+  }
+}

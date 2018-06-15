@@ -1,0 +1,52 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Hris.List.Business.Domains;
+using Hris.List.Business.Services.Interfaces;
+using Hris.Shared.Enum;
+using Hris.Shared.{0};
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Hris.List.Api
+{
+    public partial class ListApi
+    {
+        public async Task<int?> Save{0}({0}Model {1})
+        {
+            var {1}Service = _serviceProvider.GetService<I{0}Service>();
+
+            return await {1}Service.Save(_mapper.Map<{0}>({1}));
+        }
+
+        public async Task<IEnumerable<{0}Model>> Select{0}()
+        {
+            var {1}Service = _serviceProvider.GetService<I{0}Service>();
+
+            var {1}s = await {1}Service.Select();
+
+            return _mapper.Map<IEnumerable<{0}Model>>({1}s);
+        }
+
+        public async Task<IEnumerable<{0}Model>> Select{0}(Status status)
+        {
+            var {1}Service = _serviceProvider.GetService<I{0}Service>();
+
+            var {1}s = await {1}Service.Select(_mapper.Map<Business.Enums.Status>(status));
+
+            return _mapper.Map<IEnumerable<{0}Model>>({1}s);
+        }
+
+        public async Task<int?> Toggle{0}Status({0}Model {1})
+        {
+            var {1}Service = _serviceProvider.GetService<I{0}Service>();
+
+            return await {1}Service.ToggleStatus(_mapper.Map<{0}>({1}));
+        }
+
+        public async Task<int?> Delete{0}({0}Model {1})
+        {
+            var {1}Service = _serviceProvider.GetService<I{0}Service>();
+
+            return await {1}Service.Delete(_mapper.Map<{0}>({1}));
+        }
+    }
+}

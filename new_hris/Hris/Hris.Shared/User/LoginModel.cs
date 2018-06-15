@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hris.Shared.User
+﻿namespace Hris.Shared.User
 {
     public class LoginModel
     {

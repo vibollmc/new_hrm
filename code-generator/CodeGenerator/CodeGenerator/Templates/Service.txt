@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Hris.List.Business.Domains;
+using Hris.List.Business.Enums;
+using Hris.List.Business.Repositories;
+using Hris.List.Business.Services.Interfaces;
+
+namespace Hris.List.Business.Services.Implementations
+{
+    public class {0}Service : I{0}Service
+    {
+        private readonly I{0}Repository _{1}Repository;
+
+        public {0}Service(I{0}Repository {1}Repository)
+        {
+            _{1}Repository = {1}Repository;
+        }
+
+        public async Task<int?> Save({0} {1})
+        {
+            return await _{1}Repository.Save({1});
+        }
+
+        public async Task<IEnumerable<{0}>> Select()
+        {
+            return await _{1}Repository.Select();
+        }
+
+        public async Task<IEnumerable<{0}>> Select(Status status)
+        {
+            return await _{1}Repository.Select(status);
+        }
+
+        public async Task<int?> ToggleStatus({0} {1})
+        {
+            return await _{1}Repository.ToggleStatus({1});
+        }
+
+        public async Task<int?> Delete({0} {1})
+        {
+            return await _{1}Repository.Delete({1});
+        }
+    }
+}

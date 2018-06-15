@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hris.Shared.Nation
+﻿namespace Hris.Shared.Nation
 {
     public class NationModel: BaseModel
     {

@@ -12,7 +12,8 @@ import { BaseComponent } from "../../shared/base.component";
   templateUrl: "./gender.html"
 })
 export class GenderComponent extends BaseComponent {
-
+  titleAddOrEdit: string;
+  classAddOrEdit: string;
   constructor(public vm: ListModel<Gender>,
     protected router: Router) {
     super(router, "Giới tính");
@@ -33,8 +34,12 @@ export class GenderComponent extends BaseComponent {
   openAddOrEdit(action: string) {
     if (action === "edit") {
       Object.assign(this.vm.obj, this.vm.objSelected);
+      this.titleAddOrEdit = "Chỉnh sửa danh mục";
+      this.classAddOrEdit = "k-icon k-i-edit";
     } else {
       this.vm.obj = new Gender();
+      this.titleAddOrEdit = "Thêm danh mục";
+      this.classAddOrEdit = "k-icon k-i-plus";
     }
     this.vm.isAddingOrEditing = true;
   }
@@ -59,6 +64,5 @@ export class GenderComponent extends BaseComponent {
 
   updateStatus(gender: Gender) {
     this.vm.updateStatus(gender);
-    this.vm.objSelected = new Gender();
   }
 }
