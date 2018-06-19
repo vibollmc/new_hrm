@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Headers } from "@angular/http";
 import { ShareService } from "./share.service";
-
+import { LocalStorage } from "./local.storage";
 
 @Injectable()
 export class ShareModel {
-  constructor(private readonly service: ShareService) {
+  constructor(private readonly service: ShareService,
+    private readonly localStorage: LocalStorage) {
   }
 
   get currentPage(): string {
@@ -13,30 +13,30 @@ export class ShareModel {
   }
 
   get token(): string | null {
-    return this.service.token;
+    return this.localStorage.token;
   }
 
   set token(token: string | null) {
-    this.service.token = token;
+    this.localStorage.token = token;
   }
 
   get isAjaxProcessing(): boolean {
-    return this.service.isAjaxProcessing;
+    return this.localStorage.isAjaxProcessing;
   }
 
   set isAjaxProcessing(value: boolean) {
-    this.service.isAjaxProcessing = value;
+    this.localStorage.isAjaxProcessing = value;
   }
 
   get functionName(): string | null {
-    return this.service.functionName;
+    return this.localStorage.functionName;
   }
 
   set functionName(value: string | null) {
-    this.service.functionName = value;
+    this.localStorage.functionName = value;
   }
 
-  createAuthorizationHeader(): Headers {
-    return this.service.createAuthorizationHeader();
+  getProvinceActive() {
+    return this.service.getProvinceActive();
   }
 }

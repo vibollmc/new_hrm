@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.Education;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<EducationModel>>> Get()
+    [HttpGet("{status?}")]
+    public async Task<ResponseResult<IEnumerable<EducationModel>>> Get(Status? status)
     {
-      return await GetListEducation();
+      return await GetListEducation(status);
     }
 
     private async Task<ResponseResult<IEnumerable<EducationModel>>> GetListEducation()
     {
-      var educations = await _listApi.SelectEducation();
+      return await GetListEducation(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<EducationModel>>> GetListEducation(Status? status)
+    {
+      IEnumerable<EducationModel> educations;
+      if (status != null)
+        educations = await _listApi.SelectEducation(status.Value);
+      else
+        educations = await _listApi.SelectEducation();
       return new ResponseResult<IEnumerable<EducationModel>>(educations);
     }
 

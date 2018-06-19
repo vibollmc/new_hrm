@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.{0};
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<{0}Model>>> Get()
+    [HttpGet("{status}")]
+    public async Task<ResponseResult<IEnumerable<{0}Model>>> Get(Status? status)
     {
-      return await GetList{0}();
+      return await GetList{0}(status);
     }
 
     private async Task<ResponseResult<IEnumerable<{0}Model>>> GetList{0}()
     {
-      var {1}s = await _listApi.Select{0}();
+      return await GetList{0}(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<{0}Model>>> GetList{0}(Status? status)
+    {
+      IEnumerable<{0}Model> {1}s;
+      if (status != null)
+        {1}s = await _listApi.Select{0}(status.Value);
+      else
+        {1}s = await _listApi.Select{0}();
       return new ResponseResult<IEnumerable<{0}Model>>({1}s);
     }
 

@@ -15,6 +15,7 @@ import { GridModule } from "@progress/kendo-angular-grid";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DialogsModule } from "@progress/kendo-angular-dialog";
 import { SwitchModule, NumericTextBoxModule } from "@progress/kendo-angular-inputs";
+import { DropDownListModule } from "@progress/kendo-angular-dropdowns";
 
 //Common services
 import { HttpClient } from "./shared/http.client";
@@ -23,6 +24,7 @@ import { ListService } from "./shared/list.service";
 import { ShareModel } from "./shared/share.model";
 import { ShareService } from "./shared/share.service";
 import { NotificationProvider } from "./shared/notification.provider";
+import { LocalStorage } from "./shared/local.storage";
 
 //Components
 import { AppComponent } from "./app.component";
@@ -60,6 +62,7 @@ import { WardComponent } from "./list/ward/ward.component";
     ShareModel,
     ShareService,
     NotificationProvider,
+    LocalStorage,
     { provide: "BASE_URL", useFactory: getBaseUrl },
     { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
   ],
@@ -75,6 +78,7 @@ import { WardComponent } from "./list/ward/ward.component";
     DialogsModule,
     SwitchModule,
     NumericTextBoxModule,
+    DropDownListModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: "", redirectTo: "login", pathMatch: "full" },

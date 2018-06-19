@@ -1,4 +1,4 @@
-﻿<div class="row">
+<div class="row">
   <div class="col-xs-12 col-sm-12 col-lg-12">
     <div class="k-block">
       <button kendoButton (click)="openAddOrEdit('add')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
@@ -15,6 +15,16 @@
   </kendo-dialog-titlebar>
   <form class="k-form" #editForm="ngForm" (ngSubmit)="save()">
     <label class="k-form-field">
+      <span>Tỉnh/Thành <span class="k-required">*</span></span>
+      <kendo-dropdownlist [(ngModel)]="province" name="province"
+        [data]="lstProvince"
+        [filterable]="true"
+        [textField]="'name'"
+        [valueField]="'id'"
+        (filterChange)="provinceFilter($event)">
+      </kendo-dropdownlist>
+    </label>
+    <label class="k-form-field">
       <span>Tên tiếng Việt <span class="k-required">*</span></span>
       <input class="k-textbox" [(ngModel)]="vm.obj.name" required name="name"/>
     </label>
@@ -30,6 +40,8 @@
 </kendo-dialog>
 <kendo-grid [data]="vm.lstObj" [selectable]="vm.gridSelectableSettings" (selectionChange)="gridSelectionChange($event)" [height]="heightBrowser - 70">
   <kendo-grid-column field="id" title="ID" width="40">
+  </kendo-grid-column>
+  <kendo-grid-column field="provinceName" title="Tỉnh/Thành">
   </kendo-grid-column>
   <kendo-grid-column field="name" title="Name">
   </kendo-grid-column>

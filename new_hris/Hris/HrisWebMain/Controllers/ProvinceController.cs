@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.Province;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<ProvinceModel>>> Get()
+    [HttpGet("{status?}")]
+    public async Task<ResponseResult<IEnumerable<ProvinceModel>>> Get(Status? status)
     {
-      return await GetListProvince();
+      return await GetListProvince(status);
     }
 
     private async Task<ResponseResult<IEnumerable<ProvinceModel>>> GetListProvince()
     {
-      var provinces = await _listApi.SelectProvince();
+      return await GetListProvince(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<ProvinceModel>>> GetListProvince(Status? status)
+    {
+      IEnumerable<ProvinceModel> provinces;
+      if (status != null)
+        provinces = await _listApi.SelectProvince(status.Value);
+      else
+        provinces = await _listApi.SelectProvince();
       return new ResponseResult<IEnumerable<ProvinceModel>>(provinces);
     }
 

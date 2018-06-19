@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.Ward;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<WardModel>>> Get()
+    [HttpGet("{status?}")]
+    public async Task<ResponseResult<IEnumerable<WardModel>>> Get(Status? status)
     {
-      return await GetListWard();
+      return await GetListWard(status);
     }
 
     private async Task<ResponseResult<IEnumerable<WardModel>>> GetListWard()
     {
-      var wards = await _listApi.SelectWard();
+      return await GetListWard(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<WardModel>>> GetListWard(Status? status)
+    {
+      IEnumerable<WardModel> wards;
+      if (status != null)
+        wards = await _listApi.SelectWard(status.Value);
+      else
+        wards = await _listApi.SelectWard();
       return new ResponseResult<IEnumerable<WardModel>>(wards);
     }
 

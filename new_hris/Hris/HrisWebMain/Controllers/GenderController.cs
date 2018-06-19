@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.Gender;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<GenderModel>>> Get()
+    [HttpGet("{status?}")]
+    public async Task<ResponseResult<IEnumerable<GenderModel>>> Get(Status? status)
     {
-      return await GetListGender();
+      return await GetListGender(status);
     }
 
     private async Task<ResponseResult<IEnumerable<GenderModel>>> GetListGender()
     {
-      var genders = await _listApi.SelectGender();
+      return await GetListGender(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<GenderModel>>> GetListGender(Status? status)
+    {
+      IEnumerable<GenderModel> genders;
+      if (status != null)
+        genders = await _listApi.SelectGender(status.Value);
+      else
+        genders = await _listApi.SelectGender();
       return new ResponseResult<IEnumerable<GenderModel>>(genders);
     }
 

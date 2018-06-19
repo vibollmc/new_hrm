@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.Country;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<CountryModel>>> Get()
+    [HttpGet("{status?}")]
+    public async Task<ResponseResult<IEnumerable<CountryModel>>> Get(Status? status)
     {
-      return await GetListCountry();
+      return await GetListCountry(status);
     }
 
     private async Task<ResponseResult<IEnumerable<CountryModel>>> GetListCountry()
     {
-      var countrys = await _listApi.SelectCountry();
+      return await GetListCountry(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<CountryModel>>> GetListCountry(Status? status)
+    {
+      IEnumerable<CountryModel> countrys;
+      if (status != null)
+        countrys = await _listApi.SelectCountry(status.Value);
+      else
+        countrys = await _listApi.SelectCountry();
       return new ResponseResult<IEnumerable<CountryModel>>(countrys);
     }
 

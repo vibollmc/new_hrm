@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { ShareService } from "../shared/share.service";
+import { LocalStorage } from "../shared/local.storage";
 import { LoginService } from "./login.service";
 import { Login } from "../shared/datamodel/login";
 import { ResponseResult } from "../shared/datamodel/response.result";
@@ -16,10 +16,10 @@ export class LoginModel {
   constructor(
     private readonly loginService: LoginService,
     private readonly router: Router,
-    private readonly shareService: ShareService,
+    private readonly localStorage: LocalStorage,
     private readonly notification: NotificationProvider
   ) {
-    if (this.shareService.token) this.router.navigate(["home"]);
+    if (this.localStorage.token) this.router.navigate(["home"]);
     this.objLogin = new Login();
     //For test
     this.objLogin.username = "admin";
@@ -39,7 +39,7 @@ export class LoginModel {
           if (result.data) {
             this.objLogin.username = null;
 
-            this.shareService.token = result.data;
+            this.localStorage.token = result.data;
             this.router.navigate(["home"]);
           } else {
             this.notification.error("Đăng nhập không thành công. sai tên đăng nhập hoặc mật khẩu.");

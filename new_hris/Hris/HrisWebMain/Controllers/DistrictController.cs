@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Hris.List.Api;
 using Hris.Shared;
+using Hris.Shared.Enum;
 using Hris.Shared.District;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,24 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet]
-    public async Task<ResponseResult<IEnumerable<DistrictModel>>> Get()
+    [HttpGet("{status?}")]
+    public async Task<ResponseResult<IEnumerable<DistrictModel>>> Get(Status? status)
     {
-      return await GetListDistrict();
+      return await GetListDistrict(status);
     }
 
     private async Task<ResponseResult<IEnumerable<DistrictModel>>> GetListDistrict()
     {
-      var districts = await _listApi.SelectDistrict();
+      return await GetListDistrict(null);
+    }
 
+    private async Task<ResponseResult<IEnumerable<DistrictModel>>> GetListDistrict(Status? status)
+    {
+      IEnumerable<DistrictModel> districts;
+      if (status != null)
+        districts = await _listApi.SelectDistrict(status.Value);
+      else
+        districts = await _listApi.SelectDistrict();
       return new ResponseResult<IEnumerable<DistrictModel>>(districts);
     }
 

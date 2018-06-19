@@ -39,6 +39,7 @@ namespace Hris.List.Persistence
             {
                 districtDb.Name = district.Name;
                 districtDb.NameEn = district.NameEn;
+                districtDb.ProvinceId = district.ProvinceId;
                 districtDb.Status = _mapper.Map<MDStatus>(district.Status);
                 districtDb.UpdatedBy = district.UpdatedBy;
                 districtDb.UpdatedAt = DateTime.UtcNow;
@@ -51,7 +52,25 @@ namespace Hris.List.Persistence
         public async Task<IEnumerable<District>> Select()
         {
             var nations = _dbContext.Districts
-                .Where(x => !x.DeletedAt.HasValue).Select(x => _mapper.Map<District>(x));
+                .Join(_dbContext.Provinces, d => d.ProvinceId, p => p.Id, 
+                (d, p) => new District
+                {
+                    Status = _mapper.Map<Status>(d.Status),
+                    ProvinceId = p.Id,
+                    Id = d.Id,
+                    CreatedAt = d.CreatedAt,
+                    CreatedBy = d.CreatedBy,
+                    DeletedAt = d.DeletedAt,
+                    DeletedBy = d.DeletedBy,
+                    Name = d.Name,
+                    NameEn = d.NameEn,
+                    ProvinceName = p.Name,
+                    ProvinceNameEn = p.NameEn,
+                    UpdatedAt = d.UpdatedAt,
+                    UpdatedBy = d.UpdatedBy
+                })
+
+                .Where(x => !x.DeletedAt.HasValue);
 
             return await nations.ToListAsync();
         }
