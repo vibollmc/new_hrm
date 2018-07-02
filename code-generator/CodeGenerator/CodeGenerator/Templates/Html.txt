@@ -28,14 +28,18 @@
     </div>
   </form>
 </kendo-dialog>
-<kendo-grid [data]="vm.lstObj" [selectable]="vm.gridSelectableSettings" (selectionChange)="gridSelectionChange($event)" [height]="heightBrowser - 70">
-  <kendo-grid-column field="id" title="ID" width="40">
-  </kendo-grid-column>
+<kendo-grid [kendoGridBinding]="vm.lstObj"
+            [selectable]="vm.gridSelectableSettings"
+            [pageSize]="20"
+            [pageable]="true"
+            [filterable]="true"
+            [height]="heightBrowser - 116"
+            (selectionChange)="gridSelectionChange($event)">
   <kendo-grid-column field="name" title="Name">
   </kendo-grid-column>
   <kendo-grid-column field="nameEn" title="English">
   </kendo-grid-column>
-  <kendo-grid-column field="status" title="Trạng thái" width="80">
+  <kendo-grid-column field="status" title="Trạng thái" width="80" [filterable]="false">
     <ng-template kendoGridCellTemplate let-dataItem>
       <kendo-switch [(ngModel)]="dataItem.status" (valueChange)="updateStatus(dataItem)"></kendo-switch>
     </ng-template>

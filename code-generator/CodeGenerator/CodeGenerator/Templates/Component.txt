@@ -14,17 +14,25 @@ import { BaseComponent } from "../../shared/base.component";
 export class {0}Component extends BaseComponent {
   titleAddOrEdit: string;
   classAddOrEdit: string;
+
   constructor(public vm: ListModel<{0}>,
     protected router: Router) {
-    super(router, "{0}");
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
+    super(router, "Giới tính");
     this.vm.setCollection("{0}");
     this.vm.obj = new {0}();
     this.vm.objSelected = new {0}();
     this.vm.loadData();
+  }
+
+  ngOnInit(): void {
+    super.ngOnInit();
+  }
+
+  gridSelectionChange(event: SelectionEvent) {
+    if (event.selectedRows && event.selectedRows.length > 0)
+      Object.assign(this.vm.objSelected, event.selectedRows[0].dataItem);
+    else
+      this.vm.objSelected = new {0}();
   }
 
   closeAddOrEdit() {
@@ -34,21 +42,14 @@ export class {0}Component extends BaseComponent {
   openAddOrEdit(action: string) {
     if (action === "edit") {
       Object.assign(this.vm.obj, this.vm.objSelected);
-	  this.titleAddOrEdit = "Chỉnh sửa danh mục";
+      this.titleAddOrEdit = "Chỉnh sửa danh mục";
       this.classAddOrEdit = "k-icon k-i-edit";
     } else {
       this.vm.obj = new {0}();
-	  this.titleAddOrEdit = "Thêm danh mục";
+      this.titleAddOrEdit = "Thêm danh mục";
       this.classAddOrEdit = "k-icon k-i-plus";
     }
     this.vm.isAddingOrEditing = true;
-  }
-
-  gridSelectionChange(event: SelectionEvent) {
-    if (event.selectedRows && event.selectedRows.length > 0)
-      Object.assign(this.vm.objSelected, event.selectedRows[0].dataItem);
-    else
-      this.vm.objSelected = new {0}();
   }
 
   save() {
