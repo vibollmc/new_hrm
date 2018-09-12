@@ -104,6 +104,12 @@
     <Content Include="Templates\IService.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\ModelApi.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\ModelDatabase.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Repository.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

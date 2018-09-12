@@ -1,20 +1,44 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hris.Data.Enum;
 using Hris.List.Business.Domains;
-using Hris.List.Business.Enums;
 
 namespace Hris.List.Business.Repositories
 {
     public interface I{0}Repository
     {
+        /// <summary>
+        /// Save {0}
+        /// </summary>
+        /// <param name="{1}"></param>
+        /// <returns></returns>
         Task<int?> Save({0} {1});
 
+        /// <summary>
+        /// Select {0}
+        /// </summary>
+        /// <returns></returns>
         Task<IEnumerable<{0}>> Select();
 
+        /// <summary>
+        /// Select {1}
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         Task<IEnumerable<{0}>> Select(Status status);
 
+        /// <summary>
+        /// Toggle {1} status
+        /// </summary>
+        /// <param name="{1}"></param>
+        /// <returns></returns>
         Task<int?> ToggleStatus({0} {1});
 
+        /// <summary>
+        /// Delete {1}
+        /// </summary>
+        /// <param name="{1}"></param>
+        /// <returns></returns>
         Task<int?> Delete({0} {1});
     }
 }

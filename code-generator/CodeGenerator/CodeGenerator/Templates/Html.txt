@@ -1,12 +1,10 @@
-﻿<div class="row">
-  <div class="col-xs-12 col-sm-12 col-lg-12">
-    <div class="k-block">
-      <button kendoButton (click)="openAddOrEdit('add')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-plus'">Thêm</button>
-      <button kendoButton (click)="openAddOrEdit('edit')" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-edit'" [disabled]="!vm.objSelected.id">Sửa</button>
-      <button kendoButton (click)="delete()" [primary]="true" [look]="'outline'" [iconClass]="'k-icon k-i-delete'" [disabled]="!vm.objSelected.id">Xóa</button>
-    </div>
-  </div>
-</div>
+﻿<hris-toolbar buttons="'add,edit,delete'"
+              (onAddClick)="openAddOrEdit('add')"
+              (onDeleteClick)="delete()"
+              (onEditClick)="openAddOrEdit('edit')"
+              [disableEdit]="!vm.objSelected.id"
+              [disableDelete]="!vm.objSelected.id">
+</hris-toolbar>
 <kendo-dialog *ngIf="vm.isAddingOrEditing" (close)="closeAddOrEdit()" [minWidth]="500" [width]="600">
   <kendo-dialog-titlebar>
     <div style="font-size: 18px; line-height: 1.3em;">
@@ -33,7 +31,7 @@
             [pageSize]="20"
             [pageable]="true"
             [filterable]="true"
-            [height]="heightBrowser - 116"
+            [height]="heightBrowserWithoutToolbar"
             (selectionChange)="gridSelectionChange($event)">
   <kendo-grid-column field="name" title="Name">
   </kendo-grid-column>

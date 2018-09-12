@@ -1,0 +1,6 @@
+namespace Hris.List.Api.Model
+{
+    public class {0}Model : ListBaseModel
+    {
+    }
+}

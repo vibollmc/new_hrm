@@ -14,6 +14,7 @@ namespace CodeGenerator
         {
             InitializeComponent();
             LoadTemplate();
+            SelectFolder();
         }
 
         private void LoadTemplate()
@@ -51,6 +52,11 @@ namespace CodeGenerator
 
         private void button2_Click(object sender, EventArgs e)
         {
+            SelectFolder();
+        }
+
+        private void SelectFolder()
+        {
             var folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.ShowDialog();
 
@@ -77,8 +83,16 @@ namespace CodeGenerator
 
             switch (comboBox1.SelectedItem.ToString())
             {
+                case "ModelDatabase":
+                    savePath = "\\Hris.Database\\Entities\\List\\";
+                    saveFile = "MD" + cboDomain.Text + ".cs";
+                    break;
+                case "ModelApi":
+                    savePath = "\\List\\Hris.List.Api\\" + cboDomain.Text;
+                    saveFile = cboDomain.Text + "Model.cs";
+                    break;
                 case "Api":
-                    savePath = "\\List\\Hris.List.Api\\Implementations";
+                    savePath = "\\List\\Hris.List.Api\\" + cboDomain.Text;
                     saveFile = cboDomain.Text + "Api.cs";
                     break;
                 case "Component":
@@ -94,7 +108,7 @@ namespace CodeGenerator
                     saveFile = cboDomain.Text.ToLower() + ".html";
                     break;
                 case "IApi":
-                    savePath = "\\List\\Hris.List.Api\\Interfaces";
+                    savePath = "\\List\\Hris.List.Api\\" + cboDomain.Text;
                     saveFile = "I" + cboDomain.Text + "Api.cs";
                     break;
                 case "IRepository":

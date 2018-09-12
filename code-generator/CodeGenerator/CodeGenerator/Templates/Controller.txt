@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hris.List.Api;
-using Hris.Shared;
-using Hris.Shared.Enum;
-using Hris.Shared.{0};
+using Hris.Data.Enum;
+using Hris.List.Api.Model;
+using Hris.Web.Main.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Hris.Web.Main.Controllers
+namespace Hris.Web.Main.Controllers.List
 {
   [Authorize]
   [Route("api/[controller]")]
@@ -20,7 +20,7 @@ namespace Hris.Web.Main.Controllers
       _listApi = listApi;
     }
 
-    [HttpGet("{status}")]
+    [HttpGet("{status?}")]
     public async Task<ResponseResult<IEnumerable<{0}Model>>> Get(Status? status)
     {
       return await GetList{0}(status);
@@ -71,9 +71,7 @@ namespace Hris.Web.Main.Controllers
       {1}.UpdatedBy = CurrentUser;
       var {1}Id = await _listApi.Toggle{0}Status({1});
 
-      return {1}Id > 0
-        ? new ResponseResult<bool>(true, ResultCode.Success, null)
-        : new ResponseResult<bool>(false, ResultCode.Error, null);
+      return new ResponseResult<bool>({1}Id > 0, ResultCode.Success, null)
     }
   }
 }

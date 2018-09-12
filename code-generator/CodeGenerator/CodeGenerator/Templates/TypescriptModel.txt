@@ -1,6 +1,4 @@
-import { BaseModel } from "../base.model";
+import { ListBase } from "./list.base";
 
-export class {0} extends BaseModel {
-    name?: string;
-    nameEn?: string;
+export class Gender extends ListBase {
 }

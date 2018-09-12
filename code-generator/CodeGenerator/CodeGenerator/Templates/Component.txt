@@ -17,15 +17,11 @@ export class {0}Component extends BaseComponent {
 
   constructor(public vm: ListModel<{0}>,
     protected router: Router) {
-    super(router, "Giới tính");
+    super(router, "{0}");
     this.vm.setCollection("{0}");
     this.vm.obj = new {0}();
     this.vm.objSelected = new {0}();
     this.vm.loadData();
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
   }
 
   gridSelectionChange(event: SelectionEvent) {

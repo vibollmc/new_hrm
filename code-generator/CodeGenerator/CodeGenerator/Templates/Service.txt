@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Hris.Data.Enum;
 using Hris.List.Business.Domains;
-using Hris.List.Business.Enums;
 using Hris.List.Business.Repositories;
 using Hris.List.Business.Services.Interfaces;
 

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hris.Data.Enum;
+using Hris.List.Api.Model;
 using Hris.List.Business.Domains;
 using Hris.List.Business.Services.Interfaces;
-using Hris.Shared.Enum;
-using Hris.Shared.{0};
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hris.List.Api
@@ -30,7 +30,7 @@ namespace Hris.List.Api
         {
             var {1}Service = _serviceProvider.GetService<I{0}Service>();
 
-            var {1}s = await {1}Service.Select(_mapper.Map<Business.Enums.Status>(status));
+            var {1}s = await {1}Service.Select(status);
 
             return _mapper.Map<IEnumerable<{0}Model>>({1}s);
         }

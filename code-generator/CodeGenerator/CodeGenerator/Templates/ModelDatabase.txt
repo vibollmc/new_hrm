@@ -1,0 +1,6 @@
+namespace Hris.Database.Entities.List
+{
+    public class MD{0} : ListBase
+    {
+    }
+}

@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Hris.Data;
+using Hris.Data.Enum;
 using Hris.Database;
 using Hris.Database.Entities.List;
-using Hris.Database.Enums;
 using Hris.List.Business.Domains;
-using Hris.List.Business.Enums;
 using Hris.List.Business.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hris.List.Persistence
 {
-    public class {0}Repository : I{0}Repository
+    public class {0}Repository: I{0}Repository
     {
         private readonly HrisContext _dbContext;
         private readonly IMapper _mapper;
@@ -33,16 +33,15 @@ namespace Hris.List.Persistence
             if ({1}Db == null)
             {
                 {1}Db = _mapper.Map<MD{0}>({1});
+                {1}Db.CreatedAt = DateTime.Now;
                 await _dbContext.{0}s.AddAsync({1}Db);
             }
             else
             {
-                {1}Db.Name = {1}.Name;
-                {1}Db.NameEn = {1}.NameEn;
-                {1}Db.Status = _mapper.Map<MDStatus>({1}.Status);
-                {1}Db.UpdatedBy = {1}.UpdatedBy;
-                {1}Db.UpdatedAt = DateTime.UtcNow;
+                _mapper.Map({1}, {1}Db);
+                {1}Db.UpdatedAt = DateTime.Now;
             }
+
             await _dbContext.SaveChangesAsync();
 
             return {1}Db.Id;
@@ -50,28 +49,28 @@ namespace Hris.List.Persistence
 
         public async Task<IEnumerable<{0}>> Select()
         {
-            var {1}s = _dbContext.{0}s
-                .Where(x => !x.DeletedAt.HasValue).Select(x => _mapper.Map<{0}>(x));
+
+            var {1}s = _dbContext.{0}s.ProjectTo<{0}>(x => !x.DeletedAt.HasValue);
 
             return await {1}s.ToListAsync();
         }
 
         public async Task<IEnumerable<{0}>> Select(Status status)
         {
+
             var {1}s = _dbContext.{0}s
-                .Where(x => x.Status == _mapper.Map<MDStatus>(status) && !x.DeletedAt.HasValue)
-                .Select(x => _mapper.Map<{0}>(x));
+                .ProjectTo<{0}>(x => x.Status == status && !x.DeletedAt.HasValue);
 
             return await {1}s.ToListAsync();
         }
 
         public async Task<int?> ToggleStatus({0} {1})
         {
-            var {1}db = await _dbContext.{0}s.FirstOrDefaultAsync(x => x.Id == {1}.Id);
+            var {1}db = await _dbContext.{0}s.FirstOrDefaultAsync(x=> x.Id == {1}.Id);
             if ({1}db == null) return 0;
 
-            {1}db.Status = {1}db.Status == MDStatus.Active ? MDStatus.Inactive : MDStatus.Active;
-            {1}db.UpdatedAt = DateTime.UtcNow;
+            {1}db.Status = {1}db.Status.Toggle();
+            {1}db.UpdatedAt = DateTime.Now;
             {1}db.UpdatedBy = {1}.UpdatedBy;
 
             await _dbContext.SaveChangesAsync();
@@ -81,15 +80,15 @@ namespace Hris.List.Persistence
 
         public async Task<int?> Delete({0} {1})
         {
-            var {1}Db = await _dbContext.{0}s.FirstOrDefaultAsync(x => x.Id == {1}.Id);
-            if ({1}Db == null) return 0;
+            var {1}db = await _dbContext.{0}s.FirstOrDefaultAsync(x => x.Id == {1}.Id);
+            if ({1}db == null) return 0;
 
-            {1}Db.DeletedAt = DateTime.UtcNow;
-            {1}Db.DeletedBy = {1}.DeletedBy;
+            {1}db.DeletedAt = DateTime.Now;
+            {1}db.DeletedBy = {1}.DeletedBy;
 
             await _dbContext.SaveChangesAsync();
 
-            return {1}Db.Id;
+            return {1}db.Id;
         }
     }
 }
