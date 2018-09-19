@@ -25,9 +25,9 @@ namespace Hris.{0}.Business.Services.Implementations
             return await _{2}Repository.Delete({2});
         }
 
-        public async Task<IEnumerable<{1}>> Select(int? employeeId)
+        public async Task<IEnumerable<{1}>> Select()
         {
-            return await _{2}Repository.Select(employeeId);
+            return await _{2}Repository.Select();
         }
     }
 }

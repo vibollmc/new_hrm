@@ -8,7 +8,7 @@ export class {1}Service extends BaseService {
   private url: string;
   constructor(private readonly http: Http) {
     super();
-    this.url = `${this.baseUrl}api/{0}/{1}`;
+    this.url = `${this.baseUrl}api/{3}/{1}`;
   }
 
   get(employeeId: number, callBack: (result: {1}[]) => void) {

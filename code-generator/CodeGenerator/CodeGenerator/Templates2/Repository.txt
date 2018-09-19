@@ -59,10 +59,10 @@ namespace Hris.{0}.Persistence
             return {2}Db.Id;
         }
 
-        public async Task<IEnumerable<{1}>> Select(int? employeeId)
+        public async Task<IEnumerable<{1}>> Select()
         {
             var results = _dbContext.{1}s
-                .ProjectTo<{1}>(x => !x.DeletedAt.HasValue && x.EmployeeId == employeeId);
+                .ProjectTo<{1}>(x => !x.DeletedAt.HasValue);
 
             return await results.ToListAsync();
         }

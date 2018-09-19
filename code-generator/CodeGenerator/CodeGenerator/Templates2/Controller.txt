@@ -10,7 +10,7 @@ using Hris.Web.Main.Model;
 namespace Hris.Web.Main.Controllers.{0}
 {
   [Authorize]
-  [Route("api/[controller]")]
+  [Route("api/{3}/[controller]")]
   public class {1}Controller : BaseController
   {
     private readonly I{0}Api _profileApi;
@@ -50,7 +50,7 @@ namespace Hris.Web.Main.Controllers.{0}
 
         await _profileApi.Save{1}(request);
 
-        return await Get(request.EmployeeId);
+        return await Get();
       }
       catch (Exception ex)
       {

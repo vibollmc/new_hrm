@@ -53,8 +53,8 @@ namespace CodeGenerator
         private string GetFileName(string template)
         {
             if (string.IsNullOrWhiteSpace(txtPath.Text)) return null;
+            if (string.IsNullOrWhiteSpace(template)) return null;
             if (cboDomain.SelectedIndex < 0) return null;
-            if (cboTemplate.SelectedIndex < 0) return null;
 
             var projectPath = ProjectPath;
             var module = Module;
@@ -143,7 +143,7 @@ namespace CodeGenerator
 
         private string RenderCode(string template)
         {
-            if (cboTemplate.SelectedIndex < 0) return null;
+            if (string.IsNullOrWhiteSpace(template)) return null;
             if (cboDomain.SelectedIndex < 0) return null;
 
             var module = Module;
@@ -189,8 +189,8 @@ namespace CodeGenerator
                 var arr = propety.Trim().Split(' ');
                 var p = arr[2];
                 string datatype;
-                if (arr[1].StartsWith("int") || arr[1].StartsWith("real") || arr[1].StartsWith("decimal") || arr[1].StartsWith("double")) datatype = "number";
-                else if (arr[1].StartsWith("DateTime")) datatype = "date";
+                if (arr[1].StartsWith("int") || arr[1].StartsWith("float") || arr[1].StartsWith("decimal") || arr[1].StartsWith("double")) datatype = "number";
+                else if (arr[1].StartsWith("DateTime")) datatype = "Date";
                 else datatype = arr[1];
                 typescriptProperties += $"{Environment.NewLine}  {p.Substring(0, 1).ToLower()}{p.Substring(1)}: {datatype};";
             }
