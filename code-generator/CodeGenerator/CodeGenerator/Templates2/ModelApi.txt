@@ -1,0 +1,10 @@
+using Hris.Data;
+{using}
+
+namespace Hris.{0}.Api.Model
+{
+    public class {1}Model: BaseModel
+    {
+{properties}
+    }
+}

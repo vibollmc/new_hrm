@@ -1,0 +1,79 @@
+using Hris.{0}.Api;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Hris.{0}.Api.Model;
+using Hris.Web.Main.Model;
+
+namespace Hris.Web.Main.Controllers.{0}
+{
+  [Authorize]
+  [Route("api/[controller]")]
+  public class {1}Controller : BaseController
+  {
+    private readonly I{0}Api _profileApi;
+    public {1}Controller(I{0}Api profileApi)
+    {
+      _profileApi = profileApi;
+    }
+
+    [HttpGet()]
+    public async Task<ResponseResult<IEnumerable<{1}Model>>> Get()
+    {
+      try
+      {
+        var results = await _profileApi.Select{1}();
+
+        return new ResponseResult<IEnumerable<{1}Model>>(results);
+      }
+      catch(Exception ex)
+      {
+        return new ResponseResult<IEnumerable<{1}Model>>(ex.Message);
+      }
+    }
+
+    [HttpPost()]
+    public async Task<ResponseResult<IEnumerable<{1}Model>>> Post([FromBody] {1}Model request)
+    {
+      try
+      {
+        if (request.Id.HasValue)
+        {
+          request.UpdatedBy = CurrentUser;
+        }
+        else
+        {
+          request.CreatedBy = CurrentUser;
+        }
+
+        await _profileApi.Save{1}(request);
+
+        return await Get(request.EmployeeId);
+      }
+      catch (Exception ex)
+      {
+        return new ResponseResult<IEnumerable<{1}Model>>(ex.Message);
+      }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ResponseResult<bool>> Delete(int? id)
+    {
+      try
+      {
+        var deleteId = await _profileApi.Delete{1}(new {1}Model {
+          Id = id,
+          DeletedBy = CurrentUser
+        });
+
+        return new ResponseResult<bool>(deleteId > 0);
+      }
+      catch (Exception ex)
+      {
+        return new ResponseResult<bool>(false, ResultCode.Error,ex.Message);
+      }
+    }
+  }
+}

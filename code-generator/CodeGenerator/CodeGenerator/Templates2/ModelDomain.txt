@@ -1,0 +1,10 @@
+using Hris.Data;
+{using}
+
+namespace Hris.{0}.Business.Domains
+{
+    public class {1} : BaseModel
+    {
+{properties}
+    }
+}

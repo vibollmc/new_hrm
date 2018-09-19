@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Hris.{0}.Api.Model;
+using Hris.{0}.Business.Domains;
+using Hris.{0}.Business.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Hris.{0}.Api
+{
+    public partial class {0}Api
+    {
+        public async Task<int?> Save{1}({1}Model {2})
+        {
+            var bankService = _serviceProvider.GetService<I{1}Service>();
+
+            return await bankService.Save(_mapper.Map<{1}>({2}));
+        }
+
+        public async Task<int?> Delete{1}({1}Model {2})
+        {
+            var bankService = _serviceProvider.GetService<I{1}Service>();
+
+            return await bankService.Delete(_mapper.Map<{1}>({2}));
+        }
+
+        public async Task<IEnumerable<{1}Model>> Select{1}()
+        {
+            var bankService = _serviceProvider.GetService<I{1}Service>();
+
+            var results = await bankService.Select();
+
+            return results.Select(x => _mapper.Map<{1}Model>(x));
+        }
+    }
+}

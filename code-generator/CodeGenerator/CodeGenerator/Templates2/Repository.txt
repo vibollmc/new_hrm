@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Hris.Database;
+using Hris.Database.Entities.{0};
+using Hris.{0}.Business.Domains;
+using Hris.{0}.Business.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace Hris.{0}.Persistence
+{
+    public class {1}Repository: I{1}Repository
+    {
+        private readonly HrisContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public {1}Repository(HrisContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
+
+        public async Task<int?> Save({1} {2})
+        {
+            var {2}Db = await _dbContext.{1}s.FirstOrDefaultAsync(x => x.Id == {2}.Id);
+
+            if ({2}Db == null)
+            {
+                {2}Db = _mapper.Map<MD{1}>({2});
+                {2}Db.CreatedAt = DateTime.Now;
+
+                await _dbContext.{1}s.AddAsync({2}Db);
+            }
+            else
+            {
+                _mapper.Map({2}, {2}Db);
+                {2}Db.UpdatedAt = DateTime.Now;
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+            return {2}Db.Id;
+        }
+
+        public async Task<int?> Delete({1} {2})
+        {
+            var {2}Db = await _dbContext.{1}s.FirstOrDefaultAsync(x => x.Id == {2}.Id);
+
+            if ({2}Db == null) return null;
+
+            {2}Db.DeletedAt = DateTime.Now;
+            {2}Db.DeletedBy = {2}.DeletedBy;
+
+            await _dbContext.SaveChangesAsync();
+
+            return {2}Db.Id;
+        }
+
+        public async Task<IEnumerable<{1}>> Select(int? employeeId)
+        {
+            var results = _dbContext.{1}s
+                .ProjectTo<{1}>(x => !x.DeletedAt.HasValue && x.EmployeeId == employeeId);
+
+            return await results.ToListAsync();
+        }
+    }
+}

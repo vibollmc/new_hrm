@@ -1,0 +1,112 @@
+﻿import { Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+
+import { ToolbarComponent } from "../../shared/component/toolbar/toolbar.component";
+import { EmployeeListComponent } from "../../shared/component/employee.list/employee.list.component";
+import { BaseComponent } from "../../shared/base.component";
+import { Employee } from "../../shared/datamodel/{3}/employee";
+import { Organization } from "../../shared/datamodel/list/organization";
+import { SelectionEvent } from "@progress/kendo-angular-grid";
+import { {1}Model } from "./{2}.model";
+import { {1}Service } from "./{2}.service";
+import { {1} } from "../../shared/datamodel/{3}/{2}";
+
+declare var $;
+
+@Component({
+  selector: "{2}",
+  providers: [
+    {1}Model,
+    {1}Service
+  ],
+  templateUrl: "./{2}.html"
+})
+export class {1}Component extends BaseComponent {
+  
+  @ViewChild("toolbar") toolbar: ToolbarComponent;
+  @ViewChild("employeelist") employeeList: EmployeeListComponent;
+
+  employeeId: number;
+
+  selectedKeys: number[];
+
+  get girdHeight(): number {
+    if (this.heightBrowserWithoutToolbar && $("#mainform").height())
+      return this.heightBrowserWithoutToolbar - $("#mainform").height() - 38;
+
+    return 200;
+  }
+
+  constructor(
+    protected readonly router: Router,
+    public readonly vm: {1}Model) {
+    super(router, "{1}");
+
+    this.vm.onAdded.on(() => {
+      this.isAddingOrEditing = true;
+    });
+
+    this.vm.onLoaded.on(() => {
+      if (this.vm.selected.id) {
+        this.selectedKeys = [this.vm.selected.id];
+      }
+    });
+
+    this.vm.onDeleted.on(id => {
+
+    });
+
+    this.vm.onSaved.on(id => {
+      this.isAddingOrEditing = false;
+    });
+  }
+
+  employeeSelectionChange(employee: Employee) {
+    this.employeeId = employee.id;
+    this.vm.loadData(employee.id);
+  }
+
+  gridSelectionChange(event: SelectionEvent) {
+    if (event.selectedRows && event.selectedRows.length > 0)
+      Object.assign(this.vm.selected, event.selectedRows[0].dataItem);
+    else
+      this.vm.selected = new {1}();
+  }
+
+  orgSelection(org: Organization) {
+    
+  }
+
+  ngAfterContentInit() {
+    super.ngAfterContentInit();
+  }
+
+  cancel() {
+    this.isAddingOrEditing = false;
+    if (this.selectedKeys &&
+      this.selectedKeys.length > 0 &&
+      this.vm.{2}s &&
+      this.vm.{2}s.length > 0) {
+
+      var item = this.vm.{2}s.find(x => x.id === this.selectedKeys[0]);
+      Object.assign(this.vm.selected, item);
+    }
+    else {
+      this.vm.selected = new {1}();
+    }
+  }
+
+  edit() {
+    this.isAddingOrEditing = true;
+  }
+
+  save() {
+    this.vm.save();
+  }
+  delete() {
+    this.vm.delete();
+  }
+  add() {
+    this.vm.addNew(this.employeeId);
+  }
+}

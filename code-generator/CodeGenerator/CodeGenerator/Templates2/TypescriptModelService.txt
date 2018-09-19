@@ -1,0 +1,92 @@
+import { Injectable } from "@angular/core";
+import { NotificationProvider } from "../../shared/notification.provider";
+import { LiteEvent } from "../../shared/LiteEvent";
+import { {1} } from "../../shared/datamodel/{3}/{2}";
+import { {1}Service } from "./{2}.service";
+
+@Injectable()
+export class {1}Model {
+  private readonly _onSaved: LiteEvent<number>;
+  private readonly _onDeleted: LiteEvent<number>;
+  private readonly _onAdded: LiteEvent<void>;
+  private readonly _onLoaded: LiteEvent<void>;
+
+  {2}s: {1}[];
+  selected: {1};
+
+  get onSaved() {
+    return this._onSaved.expose();
+  }
+  get onDeleted() {
+    return this._onDeleted.expose();
+  }
+  get onAdded() {
+    return this._onAdded.expose();
+  }
+  get onLoaded() {
+    return this._onLoaded.expose();
+  }
+
+  constructor(private readonly service: {1}Service,
+    private readonly notification: NotificationProvider
+  ) {
+    
+    this._onSaved = new LiteEvent<number>();
+    this._onAdded = new LiteEvent<void>();
+    this._onDeleted = new LiteEvent<number>();
+    this._onLoaded = new LiteEvent<void>();
+
+    this.selected = new {1}();
+  }
+
+  loadData(employeeId: number) {
+    this.service.get(employeeId, result => {
+      this.{2}s = result;
+      if (this.{2}s && this.{2}s.length > 0) {
+        Object.assign(this.selected, this.{2}s[0]);
+      }
+      else {
+        this.selected = new {1}();
+      }
+      this.onLoaded.trigger();
+    })
+  }
+
+  addNew(employeeId: number) {
+    this.selected = new {1}();
+    this.selected.employeeId = employeeId;
+    this.onAdded.trigger();
+  }
+
+  save() {
+    this.service.save(this.selected, result => {
+      this.{2}s = result;
+      if (this.{2}s && this.{2}s.length > 0) {
+        Object.assign(this.selected, this.{2}s[0]);
+      }
+      else {
+        this.selected = new {1}();
+      }
+      this.notification.saveSuccess();
+      this.onSaved.trigger();
+    })
+  }
+
+  delete() {
+    this.notification.confirmDelete(confirm => {
+      if (confirm) {
+        this.service.delete(this.selected.id, result => {
+          if (result) {
+            this.notification.deleteSuccess();
+            var index = this.{2}s.findIndex(x => x.id === this.selected.id);
+            if (index > -1) {
+              this.{2}s.splice(index, 1);
+            }
+
+            this.onDeleted.trigger();
+          }
+        })
+      }
+    })
+  }
+}

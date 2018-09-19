@@ -1,4 +1,4 @@
-﻿<hris-toolbar buttons="'add,edit,delete'"
+﻿<hris-toolbar [buttons]="'add,edit,delete'"
               (onAddClick)="openAddOrEdit('add')"
               (onDeleteClick)="delete()"
               (onEditClick)="openAddOrEdit('edit')"
@@ -12,30 +12,24 @@
     </div>
   </kendo-dialog-titlebar>
   <form class="k-form" #editForm="ngForm" (ngSubmit)="save()">
-    <label class="k-form-field">
-      <span>Tên tiếng Việt <span class="k-required">*</span></span>
-      <input class="k-textbox" [(ngModel)]="vm.obj.name" required name="name"/>
-    </label>
-    <label class="k-form-field">
-      <span>Tên tiếng Anh </span>
-      <input class="k-textbox" [(ngModel)]="vm.obj.nameEn" name="nameEn"/>
-    </label>
-    <div class="text-right">
+    <hris-textbox fieldname="Tên tiếng Việt" [(ngModel)]="vm.obj.name" required name="name"></hris-textbox>
+    <hris-textbox fieldname="Tên tiếng Anh" [(ngModel)]="vm.obj.nameEn" name="nameEn"></hris-textbox>
+    <div class="text-right dialog-button-bar">
       <button type="button" class="k-button" (click)="closeAddOrEdit()">Cancel</button>
       <button type="button" class="k-button k-primary" (click)="save()" [disabled]="!editForm.form.valid">Save</button>
     </div>
   </form>
 </kendo-dialog>
 <kendo-grid [kendoGridBinding]="vm.lstObj"
-            [selectable]="vm.gridSelectableSettings"
+            [selectable]="true"
             [pageSize]="20"
             [pageable]="true"
             [filterable]="true"
             [height]="heightBrowserWithoutToolbar"
             (selectionChange)="gridSelectionChange($event)">
-  <kendo-grid-column field="name" title="Name">
+  <kendo-grid-column field="name" title="Tên tiếng Việt">
   </kendo-grid-column>
-  <kendo-grid-column field="nameEn" title="English">
+  <kendo-grid-column field="nameEn" title="Tên tiếng Anh">
   </kendo-grid-column>
   <kendo-grid-column field="status" title="Trạng thái" width="80" [filterable]="false">
     <ng-template kendoGridCellTemplate let-dataItem>

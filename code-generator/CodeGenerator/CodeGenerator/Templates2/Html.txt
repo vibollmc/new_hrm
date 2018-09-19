@@ -1,0 +1,23 @@
+﻿<kendo-splitter orientation="horizontal" [ngStyle]="{'height.px': heightBrowser}">
+  <kendo-splitter-pane size="25%" min="15%">
+    <hris-employee-list #employeelist (onSelectionChange)="employeeSelectionChange($event)"></hris-employee-list>
+  </kendo-splitter-pane>
+  <kendo-splitter-pane min="40%">
+    <hris-toolbar #toolbar
+                  [disableAdd]="isAddingOrEditing"
+                  [disableEdit]="isAddingOrEditing"
+                  [disableSave]="!isAddingOrEditing || !editForm.valid"
+                  [disableCancel]="!isAddingOrEditing"
+                  [disableDelete]="isAddingOrEditing"
+                  (onEditClick)="edit()"
+                  (onSaveClick)="save()"
+                  (onCancelClick)="cancel()"
+                  (onDeleteClick)="delete()"
+                  (onAddClick)="add()">
+    </hris-toolbar>
+    <form id="mainform" class="k-form" #editForm="ngForm">
+      <div class="row">
+      </div>
+	</form>
+  </kendo-splitter-pane>
+</kendo-splitter>

@@ -1,0 +1,13 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Hris.{0}.Business.Domains;
+
+namespace Hris.{0}.Business.Repositories
+{
+    public interface I{1}Repository
+    {
+        Task<int?> Save({1} {2});
+        Task<int?> Delete({1} {2});
+        Task<IEnumerable<{1}>> Select();
+    }
+}

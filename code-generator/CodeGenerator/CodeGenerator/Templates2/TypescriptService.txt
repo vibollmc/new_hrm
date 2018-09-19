@@ -1,0 +1,25 @@
+import { Injectable } from "@angular/core";
+import { BaseService } from "../../shared/base.service";
+import { Http } from "../../shared/http";
+import { {1} } from "../../shared/datamodel/{3}/{2}";
+
+@Injectable()
+export class {1}Service extends BaseService {
+  private url: string;
+  constructor(private readonly http: Http) {
+    super();
+    this.url = `${this.baseUrl}api/{0}/{1}`;
+  }
+
+  get(employeeId: number, callBack: (result: {1}[]) => void) {
+    this.http.get(`${this.url}/${employeeId}`, callBack);
+  }
+
+  save(bankInfomation: {1}, callBack: (result: {1}[]) => void) {
+    this.http.post(`${this.url}`, bankInfomation, callBack);
+  }
+
+  delete(bankInfomationId: number, callBack: (result: boolean) => void) {
+    this.http.delete(`${this.url}/${bankInfomationId}`, callBack);
+  }
+}

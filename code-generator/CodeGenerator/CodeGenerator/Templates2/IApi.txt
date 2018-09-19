@@ -1,0 +1,13 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Hris.{0}.Api.Model;
+
+namespace Hris.{0}.Api
+{
+    public partial interface I{0}Api
+    {
+        Task<int?> Save{1}({1}Model {2});
+        Task<int?> Delete{1}({1}Model {2});
+        Task<IEnumerable<{1}Model>> Select{1}();
+    }
+}

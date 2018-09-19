@@ -1,0 +1,5 @@
+import { BaseModel } from "../base.model";
+
+export class {1} extends BaseModel {
+{properties}
+}

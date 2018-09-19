@@ -71,7 +71,7 @@ namespace Hris.Web.Main.Controllers.List
       {1}.UpdatedBy = CurrentUser;
       var {1}Id = await _listApi.Toggle{0}Status({1});
 
-      return new ResponseResult<bool>({1}Id > 0, ResultCode.Success, null)
+      return new ResponseResult<bool>({1}Id > 0, ResultCode.Success, null);
     }
   }
 }

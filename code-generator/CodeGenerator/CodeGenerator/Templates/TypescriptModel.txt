@@ -1,4 +1,4 @@
 import { ListBase } from "./list.base";
 
-export class Gender extends ListBase {
+export class {0} extends ListBase {
 }
