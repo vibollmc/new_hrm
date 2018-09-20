@@ -91,7 +91,7 @@ namespace CodeGenerator
                     break;
                 case "Html":
                     path = $"\\HrisWebMain\\src\\app\\{module}\\" + domain.ToLower();
-                    file = cboDomain.Text.ToLower() + ".html";
+                    file = domain.ToLower() + ".html";
                     break;
                 case "IApi":
                     path = $"\\{module}\\Hris.{module}.Api\\" + domain;
